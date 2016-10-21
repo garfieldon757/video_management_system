@@ -1,0 +1,130 @@
+.cbadges {
+  max-width: 144px;
+}
+
+.cbadge {
+  float: left;
+  margin: 0 0 5px;
+  background-image: url("images/carer-badges.png");
+}
+
+.cbadge-worked-hours-10,
+.cbadge-worked-hours-50,
+.cbadge-worked-hours-100,
+.cbadge-worked-hours-200,
+.cbadge-worked-hours-500,
+.cbadge-worked-hours-1000 {
+  margin: 0 24px 10px 24px;
+}
+
+/* auto generated with: */
+/* sprity create . images/* -s carer-badges.css --prefix cbadge --margin 0 */
+
+.cbadge-on-holiday {
+  background-position: -0px -0px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-emergency-backup {
+  background-position: -0px -81px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-has-car {
+  background-position: -0px -162px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-has-driving-licence {
+  background-position: -0px -243px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-limited-availability {
+  background-position: -0px -324px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-live-in-care {
+  background-position: -0px -405px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-night-care {
+  background-position: -0px -486px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-evening-care {
+  background-position: -0px -567px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-weekend-care {
+  background-position: -0px -648px;
+  width: 72px;
+  height: 81px;
+}
+
+.cbadge-worked-hours-10 {
+  background-position: -0px -729px;
+  width: 96px;
+  height: 108px;
+}
+
+.cbadge-worked-hours-100 {
+  background-position: -0px -837px;
+  width: 96px;
+  height: 108px;
+}
+
+.cbadge-worked-hours-1000 {
+  background-position: -0px -945px;
+  width: 96px;
+  height: 108px;
+}
+
+.cbadge-worked-hours-200 {
+  background-position: -0px -1053px;
+  width: 96px;
+  height: 108px;
+}
+
+.cbadge-worked-hours-50 {
+  background-position: -0px -1161px;
+  width: 96px;
+  height: 108px;
+}
+
+.cbadge-worked-hours-500 {
+  background-position: -0px -1269px;
+  width: 96px;
+  height: 108px;
+}
+
+.popover {
+  border-radius: 0;
+  font-family: "proxima-nova", Helvetica, Arial, sans-serif;
+  border: 0;
+}
+
+.popover-title {
+  color: white;
+  font-size: 18px;
+  background-color: #2eb3ba;
+  border-radius: 0;
+  padding: 1em;
+  /*height: 60px;*/
+}
+.popover-content {
+    color: #606b70;
+    font-size: 15px;
+}
