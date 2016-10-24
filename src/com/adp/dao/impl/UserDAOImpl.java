@@ -24,10 +24,10 @@ public class UserDAOImpl implements UserDAO{
 		em.persist(user);
 	}
 	@Override
-	public User findUser(String username) {
+	public User findUser(String email) {
 		// TODO Auto-generated method stub
-		String jpql = "select u from User u where u.userName=:username";
-		List<User> resultList = em.createQuery(jpql).setParameter("username", username).getResultList();
+		String jpql = "select u from User u where u.email=:email";
+		List<User> resultList = em.createQuery(jpql).setParameter("email", email).getResultList();
 		User user = null;
 		for (User u : resultList) {
 			user = u;
@@ -43,6 +43,22 @@ public class UserDAOImpl implements UserDAO{
 		Role role = resultList.get(0);
 		
 		return role;
+	}
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		em.merge(user);
+		return;
+	}
+	@Override
+	public String existUser(String userName) {
+		String jpql = "select u from User u where u.userName =:userName";
+		List<User> resultList = em.createQuery(jpql).setParameter("userName", userName).getResultList();
+		if( resultList.isEmpty() ){
+			return "available";
+		}else{
+			return "unavailable";
+		}
 	}
 
 }

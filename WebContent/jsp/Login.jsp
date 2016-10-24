@@ -1,28 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<!-- saved from url=(0028)https://www.myhometouch.com/ -->
+
 <html lang="en" class="" data-desktopbrowser="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <title>Private Home Care: Find &amp; Book Carers in the UK | HomeTouch</title>
+  <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta name="description" content="HomeTouch offers a wide variety of vetted private carers, that can be booked online. Find, interview, and book home carers or live-in-carers across the UK">
-
-  <link rel="canonical" href="https://www.myhometouch.com/">
 
 
-  <!-- build:css(.) /public/css/user_signup_vendors.min.css -->
   <link rel="stylesheet" type="text/css" href="css/material.custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <!-- endbuild -->
-  <!-- build:css(.) /public/css/website.min.css -->
+
+
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap(1).css">
   <link rel="stylesheet" type="text/css" href="css/hometouch.css">
   <link rel="stylesheet" type="text/css" href="css/carer-badges.css">
-  <!-- endbuild -->
+
 
 
   <style>html.ng-cloak {display: none;}</style>
@@ -51,7 +47,7 @@
             </div>
 
 
-            <form class="ht-app__form" name="form">
+            <form class="ht-app__form" name="form" action="login">
               <div class="ht-app__field-wrapper">
                 <input id="email" name="email" placeholder="输入账号(Email)" class="ht-app__form-input" type="text" required>
                 <div id="checkDiv_email">
@@ -92,20 +88,8 @@
   </div>
 
 
-  <!-- SCRIPTS -->
-  <script type="text/javascript">
-    WebFontConfig = {
-      typekit: {id: 'ilz6qmm'}
-    };
+  <script src="js/jquery.min.js"></script>
 
-    (function(d) {
-      var wf = d.createElement('script'), s = d.scripts[0];
-      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
-      s.parentNode.insertBefore(wf, s);
-    })(document);
-  </script>
-
-    <!-- build:js(.) /public/js/website/index.js -->
     <script src="js/js.cookie.js"></script>
     <script src="js/validator.js"></script>
     <script src="js/slick.min.js"></script>
@@ -123,9 +107,8 @@
     <script src="js/requestAnimationFrame.js"></script>
     <script src="js/material.min.js"></script>
     <script src="js/jquery.placeholder.js"></script>
-    <!-- endbuild -->
 
-  <!-- /SCRIPTS -->
+
 
 </body>
 </html>

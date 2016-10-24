@@ -1,62 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="" data-desktopbrowser="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <title>Private Home Care: Find &amp; Book Carers in the UK | HomeTouch</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<head>  
+	  <title>Private Home Care: Find &amp; Book Carers in the UK | HomeTouch</title>
+	
+	  <link rel="stylesheet" type="text/css" href="css/material.custom.css">
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <meta name="description" content="HomeTouch offers a wide variety of vetted private carers, that can be booked online. Find, interview, and book home carers or live-in-carers across the UK">
-
-  <link rel="canonical" href="https://www.myhometouch.com/">
-
-
-
-  <meta name="author" content="HomeTouch">
-  <meta name="rating" content="General">
-  <meta name="copyright" content="© HomeTouch 2015. All Rights Reserved">
-  <meta name="apple-mobile-web-app-title" content="HomeTouch">
-  <meta name="application-name" content="HomeTouch">
-  <meta name="msapplication-TileColor" content="#1c5799">
-  <meta name="msapplication-TileImage" content="favicons/mstile-144x144.png">
-  <meta name="msapplication-config" content="favicons/browserconfig.xml">
+	  <link rel="stylesheet" href="css/bootstrap.css">
+	  <link rel="stylesheet" type="text/css" href="css/bootstrap(1).css">
+	  <link rel="stylesheet" type="text/css" href="css/hometouch.css">
+	  <link rel="stylesheet" type="text/css" href="css/carer-badges.css">
 
 
-  <meta name="google-site-verification" content="vbZFU1ge9v8ob518RGYDQ-TyZUP4bbdwYh5p_jVL3Mo">
-  <meta name="google-site-verification" content="qBo0hcFHJq_CYbnRPp_zHoaTyJtn7O4nx9LZ-qiWcZw">
-
-
-  <!-- build:css(.) /public/css/user_signup_vendors.min.css -->
-  <link rel="stylesheet" type="text/css" href="css/material.custom.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <!-- endbuild -->
-  <!-- build:css(.) /public/css/website.min.css -->
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap(1).css">
-  <link rel="stylesheet" type="text/css" href="css/hometouch.css">
-  <link rel="stylesheet" type="text/css" href="css/carer-badges.css">
-  <!-- endbuild -->
-
-  
-
-      <!-- Decibel Insight - www.myhometouch.com -->
-      <script type="text/javascript">
-        // <![CDATA[
-        (function(d,e,c,i,b,el,it) {
-          d._da_=d._da_||[];_da_.oldErr=d.onerror;_da_.err=[];
-          d.onerror=function(){_da_.err.push(arguments);_da_.oldErr&&_da_.oldErr.apply(d,Array.prototype.slice.call(arguments));};
-          d.DecibelInsight=b;d[b]=d[b]||function(){(d[b].q=d[b].q||[]).push(arguments);};
-          el=e.createElement(c),it=e.getElementsByTagName(c)[0];el.async=1;el.src=i;it.parentNode.insertBefore(el,it);
-        })(window,document,'script','//cdn.decibelinsight.net/i/13169/57793/di.js','decibelInsight');
-        // ]]>
-      </script>
-  <style>html.ng-cloak {display: none;}</style>
 </head>
 <body ng-cloak="">
-
-
-  <div id="alerts-container" ng-include="&#39;/public/admin/templates/alerts.html&#39;"></div>
 
   <div class="home-page">
 
@@ -67,21 +26,41 @@
             <a href="https://www.myhometouch.com/" class="ht-image -image-logo -mobile pull-left" data-di-id="di-id-b1f3ea31-41876b7"><img src="adVideoManagement/img/ht-logo-mobile.png" alt="logo"></a>
           </div>
           <div class="col-xs-7 col-sm-8 partial text-right">
-            <ul class="ht-list -list-main">
+		        <c:if test="${! (user == null) }">
+					        <ul class="ht-list -list-main">
+							
+					            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown">
+					              		<span class="caret"> ${ user.userName }</span>
+					            </button>
+					
+					            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuDivider">
+					              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+					              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+					              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+					              <li role="presentation" class="divider"></li>
+					              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+					            </ul>
+					
+					            <li class="list-item -login">
+					              <a href="">退出</a>
+					            </li>
+				
+				          </ul>
+		        </c:if>
+		        
+		        <c:if test="${ user == null }">
+				        <ul class="ht-list -list-main">
+				            <li class="list-item -login">
+				              	<a href="" >登陆</a>
+				            </li>
+				            <li class="list-item -login">
+				            	<a href="">注册</a>
+				            </li>
+			          </ul>
+		        </c:if>
+		          
 
-              <li class="list-item -login">
-
-                <a href="" >登陆</a>
-
-              </li>
-      
-              <li class="list-item -login">
-      
-                  <a href="">注册</a>
-      
-              </li>
-
-            </ul>
+		         
           </div>
         </div>
 
@@ -814,34 +793,7 @@
   
 
 
-  <!-- IE Compatibility shims -->
-  <!-- Also need a Flexibility/Flexie polyfill -->
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js""></script>
-    <![endif]-->
-
-    <!--[if IE]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.7/es5-shim.min.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>
-      <script src="/public/vendors-local/flexibility/flexibility.js"></script>
-    <![endif]-->
-  <!-- end shims -->
-
-  <!-- SCRIPTS -->
-  <script type="text/javascript">
-    WebFontConfig = {
-      typekit: {id: 'ilz6qmm'}
-    };
-
-    (function(d) {
-      var wf = d.createElement('script'), s = d.scripts[0];
-      wf.src = '/webfont.js';
-      s.parentNode.insertBefore(wf, s);
-    })(document);
-  </script>
-
-  <!-- build:js(.) /public/js/website/index.js -->
+  
   <script src="js/jquery.min.js"></script>
 <script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1027644270654279");fbq("track","PageView");fbq("track","ViewContent");</script>
 <noscript>&lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1027644270654279&amp;amp;ev=PageView&amp;amp;noscript=1"&gt;</noscript>
@@ -873,6 +825,7 @@
 
   <!-- /SCRIPTS -->
 
+  
 
-
-<div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.22760595821148755"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.40025185840858746" width="0" height="0" src="./Private Home Care_ Find &amp; Book Carers in the UK _ HomeTouch_files/0"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.6359543204860107" width="0" height="0" src="./Private Home Care_ Find &amp; Book Carers in the UK _ HomeTouch_files/0(1)"></div></body></html>
+</body>
+</html>
