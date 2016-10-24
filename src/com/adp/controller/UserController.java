@@ -50,7 +50,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("edit_personalProfile_load")
-	public ModelAndView edit_personalProfile_load( HttpServletRequest request, Model model){
+	public ModelAndView edit_personalProfile_load( HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("personalProfile");
 		User user = um.getSession(request);//session获取当前用户对象
 		if(user != null){
@@ -74,8 +74,19 @@ public class UserController {
 	public String ajax_userNameValidation(String userName){////
 		
 		String result = um.existUser(userName);
-		
 		return result;
+	}
+	
+	@RequestMapping("authSettings_load")
+	public ModelAndView authSettings_load(HttpServletRequest request){
+		
+		ModelAndView mv = new ModelAndView("AuthSettings");
+		User user = um.getSession(request);//session获取当前用户对象
+		if(user != null){
+			mv.addObject(user);
+		}
+		
+		return mv;//跳转至AuthSettings.jsp页面
 	}
 	
 }
