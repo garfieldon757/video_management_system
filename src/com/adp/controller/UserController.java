@@ -88,11 +88,11 @@ public class UserController {
 		return mv;//跳转至AuthSettings.jsp页面
 	}
 	
-	@RequestMapping("elevationPrivilege2ProUser")
-	public ModelAndView elevationPrivilege2ProUser(HttpServletRequest request){
+	@RequestMapping("elevationPrivilege2ProUser_apply")
+	public ModelAndView elevationPrivilege2ProUser_apply(HttpServletRequest request){
 		
 		ModelAndView mv = new ModelAndView("AuthSettings");
-		User user = um.elevationPrivilege2ProUser(request);
+		User user = um.elevationPrivilege2ProUser_apply(request);
 		List<AuthorizationList> authList = um.getAuthListByApplyAuthUser(user);
 		if(user != null){
 			mv.addObject(user);
@@ -102,8 +102,39 @@ public class UserController {
 	}
 	
 	@RequestMapping("authProcess_load")
-	public ModelAndView authProcess_load(){
-		return null;
+	public ModelAndView authProcess_load(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("AuthProcess");
+		List<AuthorizationList> authList = um.getAllAuthList();
+		if(authList != null){
+			mv.addObject("authList", authList);
+		}
+		return mv;//跳转至AuthProcess.jsp页面
+	}
+	
+	@RequestMapping("elevationPrivilege2ProUser_process_agree")
+	public ModelAndView elevationPrivilege2ProUser_process_agree(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("AuthProcess");
+		int authListID = Integer.parseInt(request.getParameter("authListID"));
+		um.elevationPrivilege2ProUser_process_agree(request, authListID);
+		
+		List<AuthorizationList> authList = um.getAllAuthList();
+		if(authList != null){
+			mv.addObject("authList", authList);
+		}
+		return mv;//跳转至AuthProcess.jsp页面
+	}
+	
+	@RequestMapping("elevationPrivilege2ProUser_process_deny")
+	public ModelAndView elevationPrivilege2ProUser_process_deny(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("AuthProcess");
+		int authListID = Integer.parseInt(request.getParameter("authListID"));
+		um.elevationPrivilege2ProUser_process_deny(request, authListID);
+		
+		List<AuthorizationList> authList = um.getAllAuthList();
+		if(authList != null){
+			mv.addObject("authList", authList);
+		}
+		return mv;//跳转至AuthProcess.jsp页面
 	}
 	
 }

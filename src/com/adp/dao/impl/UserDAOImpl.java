@@ -40,9 +40,17 @@ public class UserDAOImpl implements UserDAO{
 		String jpql = "select r from Role r where r.roleID=:roleID";
 		List<Role> resultList = em.createQuery(jpql).setParameter("roleID", roleID).getResultList();
 		Role role = resultList.get(0);
-		
 		return role;
 	}
+	
+	@Override
+	public AuthorizationList findAuthList(int authListID) {
+		String jpql = "select al from AuthorizationList al where al.authListID=:authListID";
+		List<AuthorizationList> resultList = em.createQuery(jpql).setParameter("authListID", authListID).getResultList();
+		AuthorizationList authList = resultList.get(0);
+		return authList;
+	}
+	
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
@@ -68,28 +76,30 @@ public class UserDAOImpl implements UserDAO{
 		return user;
 	}
 	@Override
-	public AuthorizationList insertAuthorizationList(User applyAuthUser, Role role) {
+	public AuthorizationList insertAuthorizationList(User applyAuthUser, Role role, String applyDateTime) {
 		AuthorizationList authList = new AuthorizationList();
 		authList.setApplyAuthUser(applyAuthUser);
 		authList.setGiveAuthUser(null);
 		authList.setRole(role);
-		authList.setAuthStatus(1);//1--待审核; 2--申请通过; 3--申请被拒
+		authList.setAuthStatus("1");//1--待审核; 2--申请通过; 3--申请被拒
+		authList.setApplyDateTime(applyDateTime);
+		authList.setProcessDateTime(null);
 		
 		em.persist(authList);
 		return authList;
 	}
 	
-//	@Override
-//	public AuthorizationList updateAuthorizationList(User giveAuthorizationUser) {
-//		AuthorizationList authList = new AuthorizationList();
-//		authList.setApplyAuthUser(applyAuthUser);
-//		authList.setGiveAuthUser(null);
-//		authList.setRole(null);
-//		authList.setAuthStatus(1);//1--待审核; 2--申请通过; 3--申请被拒
-//		
-//		em.persist(authList);
-//		return authList;
-//	}
+	@Override
+	public void updateAuthorizationList(int authListID, User giveAuthUser, String authStatus, String processDateTime) {
+		
+		AuthorizationList authList = findAuthList(authListID);
+		authList.setGiveAuthUser(giveAuthUser);
+		authList.setAuthStatus(authStatus);//1--待审核; 2--申请通过; 3--申请被拒
+		authList.setProcessDateTime(processDateTime);
+		
+		em.persist(authList);
+		return;
+	}
 	
 	@Override
 	public List<AuthorizationList> getAuthListByApplyAuthUser(User applyAuthUser) {
@@ -99,6 +109,17 @@ public class UserDAOImpl implements UserDAO{
 		
 		return authList;
 	}
+	@Override
+	public List<AuthorizationList> getAllAuthList() {
+		String jpql = "select al from AuthorizationList al ";
+		//Integer applyAuthUserID = applyAuthUser.getuserID();
+		List<AuthorizationList> authList = em.createQuery(jpql).getResultList();
+		
+		return authList;
+	}
+	
+
+	
 	
 	
 

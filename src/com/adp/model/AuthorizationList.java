@@ -1,5 +1,6 @@
 package com.adp.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,13 +30,15 @@ public class AuthorizationList {
 	@JoinColumn(name="roleID")
     private Role role;
 	
-	private int authStatus;
+	private String authStatus;
+	private String applyDateTime;
+	private String processDateTime;
 	
 	public AuthorizationList() {
 		super();
 	}
 
-	public AuthorizationList(User giveAuthUser, User applyAuthUser, Role role, int authStatus) {
+	public AuthorizationList(User giveAuthUser, User applyAuthUser, Role role, String authStatus) {
 		super();
 		this.giveAuthUser = giveAuthUser;
 		this.applyAuthUser = applyAuthUser;
@@ -61,10 +64,10 @@ public class AuthorizationList {
 	public void setApplyAuthUser(User applyAuthUser) {
 		this.applyAuthUser = applyAuthUser;
 	}
-	public int getAuthStatus() {
+	public String getAuthStatus() {
 		return authStatus;
 	}
-	public void setAuthStatus(int authStatus) {
+	public void setAuthStatus(String authStatus) {
 		this.authStatus = authStatus;
 	}
 	public Role getRole() {
@@ -72,6 +75,22 @@ public class AuthorizationList {
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getApplyDateTime() {
+		return applyDateTime;
+	}
+
+	public void setApplyDateTime(String applyDateTime) {
+		this.applyDateTime = applyDateTime;
+	}
+
+	public String getProcessDateTime() {
+		return processDateTime;
+	}
+
+	public void setProcessDateTime(String processDateTime) {
+		this.processDateTime = processDateTime;
 	}
 	
 }

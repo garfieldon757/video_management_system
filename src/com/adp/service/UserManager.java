@@ -17,7 +17,10 @@ public interface UserManager {
 	public User updateSession(HttpServletRequest request, User user);//???泛型
 	public User edit_personalProfile(HttpServletRequest request);
 	public String existUser(String userName);
-	public User elevationPrivilege2ProUser(HttpServletRequest request);
-	public List<AuthorizationList> getAuthListByApplyAuthUser(User applyAuthUser);
+	public User elevationPrivilege2ProUser_apply(HttpServletRequest request);
+	public List<AuthorizationList> getAuthListByApplyAuthUser(User user);
+	public List<AuthorizationList> getAllAuthList();
+	public void elevationPrivilege2ProUser_process_agree(HttpServletRequest request, int authListID);
+	public void elevationPrivilege2ProUser_process_deny(HttpServletRequest request, int authListID);
 	
 }

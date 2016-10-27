@@ -1,5 +1,8 @@
 package com.adp.service.impl;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,22 +111,67 @@ public class UserManagerImpl implements UserManager{
 	}
 
 	@Override
-	public User elevationPrivilege2ProUser(HttpServletRequest request) {
+	public User elevationPrivilege2ProUser_apply(HttpServletRequest request) {
 		User user = getSession(request, "user");//session获取当前用户对象
 		user = userDAO.updateUserRole(user);
 		user = updateSession (request, user) ;
 		
 		Role role = userDAO.findRole(2);
-		userDAO.insertAuthorizationList(user, role);
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String applyDateTime = df.format(now);
+		
+		userDAO.insertAuthorizationList(user, role, applyDateTime);
 		
 		return user;
 	}
-
+	
 	@Override
-	public List<AuthorizationList> getAuthListByApplyAuthUser(User applyAuthUser) {
-		List<AuthorizationList> authList = userDAO.getAuthListByApplyAuthUser(applyAuthUser);
+	public List<AuthorizationList> getAuthListByApplyAuthUser(User user) {
+		List<AuthorizationList> authList = userDAO.getAuthListByApplyAuthUser(user);
 		return authList;
 	}
+
+	@Override
+	public List<AuthorizationList> getAllAuthList() {
+		List<AuthorizationList> authList = userDAO.getAllAuthList();
+		return authList;
+	}
+
+	@Override
+	public void elevationPrivilege2ProUser_process_agree(HttpServletRequest request, int authListID) {
+		
+		User giveAuthUser = getSession(request, "user");//session获取当前用户对象
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String processDateTime = df.format(now);
+		
+		userDAO.updateAuthorizationList(authListID, giveAuthUser, "2", processDateTime);//修改authStatus参数为2，表示处理申请为“同意”状态
+		
+		return;
+	}
+
+	@Override
+	public void elevationPrivilege2ProUser_process_deny(HttpServletRequest request, int authListID) {
+		
+		User giveAuthUser = getSession(request, "user");//session获取当前用户对象
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String processDateTime = df.format(now);
+		
+		userDAO.updateAuthorizationList(authListID, giveAuthUser, "3", processDateTime);//修改authStatus参数为2，表示处理申请为“同意”状态
+		
+		return;
+	}
+
+	
+
+
+
+	
 
 	
 

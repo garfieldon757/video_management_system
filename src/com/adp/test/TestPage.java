@@ -1,5 +1,10 @@
 package com.adp.test;
 
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,7 +13,7 @@ import javax.persistence.Query;
 
 import org.junit.Test;
 
-import com.adp.model.AuthorizationList;
+
 import com.adp.model.Role;
 import com.adp.model.User;
 
@@ -38,9 +43,16 @@ public class TestPage {
 	}
 	
 	@Test
+	public void testTime(){
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String str = df.format(now);
+		 System.out.println(str);
+	}
+	
+	@Test
 	public void main(){
-		//Role role = findRole(1);
-		User user = findUser("ss");
+		testTime();
 	}
 	
 	

@@ -10,10 +10,12 @@ public interface UserDAO {
 	public void addUser(User user);
 	public User getUserByEmail(String email);
 	public Role findRole(int roleID);
+	public AuthorizationList findAuthList(int authListID);
 	public void updateUser(User user);
 	public String existUser(String userName);
 	public User updateUserRole(User user);
-	public AuthorizationList insertAuthorizationList(User applyAuthUserID, Role role);
-	//public AuthorizationList updateAuthorizationList(User giveAuthorizationUserID);
+	public AuthorizationList insertAuthorizationList(User applyAuthUser, Role role, String applyDateTime);
+	public void updateAuthorizationList(int authListID, User giveAuthUser, String authStatus, String processDateTime);
 	public List<AuthorizationList> getAuthListByApplyAuthUser(User applyAuthUser);
+	public List<AuthorizationList> getAllAuthList();
 }
