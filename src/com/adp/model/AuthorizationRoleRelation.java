@@ -9,19 +9,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity//声明当前类为hibernate映射到数据库中的实体�?
+@Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "AuthorizationRoleRelation")
 public class AuthorizationRoleRelation {
 	
-	@Id//声明此列为主�?
+	@Id//声明此列为主�?
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer authRoleRelationID;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="roleID")
 	private Role role;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="authID")
 	private Authorization authorization;
 	

@@ -21,17 +21,20 @@ public class Role {
 	private Integer roleID;
 	private String roleName;
 	
-	@OneToMany(mappedBy = "role", cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	private List<User> userList = new ArrayList<User>();
 	
 	
-	@OneToMany(mappedBy = "role", cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	private List<AuthorizationList> authorizatioinList = new ArrayList<AuthorizationList>();
 	
 	
-	@OneToMany(mappedBy = "role", cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	private List<AuthorizationRoleRelation> authRoleRelationList = new ArrayList<AuthorizationRoleRelation>();
 	
+	public Role() {
+		super();
+	}
 	
 	public Integer getRoleID() {
 		return roleID;

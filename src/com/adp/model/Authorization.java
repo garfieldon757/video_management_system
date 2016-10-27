@@ -12,16 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity//声明当前类为hibernate映射到数据库中的实体�?
+@Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "Authorization")
 public class Authorization {
 
-	@Id//声明此列为主�?
+	@Id//声明此列为主�?
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer authID;
 	private String authName;
 	
-	@OneToMany(mappedBy = "authorization", cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "authorization", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	private List<AuthorizationRoleRelation> authRoleRelationList= new ArrayList<AuthorizationRoleRelation>();
 	
 	public Integer getAuthID() {

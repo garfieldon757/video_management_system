@@ -29,10 +29,10 @@ public class User {
 	@JoinColumn(name="roleID")
     private Role role;
     
-    @OneToMany(mappedBy = "giveAuthUser", cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "giveAuthUser", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
     private List<AuthorizationList> giveAuthUserList = new ArrayList<AuthorizationList>();
     
-    @OneToMany(mappedBy = "applyAuthUser", cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "applyAuthUser", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
     private List<AuthorizationList> applyAuthUserList = new ArrayList<AuthorizationList>();
 
     

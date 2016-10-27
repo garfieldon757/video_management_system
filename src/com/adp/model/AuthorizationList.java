@@ -9,27 +9,39 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity//声明当前类为hibernate映射到数据库中的实体�?
+@Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "AuthorizationList")
 public class AuthorizationList {
 	
-	@Id//声明此列为主�?
-	@GeneratedValue(strategy = GenerationType.AUTO)//根据不同数据库自动�?�择合�?�的id生成方案，这里使用mysql,为�?�增�?
+	@Id//声明此列为主�?
+	@GeneratedValue(strategy = GenerationType.AUTO)//根据不同数据库自动�?�择合�?�的id生成方案，这里使用mysql,为�?�增�?
 	private Integer authListID;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="giveAuthUserID")
 	private User giveAuthUser;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="applyAuthUserID")
 	private User applyAuthUser;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="roleID")
     private Role role;
 	
-	private String authStatus;
+	private int authStatus;
+	
+	public AuthorizationList() {
+		super();
+	}
+
+	public AuthorizationList(User giveAuthUser, User applyAuthUser, Role role, int authStatus) {
+		super();
+		this.giveAuthUser = giveAuthUser;
+		this.applyAuthUser = applyAuthUser;
+		this.role = role;
+		this.authStatus = authStatus;
+	}
 	
 	public Integer getAuthListID() {
 		return authListID;
@@ -49,10 +61,10 @@ public class AuthorizationList {
 	public void setApplyAuthUser(User applyAuthUser) {
 		this.applyAuthUser = applyAuthUser;
 	}
-	public String getAuthStatus() {
+	public int getAuthStatus() {
 		return authStatus;
 	}
-	public void setAuthStatus(String authStatus) {
+	public void setAuthStatus(int authStatus) {
 		this.authStatus = authStatus;
 	}
 	public Role getRole() {

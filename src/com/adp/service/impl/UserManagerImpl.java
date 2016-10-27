@@ -1,5 +1,7 @@
 package com.adp.service.impl;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.adp.dao.UserDAO;
+import com.adp.model.AuthorizationList;
 import com.adp.model.Role;
 import com.adp.model.User;
 import com.adp.service.UserManager;
@@ -24,7 +27,7 @@ public class UserManagerImpl implements UserManager{
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
-		User user = userDAO.findUser(email);
+		User user = userDAO.getUserByEmail(email);
 		String db_pwd = user.getUserPassword();
 		if(db_pwd.equals(password)){
 			HttpSession session = request.getSession();
@@ -59,10 +62,18 @@ public class UserManagerImpl implements UserManager{
 
 
 	@Override
-	public User getSession(HttpServletRequest request) {
+	public User getSession(HttpServletRequest request, String sessionKey) {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(sessionKey);
+		return user;
+	}
+	
+	@Override
+	public User updateSession(HttpServletRequest request, User user) {
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		session.setAttribute("user", user);
 		return user;
 	}
 
@@ -94,6 +105,24 @@ public class UserManagerImpl implements UserManager{
 	public String existUser(String userName) {
 		String result = userDAO.existUser(userName);
 		return result;
+	}
+
+	@Override
+	public User elevationPrivilege2ProUser(HttpServletRequest request) {
+		User user = getSession(request, "user");//session获取当前用户对象
+		user = userDAO.updateUserRole(user);
+		user = updateSession (request, user) ;
+		
+		Role role = userDAO.findRole(2);
+		userDAO.insertAuthorizationList(user, role);
+		
+		return user;
+	}
+
+	@Override
+	public List<AuthorizationList> getAuthListByApplyAuthUser(User applyAuthUser) {
+		List<AuthorizationList> authList = userDAO.getAuthListByApplyAuthUser(applyAuthUser);
+		return authList;
 	}
 
 	

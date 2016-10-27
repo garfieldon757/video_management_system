@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.junit.Test;
 
+import com.adp.model.AuthorizationList;
 import com.adp.model.Role;
 import com.adp.model.User;
 
@@ -41,4 +42,6 @@ public class TestPage {
 		//Role role = findRole(1);
 		User user = findUser("ss");
 	}
+	
+	
 }
