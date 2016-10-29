@@ -22,5 +22,6 @@ public interface UserManager {
 	public List<AuthorizationList> getAllAuthList();
 	public void elevationPrivilege2ProUser_process_agree(HttpServletRequest request, int authListID);
 	public void elevationPrivilege2ProUser_process_deny(HttpServletRequest request, int authListID);
+	public List<AuthorizationList> searchProcessedAuthListByApplyAuthUserID(int applyAuthUserID);
 	
 }

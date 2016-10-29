@@ -58,7 +58,7 @@ public class User {
     public String getuserName() {
         return userName;
     }
-    public void setName(String userName) {
+    public void setuserName(String userName) {
         this.userName = userName;
     }
 	public String getSex() {

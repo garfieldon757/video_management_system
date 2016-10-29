@@ -9,6 +9,7 @@ import com.adp.model.User;
 public interface UserDAO {
 	public void addUser(User user);
 	public User getUserByEmail(String email);
+	public User getUserByID(int userID);
 	public Role findRole(int roleID);
 	public AuthorizationList findAuthList(int authListID);
 	public void updateUser(User user);

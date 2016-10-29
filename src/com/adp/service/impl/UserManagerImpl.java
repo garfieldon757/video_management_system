@@ -167,6 +167,13 @@ public class UserManagerImpl implements UserManager{
 		return;
 	}
 
+	@Override
+	public List<AuthorizationList> searchProcessedAuthListByApplyAuthUserID(int applyAuthUserID) {
+		User applyAuthUser = userDAO.getUserByID(applyAuthUserID);
+		List<AuthorizationList> al = userDAO.getAuthListByApplyAuthUser(applyAuthUser);
+		return al;
+	}
+
 	
 
 

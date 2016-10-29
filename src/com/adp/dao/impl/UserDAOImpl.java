@@ -33,6 +33,19 @@ public class UserDAOImpl implements UserDAO{
 		User user = resultList.get(0);
 		return user;
 	}
+	
+	@Override
+	public User getUserByID(int userID) {
+		// TODO Auto-generated method stub
+		String jpql = "select u from User u where u.userID=:userID";
+		List<User> resultList = em.createQuery(jpql).setParameter("userID", userID).getResultList();
+		User user = null;
+		if (resultList.size() != 0){
+			user = resultList.get(0);
+		}
+		
+		return user;
+	}
 
 	@Override
 	public Role findRole(int roleID) {
@@ -117,6 +130,8 @@ public class UserDAOImpl implements UserDAO{
 		
 		return authList;
 	}
+	
+
 	
 
 	

@@ -15,6 +15,12 @@ import com.adp.model.AuthorizationList;
 import com.adp.model.User;
 import com.adp.service.UserManager;
 
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
+
 
 @Controller
 public class UserController {
@@ -135,6 +141,28 @@ public class UserController {
 			mv.addObject("authList", authList);
 		}
 		return mv;//跳转至AuthProcess.jsp页面
+	}
+	
+//	@RequestMapping("ajax_userNameValidation")
+//	@ResponseBody
+//	public String ajax_userNameValidation(String userName){////
+//		
+//		String result = um.existUser(userName);
+//		return result;
+//	}
+	
+	@RequestMapping("ajax_searchProcessedAuthListByApplyAuthUserID")
+	@ResponseBody
+	public String ajax_searchProcessedAuthListByApplyAuthUserID(String ApplyAuthUserID){
+		
+		List<AuthorizationList> al = um.searchProcessedAuthListByApplyAuthUserID( Integer.parseInt(ApplyAuthUserID) );
+		System.out.println(al);
+		JsonConfig config = new JsonConfig();
+		config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		String s = JSONArray.fromObject(al , config).toString();
+		System.out.println( s );
+		
+		return s;	
 	}
 	
 }
