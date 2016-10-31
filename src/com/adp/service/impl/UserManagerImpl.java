@@ -92,7 +92,7 @@ public class UserManagerImpl implements UserManager{
 		int roleID = Integer.parseInt(request.getParameter("roleID")) ;
 		Role role = userDAO.findRole(roleID);//role_value  这两行从前端即可获取role对象
 		
-		user.setuserID(userID);
+		user.setUserID(userID);
 		user.setSex(sex);
 		user.setUserName(userName);
 		user.setUserPassword(userPassword);

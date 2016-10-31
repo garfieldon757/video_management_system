@@ -34,64 +34,102 @@ public class User {
     
     @OneToMany(mappedBy = "applyAuthUser", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
     private List<AuthorizationList> applyAuthUserList = new ArrayList<AuthorizationList>();
+    
+    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	private List<Video> videoList = new ArrayList<Video>();
 
+    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	private List<Algorithm> algorithmList = new ArrayList<Algorithm>();
     
-    public User() {
-		
+    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	private List<ProcessLog> processLogList = new ArrayList<ProcessLog>();
+
+	public Integer getUserID() {
+		return userID;
 	}
-    public User(Integer userID, String sex, String userName, String userPassword, String email, Role role) {
-		super();
+
+	public void setUserID(Integer userID) {
 		this.userID = userID;
-		this.sex = sex;
-		this.userName = userName;
-		this.userPassword = userPassword;
-		this.email = email;
-		this.role = role;
 	}
-    public Integer getuserID() {
-        return userID;
-    }
-    public void setuserID(Integer userID) {
-        this.userID = userID;
-    }
-    
-    public String getuserName() {
-        return userName;
-    }
-    public void setuserName(String userName) {
-        this.userName = userName;
-    }
+
 	public String getSex() {
 		return sex;
 	}
+
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getUserPassword() {
 		return userPassword;
 	}
+
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public Role getRole() {
 		return role;
 	}
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	
-	
+
+	public List<AuthorizationList> getGiveAuthUserList() {
+		return giveAuthUserList;
+	}
+
+	public void setGiveAuthUserList(List<AuthorizationList> giveAuthUserList) {
+		this.giveAuthUserList = giveAuthUserList;
+	}
+
+	public List<AuthorizationList> getApplyAuthUserList() {
+		return applyAuthUserList;
+	}
+
+	public void setApplyAuthUserList(List<AuthorizationList> applyAuthUserList) {
+		this.applyAuthUserList = applyAuthUserList;
+	}
+
+	public List<Video> getVideoList() {
+		return videoList;
+	}
+
+	public void setVideoList(List<Video> videoList) {
+		this.videoList = videoList;
+	}
+
+	public List<Algorithm> getAlgorithmList() {
+		return algorithmList;
+	}
+
+	public void setAlgorithmList(List<Algorithm> algorithmList) {
+		this.algorithmList = algorithmList;
+	}
+
+	public List<ProcessLog> getProcessLogList() {
+		return processLogList;
+	}
+
+	public void setProcessLogList(List<ProcessLog> processLogList) {
+		this.processLogList = processLogList;
+	}
+    
 }
