@@ -13,6 +13,8 @@ import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
 import com.adp.model.Role;
 import com.adp.model.User;
+import com.adp.model.Video;
+import com.adp.model.VideoCategory;
 
 @Repository("ud")
 @Transactional
@@ -129,6 +131,19 @@ public class UserDAOImpl implements UserDAO{
 		List<AuthorizationList> authList = em.createQuery(jpql).getResultList();
 		
 		return authList;
+	}
+	@Override
+	public VideoCategory getVideoCategoryByVideoCategoryName(String videoCategoryName) {
+		String jpql = "select vc from VideoCategory vc where vc.videoCategoryName =:videoCategoryName";
+		VideoCategory videoCategory = (VideoCategory) em.createQuery(jpql).setParameter("videoCategoryName", videoCategoryName).getResultList().get(0);
+		return videoCategory;
+	}
+	
+	@Override
+	public void insertVideo(Video video) {
+		// TODO Auto-generated method stub
+		em.persist(video);
+		return ;
 	}
 	
 

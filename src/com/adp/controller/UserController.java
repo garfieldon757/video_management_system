@@ -1,5 +1,6 @@
 package com.adp.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.adp.model.AuthorizationList;
 import com.adp.model.User;
 import com.adp.service.UserManager;
+import com.adp.service.VideoManager;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -26,6 +28,9 @@ import net.sf.json.util.CycleDetectionStrategy;
 public class UserController {
 	@Autowired(required=true)
 	UserManager um;
+	
+	@Autowired(required=true)
+	VideoManager vm;
 	
 	@RequestMapping(value="login_page")
 	public String login_page(){
@@ -163,6 +168,13 @@ public class UserController {
 		System.out.println( s );
 		
 		return s;	
+	}
+	
+	@RequestMapping(value="parse_json")
+	public void parse_json() throws IOException{
+		
+		vm.jsonToDB();
+		return ;
 	}
 	
 }

@@ -35,12 +35,13 @@ public class Video {
 	@Id//声明此列为主�?
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer videoID;
-	private boolean isDownloadable;
+	
+	private int isDownloadable;
 	private String language;
 	private String brand;
 	private String publishYear;
 	private String videoSourceLink;
-	private String Country;
+	private String country;
 	private String videoName;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -68,12 +69,7 @@ public class Video {
 	public void setVideoID(int videoID) {
 		this.videoID = videoID;
 	}
-	public boolean isDownloadable() {
-		return isDownloadable;
-	}
-	public void setDownloadable(boolean isDownloadable) {
-		this.isDownloadable = isDownloadable;
-	}
+	
 	public String getLanguage() {
 		return language;
 	}
@@ -98,12 +94,7 @@ public class Video {
 	public void setVideoSourceLink(String videoSourceLink) {
 		this.videoSourceLink = videoSourceLink;
 	}
-	public String getCountry() {
-		return Country;
-	}
-	public void setCountry(String country) {
-		Country = country;
-	}
+	
 	public String getVideoName() {
 		return videoName;
 	}
@@ -127,6 +118,18 @@ public class Video {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public int getIsDownloadable() {
+		return isDownloadable;
+	}
+	public void setIsDownloadable(int isDownloadable) {
+		this.isDownloadable = isDownloadable;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	

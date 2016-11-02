@@ -39,9 +39,9 @@
       </div>
 
 
-      <form  class="ht-app__form ng-pristine ng-invalid ng-invalid-required ng-valid-remote ng-valid-email Formisimo_clocked_71994" action="signUp" name="form">
+      <form  class="ht-app__form" action="signUp" name="form">
         <div class="ht-app__field-wrapper" >
-          <input id="sex" name="sex" class="ht-app__form-input ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-remote" type="text" placeholder="性别">
+          <input id="sex" name="sex" class="ht-app__form-input" type="text" placeholder="性别">
           <div id="checkDiv_Sex" >
             <br id="br_Sex" style="display: block">
             <p id="error_Sex" style="display:none; color:red">该输入不符合要求</p>
@@ -51,7 +51,7 @@
 
 
         <div class="ht-app__field-wrapper" >
-          <input id="username" name="userName" class="ht-app__form-input ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-remote" type="text" placeholder="昵称">
+          <input id="username" name="userName" class="ht-app__form-input" type="text" placeholder="昵称">
           <div id="checkDiv_userName" >
             <br id="br_userName" style="display: block">
             <p id="error_userName" style="display:none; color:red">该输入不符合要求</p>
@@ -60,17 +60,17 @@
         </div>
 
 
-        <div class="ht-app__field-wrapper" >
-          <input id="userPassword" name="userPassword" class="ht-app__form-input ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required ng-valid-remote" type="email" placeholder="密码">
-          <div id="checkDiv_userPassword" >
-            <br id="br_userPassword" style="display: block">
-            <p id="error_userPassword" style="display:none; color:red">该输入不符合要求</p>
-            <p id="success_userPassword"><img src="" /></p>
-          </div>
-        </div>
+        <div class="ht-app__field-wrapper">
+	        <input id="userPassword" name="userPassword" class="ht-app__form-input" type="text" placeholder="密码">
+	        <div id="checkDiv_userPassword" >
+	          <br id="br_userPassword" style="display: block">
+	          <p id="error_userPassword" style="display:none; color:red">该输入不符合要求</p>
+	          <p id="success_userPassword"><img src="" /></p>
+	        </div>
+	      </div>
 
         <div class="ht-app__field-wrapper" >
-          <input id="userPasswordConfirm" name="userPasswordConfirm" class="ht-app__form-input ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required ng-valid-remote" type="text" placeholder="密码确认">
+          <input id="userPasswordConfirm" name="userPasswordConfirm" class="ht-app__form-input" type="text" placeholder="密码确认">
           <div id="checkDiv_userPasswordConfirm" >
             <br id="br_userPasswordConfirm" style="display: block">
             <p id="error_userPasswordConfirm" style="display:none; color:red">该输入不符合要求</p>
@@ -78,15 +78,16 @@
           </div>
         </div>
 
-
-        <div class="ht-app__field-wrapper">
-          <input id="email" name="email" class="ht-app__form-input ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-remote" type="text" placeholder="电子邮箱">
-          <div id="checkDiv_email" >
-            <br id="br_email" style="display: block">
-            <p id="error_email" style="display:none; color:red">该输入不符合要求</p>
-            <p id="success_email"><img src="" /></p>
-          </div>
-        </div>
+        <div class="ht-app__field-wrapper" >
+	        <input id="email" name="email" class="ht-app__form-input" type="email" placeholder="电子邮箱">
+	        <div id="checkDiv_email" >
+	          <br id="br_email" style="display: block">
+	          <p id="error_email" style="display:none; color:red">该输入不符合要求</p>
+	          <p id="success_email"><img src="" /></p>
+	        </div>
+	      </div>
+        
+      
 
 
         <div class="ht-app__form-submit-wrapper">
@@ -110,25 +111,8 @@
 
 
 
-<!-- build:js(.) /public/js/website/index.js -->
-<script src="js/js.cookie.js"></script>
-<script src="js/validator.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/app.js"></script>
-<script src="js/navigation.js"></script>
-<script src="js/quick-filter.js"></script>
-<script src="js/google-map.js"></script>
-<script src="js/init.js"></script>
-<script src="js/lead-capture.js"></script>
-<script src="js/contact.js"></script>
-<script src="js/tooltip.js"></script>
-<script src="js/popover.js"></script>
-<script src="js/dropdown.js"></script>
-<script src="js/lodash.js"></script>
-<script src="js/requestAnimationFrame.js"></script>
-<script src="js/material.min.js"></script>
-<script src="js/jquery.placeholder.js"></script>
-<!-- endbuild -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 
 

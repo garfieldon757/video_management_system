@@ -19,7 +19,10 @@ public class VideoCategory {
 	@Id//声明此列为主�?
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer videoCategoryID;
+	
 	private String videoCategoryName;  
+	
+	private String videoCategoryUrl;
 	
 	@OneToMany(mappedBy = "videoCategory", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	private List<Video> videoList = new ArrayList<Video>();
@@ -41,6 +44,12 @@ public class VideoCategory {
 	}
 	public void setVideoCategoryName(String videoCategoryName) {
 		this.videoCategoryName = videoCategoryName;
+	}
+	public String getVideoCategoryUrl() {
+		return videoCategoryUrl;
+	}
+	public void setVideoCategoryUrl(String videoCategoryUrl) {
+		this.videoCategoryUrl = videoCategoryUrl;
 	}
 	
 }

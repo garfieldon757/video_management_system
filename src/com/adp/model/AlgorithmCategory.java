@@ -19,6 +19,7 @@ public class AlgorithmCategory {
 	@Id//声明此列为主�?
 	@GeneratedValue(strategy = GenerationType.AUTO)//根据不同数据库自动�?�择合�?�的id生成方案，这里使用mysql,为�?�增�?
 	private Integer algorithmCategoryID;
+	
 	private String algorithmCategoryName;
 	 
 	@OneToMany(mappedBy = "algorithmCategory", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)

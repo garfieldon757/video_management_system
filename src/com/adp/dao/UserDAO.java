@@ -5,6 +5,8 @@ import java.util.List;
 import com.adp.model.AuthorizationList;
 import com.adp.model.Role;
 import com.adp.model.User;
+import com.adp.model.Video;
+import com.adp.model.VideoCategory;
 
 public interface UserDAO {
 	public void addUser(User user);
@@ -19,4 +21,6 @@ public interface UserDAO {
 	public void updateAuthorizationList(int authListID, User giveAuthUser, String authStatus, String processDateTime);
 	public List<AuthorizationList> getAuthListByApplyAuthUser(User applyAuthUser);
 	public List<AuthorizationList> getAllAuthList();
+	public VideoCategory getVideoCategoryByVideoCategoryName(String videoCategoryName);
+	public void insertVideo(Video video);
 }
