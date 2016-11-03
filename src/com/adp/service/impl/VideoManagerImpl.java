@@ -6,12 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.adp.dao.UserDAO;
+import com.adp.dao.VideoDAO;
 import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
@@ -26,6 +28,9 @@ public class VideoManagerImpl implements VideoManager {
 	
 	@Autowired(required=true)
 	private UserDAO userDAO;
+	
+	@Autowired(required=true)
+	private VideoDAO videoDAO;
 	
 
 	public String jsonToStr(String fileUrl) throws IOException{
@@ -82,7 +87,7 @@ public class VideoManagerImpl implements VideoManager {
 		
 		JSONArray jsonArray = new JSONArray().fromObject(resultStr);
 		int size = jsonArray.size();
-		for(int i =0 ;i <size; i++){
+		for(int i =14 ;i <size; i++){
 			JSONObject sortObject = jsonArray.getJSONObject(i);
 		
 			 String sortName = sortObject.getString("所属分类");//视频资源集合
@@ -139,7 +144,25 @@ public class VideoManagerImpl implements VideoManager {
 		//sampleDataToDB(resultStr);
 		AllDataToDB(resultStr);
 		
-		 
+	}
+
+	@Override
+	public List<VideoCategory> getVideoCategoryList() {
+		List<VideoCategory> videoCategoryList = videoDAO.getVideoCategoryList();
+		return videoCategoryList;
+	}
+
+	@Override
+	public List<Video> getVideoListByVideoCategroyIDAndPage(String videoCategroyID , Integer page) {
+		VideoCategory videoCategory = videoDAO.getVideoCategoryByVideoCategoryID(videoCategroyID);
+		List<Video> videoList = videoDAO.getVideoListByVideoCategroyIDAndPage(videoCategory , page);
+		return videoList;
+	}
+
+	@Override
+	public int getVideoListSizeByVideoCategoryID(String videoCategoryID) {
+		int videoListSize = videoDAO.getVideoListSizeByVideoCategoryID(videoCategoryID);
+		return videoListSize;
 	}
 	
 }

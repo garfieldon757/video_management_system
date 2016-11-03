@@ -88,13 +88,16 @@
                                             <label for="sex">性别</label>
                                             <div id="sex_div">
                                                 <select class="form-control" id="sex" name="sex">
-                                                    <option>${user.sex}</option>
+                                                    <option selected="selected">${user.sex}</option>
+                                                    <option >${user.sex}</option>
                                                     
-                                                    <c:if test=" ${user.sex eq 'female'} ">
+                                                    <c:if test=" ${user.sex eq '男'} ">
                                                     	<option>男</option>
+                                                    	<option>女</option>
                                                     </c:if>
-                                                    <c:if test=" ${user.sex eq 'male'} ">
+                                                    <c:if test=" ${user.sex eq '女'} ">
 	                                                	<option>女</option>
+	                                                	<option>男</option>
 	                                                </c:if>
 	                                                <!--???????????????????????????????????????? -->
                                                     

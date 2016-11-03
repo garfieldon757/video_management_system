@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.adp.model.AuthorizationList;
 import com.adp.model.User;
+import com.adp.model.Video;
+import com.adp.model.VideoCategory;
 import com.adp.service.UserManager;
 import com.adp.service.VideoManager;
 
@@ -175,6 +178,25 @@ public class UserController {
 		
 		vm.jsonToDB();
 		return ;
+	}
+	
+	@RequestMapping(value="videoSearchInit")
+	public ModelAndView videoSearchInit(@RequestParam("videoCategoryID") String videoCategoryID , @RequestParam("page") Integer page){
+		ModelAndView mv = new ModelAndView("VideoSearch");
+		List<VideoCategory> videoCategoryList = vm.getVideoCategoryList();
+		List<Video> videoList = vm.getVideoListByVideoCategroyIDAndPage(videoCategoryID , page);
+		int videoListSize = vm.getVideoListSizeByVideoCategoryID(videoCategoryID);
+		if(videoCategoryList != null && videoList != null){
+			mv.addObject("videoCategoryList" , videoCategoryList);//传给视频分类栏使用
+			mv.addObject("videoList" , videoList);//传16个视频对象给16个视频区域使用
+			mv.addObject("videoListSize", videoListSize);//传给分页组件使用
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "paramTest")
+	public void paramTest(@RequestParam("param") String param){
+		System.out.println("param get :" + param);
 	}
 	
 }
