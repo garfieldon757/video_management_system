@@ -38,20 +38,26 @@ public class VideoDAOIpml implements VideoDAO{
 	@Override
 	public List<Video> getVideoListByVideoCategroyIDAndPage(VideoCategory videoCategory , int page) {
 		String jpql = "select v from Video v where v.videoCategory =:videoCategory";
-		List<Video> videoList = em.createQuery(jpql).setParameter("videoCategory", videoCategory).getResultList();
-		int startVideoIndex = ( page - 1 ) * 16;
-		int endVideoIndex = page * 16 -1;
-		if( (videoList.size() - endVideoIndex) < 16 ){
-			endVideoIndex = videoList.size();
-		}
-		videoList = videoList.subList(  startVideoIndex , endVideoIndex );//根据page参数选取16条video
+		int startVideoIndex = ( page -1 ) * 16 ;
+		List<Video> videoList = em.createQuery(jpql)
+													.setParameter("videoCategory", videoCategory)
+													.setMaxResults(16)
+													.setFirstResult(startVideoIndex)
+													.getResultList();
+//		int startVideoIndex = ( page - 1 ) * 16;
+//		int endVideoIndex = page * 16 -1;
+//		if( (videoList.size() - endVideoIndex) < 16 ){
+//			endVideoIndex = videoList.size();
+//		}
+//		videoList = videoList.subList(  startVideoIndex , endVideoIndex );//根据page参数选取16条video
 		return videoList;
 	}
 
 	@Override
 	public int getVideoListSizeByVideoCategory(VideoCategory videoCategory) {
-		String jpql = "select v from Video v where v.videoCategory =:videoCategory";
-		int videoListSize=em.createQuery(jpql).setParameter("videoCategory", videoCategory ).getResultList().size();
+		String jpql = "select count(v) from Video v where v.videoCategory =:videoCategory";
+		String videoListSizeTemp=em.createQuery(jpql).setParameter("videoCategory", videoCategory ).getSingleResult().toString();
+		int videoListSize = Integer.parseInt(videoListSizeTemp);
 		return videoListSize;
 	}
 
