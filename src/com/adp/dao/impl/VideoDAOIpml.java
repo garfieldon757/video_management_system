@@ -29,24 +29,29 @@ public class VideoDAOIpml implements VideoDAO{
 	}
 	
 	@Override
-	public VideoCategory getVideoCategoryByVideoCategoryID(String videoCategoryID) {
+	public VideoCategory getVideoCategoryByVideoCategoryID(int videoCategoryID) {
 		String jpql = "select vc from VideoCategory vc where vc.videoCategoryID =:videoCategoryID";
 		VideoCategory videoCategroy = (VideoCategory) em.createQuery(jpql).setParameter("videoCategoryID", videoCategoryID ).getResultList().get(0);
 		return videoCategroy;
 	}
 
 	@Override
-	public List<Video> getVideoListByVideoCategroyIDAndPage(VideoCategory videoCategory , Integer page) {
+	public List<Video> getVideoListByVideoCategroyIDAndPage(VideoCategory videoCategory , int page) {
 		String jpql = "select v from Video v where v.videoCategory =:videoCategory";
 		List<Video> videoList = em.createQuery(jpql).setParameter("videoCategory", videoCategory).getResultList();
-		videoList = videoList.subList( ( page - 1 ) * 16 , page * 16 -1 );//根据page参数选取16条video
+		int startVideoIndex = ( page - 1 ) * 16;
+		int endVideoIndex = page * 16 -1;
+		if( (videoList.size() - endVideoIndex) < 16 ){
+			endVideoIndex = videoList.size();
+		}
+		videoList = videoList.subList(  startVideoIndex , endVideoIndex );//根据page参数选取16条video
 		return videoList;
 	}
 
 	@Override
-	public int getVideoListSizeByVideoCategoryID(String videoCategoryID) {
-		String jpql = "select vc from VideoCategory vc where vc.videoCategoryID =:videoCategoryID";
-		int videoListSize=em.createQuery(jpql).setParameter("videoCategoryID", videoCategoryID ).getResultList().size();
+	public int getVideoListSizeByVideoCategory(VideoCategory videoCategory) {
+		String jpql = "select v from Video v where v.videoCategory =:videoCategory";
+		int videoListSize=em.createQuery(jpql).setParameter("videoCategory", videoCategory ).getResultList().size();
 		return videoListSize;
 	}
 

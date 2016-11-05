@@ -181,7 +181,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="videoSearchInit")
-	public ModelAndView videoSearchInit(@RequestParam("videoCategoryID") String videoCategoryID , @RequestParam("page") Integer page){
+	public ModelAndView videoSearchInit(@RequestParam("videoCategoryID") int videoCategoryID , @RequestParam("page") int page){
 		ModelAndView mv = new ModelAndView("VideoSearch");
 		List<VideoCategory> videoCategoryList = vm.getVideoCategoryList();
 		List<Video> videoList = vm.getVideoListByVideoCategroyIDAndPage(videoCategoryID , page);
@@ -190,6 +190,8 @@ public class UserController {
 			mv.addObject("videoCategoryList" , videoCategoryList);//传给视频分类栏使用
 			mv.addObject("videoList" , videoList);//传16个视频对象给16个视频区域使用
 			mv.addObject("videoListSize", videoListSize);//传给分页组件使用
+			mv.addObject("videoCategoryID", videoCategoryID);
+			mv.addObject("page", page);
 		}
 		return mv;
 	}

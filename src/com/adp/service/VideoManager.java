@@ -13,6 +13,6 @@ public interface VideoManager {
 	public void AllDataToDB(String resultStr);
 	public void jsonToDB( ) throws IOException;
 	public List<VideoCategory> getVideoCategoryList();
-	public List<Video> getVideoListByVideoCategroyIDAndPage(String videoCategroyID , Integer page);
-	public int getVideoListSizeByVideoCategoryID(String videoCategoryID);
+	public List<Video> getVideoListByVideoCategroyIDAndPage(int videoCategroyID , int page);
+	public int getVideoListSizeByVideoCategoryID(int videoCategoryID);
 }

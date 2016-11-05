@@ -7,7 +7,7 @@ import com.adp.model.VideoCategory;
 
 public interface VideoDAO {
 	public List<VideoCategory> getVideoCategoryList();
-	public VideoCategory getVideoCategoryByVideoCategoryID(String videoCategroyID);
-	public List<Video> getVideoListByVideoCategroyIDAndPage(VideoCategory videoCategory , Integer page);
-	public int getVideoListSizeByVideoCategoryID(String videoCategoryID);
+	public VideoCategory getVideoCategoryByVideoCategoryID(int videoCategroyID);
+	public List<Video> getVideoListByVideoCategroyIDAndPage(VideoCategory videoCategory , int page);
+	public int getVideoListSizeByVideoCategory(VideoCategory videoCategory);
 }

@@ -153,15 +153,16 @@ public class VideoManagerImpl implements VideoManager {
 	}
 
 	@Override
-	public List<Video> getVideoListByVideoCategroyIDAndPage(String videoCategroyID , Integer page) {
+	public List<Video> getVideoListByVideoCategroyIDAndPage(int videoCategroyID , int page) {
 		VideoCategory videoCategory = videoDAO.getVideoCategoryByVideoCategoryID(videoCategroyID);
 		List<Video> videoList = videoDAO.getVideoListByVideoCategroyIDAndPage(videoCategory , page);
 		return videoList;
 	}
 
 	@Override
-	public int getVideoListSizeByVideoCategoryID(String videoCategoryID) {
-		int videoListSize = videoDAO.getVideoListSizeByVideoCategoryID(videoCategoryID);
+	public int getVideoListSizeByVideoCategoryID(int videoCategoryID) {
+		VideoCategory videoCategory = videoDAO.getVideoCategoryByVideoCategoryID(videoCategoryID);
+		int videoListSize = videoDAO.getVideoListSizeByVideoCategory(videoCategory);
 		return videoListSize;
 	}
 	

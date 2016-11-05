@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html class="no-js">
 <head>
     <meta charset="utf-8">
@@ -57,10 +57,10 @@
                         <hr style="margin-top: 0;">
                         <ul class="nav nav-stacked side-nav">
                             <c:forEach items="${videoCategoryList}" var="vc">
-                            	<c:if test="${ vc.videoCategoryID == '1' }">
+                            	<c:if test="${ vc.videoCategoryID == videoCategoryID }">
                                 	<li  class="active">
                                 </c:if>
-                                <c:if test="${vc.videoCategoryID != '1'}">
+                                <c:if test="${ vc.videoCategoryID != videoCategoryID }">
 	                            	<li  class="">
 	                            </c:if>
 	                                    <a href="${vc.videoCategoryUrl}">${vc.videoCategoryName}</a>
@@ -88,11 +88,11 @@
 				                    		
 					                    		<div class="col-md-3">
 					                                <div class="thumbnail">
-					                                    <img data-src="holder.js/300x300" alt="..." class="img-responsive" src="http://v.cnad.cn/vg/qqgg1/2015.4.23/【化妆与日用】迪奥广告（4）_512x280_2.00M_h.264_201542484458.JPG">
+					                                    <img data-src="holder.js/300x300" style="width: 240px; height: 140px;" class="img-responsive" src="${v.videoCoverLink}">
 					                                    <div class="caption">
-					                                        <h3>videoName</h3>
+					                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 					                                        <p>
-					                                            <a href="#" class="btn btn-primary">视频播放</a>
+					                                            <a href="${v.videoSourceLink}" class="btn btn-primary">视频播放</a>
 					                                            <a href="#" class="btn btn-default">视频分析</a>
 					                                        </p>
 					                                    </div>
@@ -105,9 +105,9 @@
 				                    		
 						                    		<div class="col-md-3">
 						                                <div class="thumbnail">
-						                                    <img data-src="holder.js/300x300" alt="..." class="img-responsive" src="http://v.cnad.cn/vg/qqgg1/2015.4.23/【化妆与日用】迪奥广告（4）_512x280_2.00M_h.264_201542484458.JPG">
+						                                    <img data-src="holder.js/300x300" style="width: 240px; height: 140px;" class="img-responsive" src="${v.videoCoverLink}">
 						                                    <div class="caption">
-						                                        <h3>videoName</h3>
+						                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 						                                        <p>
 						                                            <a href="#" class="btn btn-primary">视频播放</a>
 						                                            <a href="#" class="btn btn-default">视频分析</a>
@@ -122,9 +122,9 @@
 				                    		
 						                    		<div class="col-md-3">
 						                                <div class="thumbnail">
-						                                    <img data-src="holder.js/300x300" alt="..." class="img-responsive" src="http://v.cnad.cn/vg/qqgg1/2015.4.23/【化妆与日用】迪奥广告（4）_512x280_2.00M_h.264_201542484458.JPG">
+						                                    <img data-src="holder.js/300x300" style="width: 240px; height: 140px;" class="img-responsive" src="${v.videoCoverLink}">
 						                                    <div class="caption">
-						                                        <h3>videoName</h3>
+						                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 						                                        <p>
 						                                            <a href="#" class="btn btn-primary">视频播放</a>
 						                                            <a href="#" class="btn btn-default">视频分析</a>
@@ -144,18 +144,38 @@
                         </div>
                     </div>
                     
-                    <nav>
-	                    <ul class="pagination">
-	                        <li class="disabled"><a href="#">«</a></li>
-	                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-	                        <li><a href="#">2</a></li>
-	                        <li><a href="#">3</a></li>
-	                        <li><a href="#">4</a></li>
-	                        <li><a href="#">5</a></li>
-	                        <li><a href="#">...</a></li>
-	                        <li><a href="#">${videoListSize}</a></li>
-	                    </ul>
-	                </nav>
+                    <div style="text-align: center">
+	                    <nav>
+		                    <ul class="pagination">
+		                        <c:if test="${page - 2 > 0}">
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-2}">${page-2}</a></li>
+		                        </c:if>
+		                        <c:if test="${page - 1 > 0}">
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-1}">${page-1}</a></li>
+		                        </c:if>
+		                        <li class="active"><a href="">${page}</a></li>
+		                        <c:if test="${  (page + 1< videoListSize / 16)  and  (page + 2 > videoListSize / 16) }">
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page+1}">${page + 1}</a></li>
+		                        </c:if>
+		                        <c:if test="${ (page + 2 < videoListSize / 16) and (page + 3 > videoListSize / 16) }">
+			                        <li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page+1}">${page + 1}</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page+1}">${page + 2}</a></li>
+		                        </c:if>
+		                        <c:if test="${ (page + 3 < videoListSize / 16) and (page + 4 > videoListSize / 16) }">
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page+1}">${page+1}</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page+2}">${page+2}</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page+3}">${page+3}</a></li>
+		                        </c:if>
+		                        <c:if test="${ page + 4 < videoListSize / 16 }">
+			                        <li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page+1}">${page + 1}</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page+2}">${page + 2}</a></li>
+		                        	<li><a href="">...</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=3&page=<fmt:formatNumber type="number" value="${videoListSize/16}" maxFractionDigits="0"/>">尾页</a></li>
+		                        </c:if>
+		                        
+		                    </ul>
+		                </nav>
+		             </div>
                     
                 </div>
                 <div class="col-md-1"></div>
