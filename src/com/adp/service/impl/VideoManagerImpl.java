@@ -87,7 +87,7 @@ public class VideoManagerImpl implements VideoManager {
 		
 		JSONArray jsonArray = new JSONArray().fromObject(resultStr);
 		int size = jsonArray.size();
-		for(int i =14 ;i <size; i++){
+		for(int i =0 ;i <size; i++){
 			JSONObject sortObject = jsonArray.getJSONObject(i);
 		
 			 String sortName = sortObject.getString("所属分类");//视频资源集合
