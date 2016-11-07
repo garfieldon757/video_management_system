@@ -54,7 +54,7 @@ public class Video {
 	@JoinColumn(name="userID")
 	private User user;
 	
-	@OneToMany(mappedBy = "video", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "video", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	private List<ProcessLog> processLogList = new ArrayList<ProcessLog>();
 	
 	public int getVideoID() {

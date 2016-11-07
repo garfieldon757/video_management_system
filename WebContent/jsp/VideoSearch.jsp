@@ -92,7 +92,7 @@
 					                                    <div class="caption">
 					                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 					                                        <p>
-					                                            <a href="${v.videoSourceLink}" class="btn btn-primary">视频播放</a>
+					                                            <a href="videoPlay?videoID=${v.videoID}" class="btn btn-primary">视频播放</a>
 					                                            <a href="#" class="btn btn-default">视频分析</a>
 					                                        </p>
 					                                    </div>
@@ -109,7 +109,7 @@
 						                                    <div class="caption">
 						                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 						                                        <p>
-						                                            <a href="#" class="btn btn-primary">视频播放</a>
+						                                            <a href="videoPlay?videoID=${v.videoID}" class="btn btn-primary">视频播放</a>
 						                                            <a href="#" class="btn btn-default">视频分析</a>
 						                                        </p>
 						                                    </div>
@@ -126,7 +126,7 @@
 						                                    <div class="caption">
 						                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 						                                        <p>
-						                                            <a href="#" class="btn btn-primary">视频播放</a>
+						                                            <a href="videoPlay?videoID=${v.videoID}" class="btn btn-primary">视频播放</a>
 						                                            <a href="#" class="btn btn-default">视频分析</a>
 						                                        </p>
 						                                    </div>
@@ -147,11 +147,24 @@
                     <div style="text-align: center">
 	                    <nav>
 		                    <ul class="pagination">
-		                        <c:if test="${page - 2 > 0}">
-		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-2}">${page-2}</a></li>
+		                    
+		                        <c:if test="${ page - 4 > 0 }">
+			                        <li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=1">1</a></li>
+		                        	<li><a href="">...</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-2}">${page - 2}</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-1}">${page - 1}</a></li>
 		                        </c:if>
-		                        <c:if test="${page - 1 > 0}">
-		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-1}">${page-1}</a></li>
+		                        <c:if test="${ ( page - 3 > 0 )  and  (  page - 4 == 0 ) }">
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-3}">${page - 3}</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-2}">${page - 2}</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-1}">${page - 1}</a></li>
+		                        </c:if>
+		                        <c:if test="${ ( page - 2 > 0 )  and  (  page - 3 == 0 ) }">
+			                        <li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-2}">${page - 2}</a></li>
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-1}">${page - 1}</a></li>
+		                        </c:if>
+		                        <c:if test="${  ( page - 1 > 0 )  and  (  page - 2 == 0 ) }">
+		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-1}">${page - 1}</a></li>
 		                        </c:if>
 		                        <li class="active"><a href="">${page}</a></li>
 		                        <c:if test="${  (page + 1< videoListSize / 16)  and  (page + 2 > videoListSize / 16) }">

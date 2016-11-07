@@ -10,4 +10,5 @@ public interface VideoDAO {
 	public VideoCategory getVideoCategoryByVideoCategoryID(int videoCategroyID);
 	public List<Video> getVideoListByVideoCategroyIDAndPage(VideoCategory videoCategory , int page);
 	public int getVideoListSizeByVideoCategory(VideoCategory videoCategory);
+	public Video getVideoByVideoID(int videoID);
 }

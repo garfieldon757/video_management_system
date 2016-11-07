@@ -22,7 +22,7 @@ public class AlgorithmCategory {
 	
 	private String algorithmCategoryName;
 	 
-	@OneToMany(mappedBy = "algorithmCategory", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "algorithmCategory", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	 private List<Algorithm> algorithmList = new ArrayList<Algorithm>();
 	 
 	public Integer getAlgorithmCategoryID() {

@@ -15,4 +15,5 @@ public interface VideoManager {
 	public List<VideoCategory> getVideoCategoryList();
 	public List<Video> getVideoListByVideoCategroyIDAndPage(int videoCategroyID , int page);
 	public int getVideoListSizeByVideoCategoryID(int videoCategoryID);
+	public Video getVideoByVideoID(int videoID);
 }

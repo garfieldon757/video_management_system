@@ -165,5 +165,11 @@ public class VideoManagerImpl implements VideoManager {
 		int videoListSize = videoDAO.getVideoListSizeByVideoCategory(videoCategory);
 		return videoListSize;
 	}
+
+	@Override
+	public Video getVideoByVideoID(int videoID) {
+		Video video = videoDAO.getVideoByVideoID(videoID);
+		return video;
+	}
 	
 }

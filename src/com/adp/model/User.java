@@ -29,19 +29,19 @@ public class User {
 	@JoinColumn(name="roleID")
     private Role role;
     
-    @OneToMany(mappedBy = "giveAuthUser", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "giveAuthUser", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
     private List<AuthorizationList> giveAuthUserList = new ArrayList<AuthorizationList>();
     
-    @OneToMany(mappedBy = "applyAuthUser", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "applyAuthUser", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
     private List<AuthorizationList> applyAuthUserList = new ArrayList<AuthorizationList>();
     
-    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	private List<Video> videoList = new ArrayList<Video>();
 
-    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	private List<Algorithm> algorithmList = new ArrayList<Algorithm>();
     
-    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	private List<ProcessLog> processLogList = new ArrayList<ProcessLog>();
 
 	public Integer getUserID() {

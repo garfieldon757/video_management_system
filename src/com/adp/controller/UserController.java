@@ -201,4 +201,14 @@ public class UserController {
 		System.out.println("param get :" + param);
 	}
 	
+	@RequestMapping(value="videoPlay")
+	public ModelAndView videoPlay(@RequestParam("videoID") int videoID){
+		ModelAndView mv = new ModelAndView("VideoPlayer");
+		Video video = vm.getVideoByVideoID(videoID);
+		if(video != null){
+			mv.addObject("video", video);
+		}
+		return mv;
+	}
+	
 }

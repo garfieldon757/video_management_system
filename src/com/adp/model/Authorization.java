@@ -21,7 +21,7 @@ public class Authorization {
 	private Integer authID;
 	private String authName;
 	
-	@OneToMany(mappedBy = "authorization", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "authorization", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	private List<AuthorizationRoleRelation> authRoleRelationList= new ArrayList<AuthorizationRoleRelation>();
 	
 	public Integer getAuthID() {

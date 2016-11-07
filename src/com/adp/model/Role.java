@@ -1,4 +1,4 @@
-package com.adp.model;
+ package com.adp.model;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,15 +21,15 @@ public class Role {
 	private Integer roleID;
 	private String roleName;
 	
-	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	private List<User> userList = new ArrayList<User>();
 	
 	
-	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	private List<AuthorizationList> authorizatioinList = new ArrayList<AuthorizationList>();
 	
 	
-	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	private List<AuthorizationRoleRelation> authRoleRelationList = new ArrayList<AuthorizationRoleRelation>();
 	
 	public Role() {

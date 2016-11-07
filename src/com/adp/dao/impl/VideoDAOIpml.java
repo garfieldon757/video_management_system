@@ -61,6 +61,13 @@ public class VideoDAOIpml implements VideoDAO{
 		return videoListSize;
 	}
 
+	@Override
+	public Video getVideoByVideoID(int videoID) {
+		String jpql = "select v from Video v where v.videoID =:videoID";
+		Video video = (Video) em.createQuery(jpql).setParameter("videoID", videoID).getSingleResult();
+		return video;
+	}
+
 	
 
 }

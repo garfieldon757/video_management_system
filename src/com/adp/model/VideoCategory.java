@@ -24,7 +24,7 @@ public class VideoCategory {
 	
 	private String videoCategoryUrl;
 	
-	@OneToMany(mappedBy = "videoCategory", cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "videoCategory", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	private List<Video> videoList = new ArrayList<Video>();
 	
 	public List<Video> getVideoList() {

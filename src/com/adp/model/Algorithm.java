@@ -35,7 +35,7 @@ public class Algorithm {
 	@JoinColumn(name="algorithmCategoryID")
 	private AlgorithmCategory algorithmCategory;
 	
-	@OneToMany(mappedBy = "algorithm", cascade=CascadeType.MERGE , fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "algorithm", cascade=CascadeType.MERGE , fetch=FetchType.LAZY)
 	private List<ProcessLog> processLogList = new ArrayList<ProcessLog>();
 
 	
