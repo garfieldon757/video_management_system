@@ -1,6 +1,9 @@
 package com.adp.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.adp.model.Algorithm;
+import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.service.AlgorithmManager;
+import com.adp.service.UserManager;
 import com.adp.service.VideoManager;
 
 @Controller
 public class AlgorithmController {
+	
+	@Autowired(required=true)
+	UserManager um;
 	
 	@Autowired(required=true)
 	VideoManager vm;
@@ -36,11 +44,19 @@ public class AlgorithmController {
 	
 	@RequestMapping(value="ajax_imageProcess4Trial_keyFrameSegmentation")
 	@ResponseBody
-	public String ajax_imageProcess4Trial_keyFrameSegmentation( int videoID, int algorithmID){
+	public String ajax_imageProcess4Trial_keyFrameSegmentation( HttpServletRequest request , String sourceVideoLink, int algorithmID) throws IOException, InterruptedException{
 		//视频场景分割代码block-start
+		User user = um.getSession(request, "user");
+		String userName = user.getUserName();//通过session获取userName
+		int start_index = sourceVideoLink.lastIndexOf("/") + 1;
+		int end_index = sourceVideoLink.length();
+		String videoSourceName = sourceVideoLink.substring( start_index , end_index );//截取videoSourceLink的最后一部分，即视频文件名（带后缀）
 		
+		sourceVideoLink = "E:/workspace2/ADP/WebContent/ImageProcess/" + userName + "/" + videoSourceName;//作为调用python方法的输入参数之一
+		String destFolderLink = "E:/workspace2/ADP/WebContent/ImageProcess/" + userName + "/frames/";
+		am.frameExtract(sourceVideoLink, destFolderLink);
 		//视频场景分割代码block-end
-		return ??;
+		return "success";
 	}
 	
 	@RequestMapping(value="ajax_loadImageProcess4Pro_keyFrameSegmentation")

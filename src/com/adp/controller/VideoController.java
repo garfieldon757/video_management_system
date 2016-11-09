@@ -2,6 +2,7 @@ package com.adp.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,13 +84,15 @@ public class VideoController {
 	
 	@RequestMapping("downloadVideo")
 	@ResponseBody
-	public String downloadVideo(@RequestParam("urlStr") String urlStr , @RequestParam("userName") String userName) throws IOException{
+	public String downloadVideo(String urlStr , String userName) throws IOException{
 		
+		urlStr = URLDecoder.decode(urlStr, "utf-8");
+		userName = URLDecoder.decode(userName, "utf-8");
 		String fileName = urlStr.substring(urlStr.lastIndexOf("/") + 1 , urlStr.length() );
 		String savePath = "E:/workspace2/ADP/WebContent/ImageProcess/" + userName;
 		dm.downLoadFromUrl(urlStr, fileName, savePath);
 		
-		return "下载成功";
+		return "Video downloading success.";
 	}
 
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
 
 import org.junit.Test;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,7 @@ public class DownloadManagerImpl implements DownloadManager{
 	        if(!saveDir.exists()){  
 	            saveDir.mkdir();  
 	        }  
+	        String fileName1 = URLDecoder.decode(fileName, "utf-8");
 	        File file = new File(saveDir+File.separator+fileName);      
 	        FileOutputStream fos = new FileOutputStream(file);       
 	        fos.write(getData);   

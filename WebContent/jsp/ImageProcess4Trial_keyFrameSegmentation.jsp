@@ -108,7 +108,7 @@
 	                                    <dt>发布者信息：</dt>
 	                                    <dd>${video.user.userName} (ID : ${video.user.userID})</dd>
 	                                </dl>
-	
+	                                <button id="videoSourceLink_Btn" value="${video.videoSourceLink}" style="display:none"></button>
 	                            </div>
 		                        <div class="col-md-2"></div>
 		
@@ -126,7 +126,7 @@
 		            </div>
 		           
 		            <div class="text-center">
-		            	<button id="" name="execute_btn" type="button" class="btn btn-danger btn-lg">运行算法</button>
+		            	<button id="execute_btn" type="button" class="btn btn-danger btn-lg">运行算法</button>
 		            </div>
 		            
 		            <br/>
@@ -167,74 +167,19 @@
         
         $('#execute_btn').click(function(e){
         	
-        	var videoID_value = ${video.videoID};
+        	var videoSourceLink_value = $('#videoSourceLink_Btn').val();//传入后台controller之后需要截取文件名的字符串片段~
         	var algorithmID_value = 1;
         	
         	$.ajax({
                 url: "ajax_imageProcess4Trial_keyFrameSegmentation",
-                data: { 	videoID : videoID_value;
-        					algorithmID : algorithmID_value},
+                data: { 	sourceVideoLink : videoSourceLink_value,
+        					algorithmID : algorithmID_value
+        					},
                 type: "GET",
                 success: function (response) {
                     
-	                  var json = eval(response);
-	                  var concatStr = "";
-	                  $.each(json, function(index){
-	                  	var authListID = json[index].authListID;
-	                  	var authStatus = json[index].authStatus;
-	                  	var applyAuthUserName = json[index].applyAuthUser.userName;
-	                  	var applyAuthUserID = json[index].applyAuthUser.userID;
-	                  	var giveAuthUserID = json[index].giveAuthUser.userID;
-	                  	var roleID = json[index].role.roleID;
-	                  	var applyDateTime = json[index].applyDateTime;
-	                  	var processDateTime = json[index].processDateTime;
-	//                  	concatStr += authListID + "__" + authStatus + "__" + applyAuthUserID + "__" 
-	//                  						+giveAuthUserID + "__" + roleID + "__" + applyDateTime + "__" + processDateTime;
-	                  	concatStr = "";
-	                  	if(authStatus == 2){
-	                  		
-	                  		concatStr =			 "<div class=\"alert alert-success\" role=\"alert\"> "
-	                  								+		"<div class=\"row\">"
-								                        +      "<div class=\"col-md-8\">"
-										                    +      "<p>当前申请ID：" + authListID + "</p>"
-										                    +      "<p>申请请求时间：" + applyDateTime + "</p>"
-								                            + 		"<p>申请处理时间：" + processDateTime + "</p>"
-								                            + 		"<p>申请权限人：" + applyAuthUserName + " ( ID : " + applyAuthUserID + " )</p>"
-								                            + 		"<p>当前角色：普通用户 </p>"
-								                            + 		"<p>申请角色：专业用户 </p>"
-						                             	+		"</div>"
-						                                +      "<div class=\"col-md-4\" style=\"vertical-align: bottom\">"
-						                                	+      "<p>已通过角色申请提醒</p>"
-						                                +      "</div>"
-					                                +   	 "</div>"
-				                                + 		 "</div>" ;
-					                                  		
-	                  	}else if(authStatus == 3){
-	                  		
-	                  		concatStr =			 "<div class=\"alert alert-danger\" role=\"alert\"> "
-				      								+		"<div class=\"row\">"
-								                        +      "<div class=\"col-md-7 text-left \">"
-										                    +      "<p >当前申请ID：" + authListID + "</p>"
-										                    +      "<p>申请请求时间：" + applyDateTime + "</p>"
-								                            + 		"<p>申请处理时间：" + processDateTime + "</p>"
-								                            + 		"<p>申请权限人：" + applyAuthUserName + " ( ID : " + applyAuthUserID + " )</p>"
-								                            + 		"<p>当前角色：普通用户 </p>"
-								                            + 		"<p>申请角色：专业用户 </p>"
-						                             	+		"</div>"
-						                                +      "<div class=\"col-md-4\" style=\"vertical-align: bottom\">"
-						                                	+      "<p><strong>已拒绝角色申请提醒</strong></p>"
-						                                +      "</div>"
-					                                +   	 "</div>"
-				                                + 		 "</div>" ;
-	                  		
-	                  	}
-	                  	
-	                  	
-	                  	
-	                  });
+	                  alert(response);
 	                  
-	                  $("#modal-footer").html('');
-	                  $("#modal-footer").html(concatStr);
                 	
                 }
             });

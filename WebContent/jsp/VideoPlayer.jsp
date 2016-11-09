@@ -92,7 +92,8 @@
                             </dl>
                             <dl class="dl-horizontal">
                                 <dt>发布者信息：</dt>
-                                <dd id="userName" value="${video.user.userName}">${video.user.userName} (ID: ${video.user.userID} )</dd>
+                                <dd>${video.user.userName} (ID: ${video.user.userID} )</dd>
+                                <button id="userName" value="${video.user.userName}" style="display:none"></button>
                             </dl>
                             
                         </div>
@@ -136,19 +137,21 @@
 
 
 <script src="js/jquery.min.js"></script>
-<script src="js/js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function(){
 	
 	    $('#downloadBtn').click(function(e) {
 	    		
-	    		var urlStr_value = $('#downloadBtn').val();
-	    		var userName = ${'#userName'}.val();
-	    		
+		    	var urlStr_value = $('#downloadBtn').val();
+	    		var userName_value = $('#userName').val();
+	    	
 	    		$.ajax({
-		            url: "downloadVideo?urlStr=" + urlStr_value + "&userName=" + userName ,
-		            data: {},
+		            url: "downloadVideo" ,
+		            data: {        urlStr : encodeURI(encodeURI(urlStr_value)) ,
+	    					  userName : encodeURI(encodeURI(userName_value))
+	    							  },
 		            type: "GET",
 		            success: function (response) {
 		                
