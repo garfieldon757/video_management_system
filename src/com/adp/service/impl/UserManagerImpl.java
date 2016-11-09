@@ -1,5 +1,6 @@
 package com.adp.service.impl;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,6 +60,10 @@ public class UserManagerImpl implements UserManager{
 		role.getUserList().add(user);
 		user.setRole(role);
 		userDAO.addUser(user);//存储这条user数据到数据库
+		
+		File file = new File("E:\\workspace2\\ADP\\WebContent\\ImageProcess\\" + userName);
+		file.mkdirs();
+		//建立一个属于该用户的文件夹
 		
 		return "main_page";
 	}

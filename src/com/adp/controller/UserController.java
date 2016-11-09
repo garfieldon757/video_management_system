@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.adp.model.Algorithm;
 import com.adp.model.AuthorizationList;
 import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
+import com.adp.service.AlgorithmManager;
 import com.adp.service.UserManager;
 import com.adp.service.VideoManager;
 
@@ -57,7 +59,7 @@ public class UserController {
 	@RequestMapping(value="signUp")
 	public String signUp(HttpServletRequest request){
 
-				String result_page_url = um.signUp(request);//返回值怎么使用呢？		
+				String result_page_url = um.signUp(request);
 				return result_page_url;
 	}
 	
@@ -151,64 +153,16 @@ public class UserController {
 		return mv;//跳转至AuthProcess.jsp页面
 	}
 	
-//	@RequestMapping("ajax_userNameValidation")
-//	@ResponseBody
-//	public String ajax_userNameValidation(String userName){////
-//		
-//		String result = um.existUser(userName);
-//		return result;
-//	}
-	
 	@RequestMapping("ajax_searchProcessedAuthListByApplyAuthUserID")
 	@ResponseBody
 	public String ajax_searchProcessedAuthListByApplyAuthUserID(String ApplyAuthUserID){
 		
 		List<AuthorizationList> al = um.searchProcessedAuthListByApplyAuthUserID( Integer.parseInt(ApplyAuthUserID) );
-		System.out.println(al);
 		JsonConfig config = new JsonConfig();
 		config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		String s = JSONArray.fromObject(al , config).toString();
-		System.out.println( s );
 		
 		return s;	
-	}
-	
-	@RequestMapping(value="parse_json")
-	public void parse_json() throws IOException{
-		
-		vm.jsonToDB();
-		return ;
-	}
-	
-	@RequestMapping(value="videoSearchInit")
-	public ModelAndView videoSearchInit(@RequestParam("videoCategoryID") int videoCategoryID , @RequestParam("page") int page){
-		ModelAndView mv = new ModelAndView("VideoSearch");
-		List<VideoCategory> videoCategoryList = vm.getVideoCategoryList();
-		List<Video> videoList = vm.getVideoListByVideoCategroyIDAndPage(videoCategoryID , page);
-		int videoListSize = vm.getVideoListSizeByVideoCategoryID(videoCategoryID);
-		if(videoCategoryList != null && videoList != null){
-			mv.addObject("videoCategoryList" , videoCategoryList);//传给视频分类栏使用
-			mv.addObject("videoList" , videoList);//传16个视频对象给16个视频区域使用
-			mv.addObject("videoListSize", videoListSize);//传给分页组件使用
-			mv.addObject("videoCategoryID", videoCategoryID);
-			mv.addObject("page", page);
-		}
-		return mv;
-	}
-	
-	@RequestMapping(value = "paramTest")
-	public void paramTest(@RequestParam("param") String param){
-		System.out.println("param get :" + param);
-	}
-	
-	@RequestMapping(value="videoPlay")
-	public ModelAndView videoPlay(@RequestParam("videoID") int videoID){
-		ModelAndView mv = new ModelAndView("VideoPlayer");
-		Video video = vm.getVideoByVideoID(videoID);
-		if(video != null){
-			mv.addObject("video", video);
-		}
-		return mv;
 	}
 	
 }

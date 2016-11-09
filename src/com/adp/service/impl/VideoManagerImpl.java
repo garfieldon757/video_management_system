@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.adp.dao.UserDAO;
 import com.adp.dao.VideoDAO;
+import com.adp.model.Algorithm;
 import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
@@ -171,5 +172,6 @@ public class VideoManagerImpl implements VideoManager {
 		Video video = videoDAO.getVideoByVideoID(videoID);
 		return video;
 	}
+
 	
 }

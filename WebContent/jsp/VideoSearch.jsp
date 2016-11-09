@@ -93,7 +93,7 @@
 					                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 					                                        <p>
 					                                            <a href="videoPlay?videoID=${v.videoID}" class="btn btn-primary">视频播放</a>
-					                                            <a href="#" class="btn btn-default">视频分析</a>
+					                                            <a href="loadImageProcess4Trial_keyFrameSegmentation?videoID=${v.videoID}" class="btn btn-default">视频分析</a>
 					                                        </p>
 					                                    </div>
 					                                </div>
@@ -110,7 +110,7 @@
 						                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 						                                        <p>
 						                                            <a href="videoPlay?videoID=${v.videoID}" class="btn btn-primary">视频播放</a>
-						                                            <a href="#" class="btn btn-default">视频分析</a>
+						                                            <a href="loadImageProcess4Trial_keyFrameSegmentation?videoID=${v.videoID}" class="btn btn-default">视频分析</a>
 						                                        </p>
 						                                    </div>
 						                                </div>
@@ -127,7 +127,7 @@
 						                                        <h3 style="overflow:hidden;white-space:nowrap">${v.videoName}</h3>
 						                                        <p>
 						                                            <a href="videoPlay?videoID=${v.videoID}" class="btn btn-primary">视频播放</a>
-						                                            <a href="#" class="btn btn-default">视频分析</a>
+						                                            <a href="loadImageProcess4Trial_keyFrameSegmentation?videoID=${v.videoID}" class="btn btn-default">视频分析</a>
 						                                        </p>
 						                                    </div>
 						                                </div>

@@ -3,6 +3,7 @@ package com.adp.service;
 import java.io.IOException;
 import java.util.List;
 
+import com.adp.model.Algorithm;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
 
@@ -16,4 +17,5 @@ public interface VideoManager {
 	public List<Video> getVideoListByVideoCategroyIDAndPage(int videoCategroyID , int page);
 	public int getVideoListSizeByVideoCategoryID(int videoCategoryID);
 	public Video getVideoByVideoID(int videoID);
+	
 }
