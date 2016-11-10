@@ -90,7 +90,7 @@ public class UserManagerImpl implements UserManager{
 
 		User user = new User();
 		int userID = Integer.parseInt( request.getParameter("userID") );
-		String sex = request.getParameter("userID");
+		String sex = request.getParameter("sex");
 		String userName = request.getParameter("userName");
 		String userPassword = request.getParameter("userPassword");
 		String email = request.getParameter("email");

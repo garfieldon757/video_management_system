@@ -27,11 +27,9 @@
                 <a class="navbar-brand" href="#/"></a>
             </div>
             <ul class="nav navbar-nav pull-right ng-scope">
-                <li class="ng-scope ng-hide"><a href="/app/login">登陆</a></li>
-                <li class="ng-scope"><a style="padding-left: 0;">登出</a></li>
-                <li  class="ng-scope active" style="">
-                    <a href="#/settings" class="icon-settings">设置</a>
-                </li>
+	            <li  class="ng-scope active">
+		            <a href="edit_personalProfile_load" class="icon-settings">个人设置</a>
+		        </li>
             </ul>
         </div>
     </div>
@@ -42,7 +40,7 @@
             <img class="pic-thumb pull-left" src="/api/users/5807359745f8421c006a0a7b/picture?_=1476867524356">
             <h4 class="ng-binding">oliver fan</h4>
         </div>
-    </div><!-- end ngIf: currentUser && currentUser.isConsumer -->
+    </div>
 </div>
 
 <div id="main">

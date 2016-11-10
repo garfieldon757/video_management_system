@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +50,13 @@ public class UserController {
 		
 		String result_page_url = um.login(request) ;
 		return result_page_url;
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.setAttribute("user", null);
+		return "main_page";
 	}
 	
 	@RequestMapping(value="signUp_page")
@@ -120,8 +129,10 @@ public class UserController {
 	@RequestMapping("authProcess_load")
 	public ModelAndView authProcess_load(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("AuthProcess");
+		User user = um.getSession(request, "user");//session获取当前用户对象
 		List<AuthorizationList> authList = um.getAllAuthList();
 		if(authList != null){
+			mv.addObject(user);
 			mv.addObject("authList", authList);
 		}
 		return mv;//跳转至AuthProcess.jsp页面
@@ -163,6 +174,11 @@ public class UserController {
 		String s = JSONArray.fromObject(al , config).toString();
 		
 		return s;	
+	}
+	
+	@RequestMapping("backToMainPage")
+	public String backToMainPage(){
+		return "main_page";
 	}
 	
 }

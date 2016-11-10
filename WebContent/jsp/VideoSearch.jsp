@@ -27,10 +27,8 @@
                         <a class="navbar-brand" href="#/"></a>
                     </div>
                     <ul class="nav navbar-nav pull-right ng-scope">
-                        <li class="ng-scope ng-hide"><a href="/app/login">登陆</a></li>
-                        <li class="ng-scope"><a style="padding-left: 0;">登出</a></li>
-                        <li  class="ng-scope active" style="">
-                            <a href="#/settings" class="icon-settings">设置</a>
+                        <li  class="ng-scope active">
+                            <a href="edit_personalProfile_load" class="icon-settings">个人设置</a>
                         </li>
                     </ul>
                 </div>

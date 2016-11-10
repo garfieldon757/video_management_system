@@ -79,7 +79,7 @@ public class UserDAOImpl implements UserDAO{
 		if( resultList.isEmpty() ){
 			return "available";
 		}else{
-			return "unavailable";
+			return resultList.get(0).getUserName();//"unavailable";
 		}
 	}
 	

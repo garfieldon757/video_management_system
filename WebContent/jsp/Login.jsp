@@ -35,10 +35,10 @@
         <div class="ht-app" ng-controller="LoginCtrl">
 
           <div class="ht-app__wrapper">
-            <a class="ht-app__return js-return" href="javascript:void(0)">
-              <i class="ht-icon icon-ui-return"></i>
-              Go Back
-            </a>
+          <a class="ht-app__return js-return" href="backToMainPage" >
+	          <i class="ht-icon icon-ui-return"></i>
+	          返回首页
+	        </a>
 
             <div class="ht-app__header">
               <div class="ht-app__header-content">
@@ -58,7 +58,7 @@
               </div>
 
               <div class="ht-app__field-wrapper">
-                <input id="password" name="password" placeholder="输入密码" class="ht-app__form-input" type="text" required>
+                <input id="password" name="password" type="password" placeholder="输入密码" class="ht-app__form-input" type="text" required>
                 <div id="checkDiv_password">
                   <br id="br_password" style="display: block">
                   <p id="error_password" style="display:none; color:red">该输入不符合要求</p>
@@ -75,7 +75,7 @@
 
                 <div class="ht-app__additional">
                   <span class="margin-right-10">从未来到过视频分析平台?</span>
-                  <a class="btn ht-btn -btn-blue" ng-href="{{registerUrl()}}">注册</a>
+                  <a class="btn ht-btn -btn-blue" href="signUp_page" >注册</a>
                 </div>
               </div>
             </form>

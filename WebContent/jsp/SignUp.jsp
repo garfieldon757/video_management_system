@@ -25,7 +25,7 @@
   <section>
     <div class="ht-app ht-app--register">
       <div ui-view="" class="ng-scope"><div class="ht-app__wrapper ng-scope">
-      <a class="ht-app__return js-return" href="" >
+      <a class="ht-app__return js-return" href="backToMainPage" >
         <i class="ht-icon icon-ui-return"></i>
         返回首页
       </a>
@@ -96,7 +96,7 @@
 
             <div class="ht-app__additional">
               <span class="margin-right-10">已注册过账户？</span>
-              <a class="btn ht-btn -btn-blue"href="/app/login#/">登陆</a>
+              <a class="btn ht-btn -btn-blue" href="login_page">登陆</a>
             </div>
           </div>
         </div>

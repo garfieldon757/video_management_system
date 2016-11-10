@@ -25,10 +25,11 @@
                 <a class="navbar-brand" href="#/"></a>
             </div>
             <ul class="nav navbar-nav pull-right ng-scope">
-                <li class="ng-scope ng-hide"><a href="/app/login">登陆</a></li>
-                <li class="ng-scope"><a style="padding-left: 0;">登出</a></li>
+	            <li  class="ng-scope active" style="">
+		            <a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+		        </li>
                 <li  class="ng-scope active" style="">
-                    <a href="#/settings" class="icon-settings">设置</a>
+                    <a href="edit_personalProfile_load" class="icon-settings">个人设置</a>
                 </li>
             </ul>
         </div>
@@ -38,9 +39,9 @@
     <div class="horizontal-header ng-scope" ng-if="currentUser &amp;&amp; currentUser.isConsumer">
         <div class="container">
             <img class="pic-thumb pull-left" src="/api/users/5807359745f8421c006a0a7b/picture?_=1476867524356">
-            <h4 class="ng-binding">oliver fan</h4>
+            <h4 id="userName" class="ng-binding" value="${user.userName}">${user.userName}</h4>
         </div>
-    </div><!-- end ngIf: currentUser && currentUser.isConsumer -->
+    </div>
 </div>
 
 <div id="main">
@@ -156,73 +157,9 @@
 </footer>
 
 
-<!-- build:js(.) /public/js/vendor.js -->
 <script src="js/jquery.min.js"></script>
-<script src="js/lodash.js"></script>
-<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1027644270654279");fbq("track","PageView");fbq("track","ViewContent");</script>
-<noscript>&lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1027644270654279&amp;amp;ev=PageView&amp;amp;noscript=1"&gt;</noscript>
-
-<script src="js/moment.js"></script>
 <script src="js/js/bootstrap.min.js"></script>
-<script src="js.js"></script>
-<script src="js/angular-resource.js"></script>
-<script src="js/angular-cookies.js"></script>
-<script src="js/angular-sanitize.js"></script>
-<script src="js/release/angular-ui-router.js"></script>
-<script src="js/angular-animate.js"></script>
-<script src="js/ui-bootstrap-tpls.min.js"></script>
-<script src="js/checklist-model.js"></script>
-<script src="js/ng-file-upload-shim.js"></script>
-<script src="js/ng-file-upload.js"></script>
-<script src="js/mask.js"></script>
-<script src="js/angular-filter.js"></script>
-<script src="js/angular-strap.js"></script>
-<script src="js/angular-strap.tpl.js"></script>
-<script src="js/jquery.placeholder.js"></script>
-<!-- endbuild -->
 
-<script src="/app/config.js"></script>
-
-<!-- build:js(.) /public/js/app.js -->
-<script src="js/intercom.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/alerts.js"></script>
-<script src="js/remote-error.js"></script>
-<script src="js/l10n.js"></script>
-<script src="js/pw-check.js"></script>
-<script src="js/pagination.js"></script>
-<script src="js/days.js"></script>
-<script src="js/experience.js"></script>
-<script src="js/formatters.filter.js"></script>
-<script src="js/schedule-week.js"></script>
-<script src="js/ui-view-smooth-scroll.js"></script>
-<script src="js/intercom-communications.js"></script>
-<script src="js/app.js"></script>
-<script src="js/resources.js"></script>
-<script src="js/resources.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/messages.js"></script>
-<script src="js/messages.send.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/carers.js"></script>
-<script src="js/item/carers.item.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/contracts.js"></script>
-<script src="js/item/contracts.item.js"></script>
-<script src="js/contract-state-directive.js"></script>
-<script src="js/contract-time-table-directive.js"></script>
-<script src="js/contract-reject-form-directive.js"></script>
-<script src="js/logbook-table-directive.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/payment-ctrl.js"></script>
-<script src="js/payment-list-directive.js"></script>
-
-<script src="js/account.controller.js"></script>
-<script src="js/dashboard.js"></script>
 
 <script type="text/javascript">
 
@@ -234,26 +171,35 @@
 
 
              var userNameValue = $('#userName').val();
-             alert("111111");
             $.ajax({
                 url: "ajax_userNameValidation",
                 data: { userName : userNameValue},
                 type: "GET",
                 success: function (response, status, xhr) {
-                    //alert(response);
                     
-                    reg_result = response ;//返回"available"表示userName可用，“unavailable“表示不可用
-alert(reg_result);
+                    reg_result = response ;//返回用户名和当前页面session的用户名就不做为
+                    									//,返回"available"表示userName可用，“unavailable“表示不可用
+                    
                     if(reg_result == "available"){
                         $("#userName_div").removeClass("has-error");
                         $("#userName_div").addClass("has-success");
                         $("#userName_div > span:last").css('display', 'none');
                         $("#userName_div > span:first").css('display', 'block');
-                    }else if(reg_result == "unavailable"){
-                        $("#userName_div").removeClass("has-success");
-                        $("#userName_div").addClass("has-error");
-                        $("#userName_div > span:first").css('display', 'none');
-                        $("#userName_div > span:last").css('display', 'block');
+                        alert("用户名可用");
+                    }else if( reg_result != "available" ){
+                    	
+                    	if( reg_result == $("#userName").val() ){
+                            
+                    		//不作为
+                    		
+                        }else if(reg_result == "unavailable"){
+                        	$("#userName_div").removeClass("has-success");
+	                        $("#userName_div").addClass("has-error");
+	                        $("#userName_div > span:first").css('display', 'none');
+	                        $("#userName_div > span:last").css('display', 'block');
+	                        alert("用户名已被占用");
+                        }
+                    	
                     }
                     
                 }
