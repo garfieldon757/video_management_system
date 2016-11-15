@@ -60,7 +60,7 @@ public class DownloadManagerImpl implements DownloadManager{
 	            saveDir.mkdir();  
 	        }  
 	        String fileName1 = URLDecoder.decode(fileName, "utf-8");
-	        File file = new File(saveDir+File.separator+fileName);      
+	        File file = new File(saveDir+File.separator+fileName1);      
 	        FileOutputStream fos = new FileOutputStream(file);       
 	        fos.write(getData);   
 	        if(fos!=null){  

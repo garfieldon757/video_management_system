@@ -20,28 +20,44 @@
 </head>
 <body class="ng-scope">
 
-<div class="ng-scope">
-    <div class="navbar navbar-static-top ng-scope">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#/"></a>
-            </div>
-            <ul class="nav navbar-nav pull-right ng-scope">
-	            <li  class="ng-scope active">
-		            <a href="edit_personalProfile_load" class="icon-settings">个人设置</a>
-		        </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="ng-scope"><!-- ngIf: currentUser && currentUser.isConsumer -->
-    <div class="horizontal-header ng-scope" >
-        <div class="container">
-            <img class="pic-thumb pull-left" src="/api/users/5807359745f8421c006a0a7b/picture?_=1476867524356">
-            <h4 class="ng-binding">oliver fan</h4>
-        </div>
-    </div>
-</div>
+			<div class="ng-scope">
+				<div class="navbar navbar-static-top ng-scope">
+				    <div class="container">
+				        <div class="navbar-header">
+				            <a class="navbar-brand" href="#/"></a>
+				        </div>
+				        <ul class="nav navbar-nav pull-right ng-scope">
+				            <li  class="ng-scope" style="">
+					            <a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+					        </li>
+					        <li id="dropdown_index" class="dropdown">
+				                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+				                <ul class="dropdown-menu" role="menu" >
+				                    <li>
+				                        <a href="edit_personalProfile_load">个人信息编辑</a>
+				                    </li>
+				                    <li>
+				                        <a href="authSettings_load">个人权限申请</a>
+				                    </li>
+				                    <li>
+				                        <a href="authProcess_load">角色申请处理</a>
+				                    </li>
+				                </ul>
+				            </li>
+				        </ul>
+				    </div>
+				</div>
+			</div>
+			
+			<div  class="ng-scope">
+				<div class="horizontal-header ng-scope" ng-if="currentUser &amp;&amp; currentUser.isConsumer">
+				    <div class="container ">
+				        <img class="pic-thumb pull-left" src="/api/users/5807359745f8421c006a0a7b/picture?_=1476867524356">
+				        <h4 id="userName_label" class="ng-binding" value="${user.userName}">${user.userName}</h4>
+				        <a href="logout"><button type="button" class="btn btn-default pull-right">退出</button></a>
+				    </div>
+				</div>
+			</div>
 
 <div id="main">
 
@@ -98,7 +114,7 @@
                         <div class="col-md-5">
                             <div class="">
                                 <button type="button" id="downloadBtn" value="${video.videoSourceLink}" class="btn btn-primary btn-lg btn-block">下载视频</button>
-                                <a href="loadImageProcess4Trial_keyFrameSegmentation?videoID=${video.videoID}"><button type="button" class="btn btn-default btn-lg btn-block">分析视频</button></a>
+                                <a href="loadImageProcess4Trial_frameSegmentation?videoID=${video.videoID}"><button type="button" class="btn btn-default btn-lg btn-block">分析视频</button></a>
                             </div>
                         </div>
                         <div class="col-md-1">

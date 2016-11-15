@@ -14,7 +14,6 @@
     <!-- build:css(.) /public/css/app.min.css -->
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/app.css" rel="stylesheet" type="text/css">
-    <link href="css/carer-badges.css" rel="stylesheet" type="text/css">
     <!-- endbuild -->
    <body class="ng-scope">
 
@@ -25,21 +24,33 @@
                 <a class="navbar-brand" href="#/"></a>
             </div>
             <ul class="nav navbar-nav pull-right ng-scope">
-	            <li  class="ng-scope active" style="">
+	            <li  class="ng-scope" style="">
 		            <a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
 		        </li>
-                <li  class="ng-scope active" style="">
-                    <a href="edit_personalProfile_load" class="icon-settings">个人设置</a>
-                </li>
+		        <li id="dropdown_index" class="dropdown">
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+	                <ul class="dropdown-menu" role="menu" >
+	                    <li>
+	                        <a href="edit_personalProfile_load">个人信息编辑</a>
+	                    </li>
+	                    <li>
+	                        <a href="authSettings_load">个人权限申请</a>
+	                    </li>
+	                    <li>
+	                        <a href="authProcess_load">角色申请处理</a>
+	                    </li>
+	                </ul>
+	            </li>
             </ul>
         </div>
     </div>
 </div>
 <div ng-include="'/public/app/templates/horizontal-header.html'" class="ng-scope"><!-- ngIf: currentUser && currentUser.isConsumer -->
     <div class="horizontal-header ng-scope" ng-if="currentUser &amp;&amp; currentUser.isConsumer">
-        <div class="container">
+        <div class="container ">
             <img class="pic-thumb pull-left" src="/api/users/5807359745f8421c006a0a7b/picture?_=1476867524356">
             <h4 id="userName" class="ng-binding" value="${user.userName}">${user.userName}</h4>
+            <button type="button" class="btn btn-default pull-right" class="logout" >退出</button>
         </div>
     </div>
 </div>
@@ -158,7 +169,7 @@
 
 
 <script src="js/jquery.min.js"></script>
-<script src="js/js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 
 <script type="text/javascript">

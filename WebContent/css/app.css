@@ -568,7 +568,7 @@ fieldset > .content {
 
 .navbar {
   height: 65px;
-  overflow: hidden;
+  /*overflow: hidden;*/
   margin: 0;
   border-width: 0;
   background: #ffffff url(images/rainbow.png) repeat-x left bottom;

@@ -3,6 +3,7 @@ package com.adp.service.impl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class AlgorithmManagerImpl implements AlgorithmManager{
 	{
 			
 		System.out.println("start");  
-		sourceVideoLink = URLEncoder.encode(sourceVideoLink, "utf-8");
+//		String sourceVideoLink1 = URLDecoder.decode(sourceVideoLink, "utf-8");
+//		String destFolderLink1 = URLDecoder.decode(destFolderLink, "utf-8");
 		Process pr = Runtime.getRuntime().exec("python C:/Users/oliverfan/PycharmProjects/opencv/frameExtract.py " + sourceVideoLink + destFolderLink);
 		
 		BufferedReader in = new BufferedReader(new  
