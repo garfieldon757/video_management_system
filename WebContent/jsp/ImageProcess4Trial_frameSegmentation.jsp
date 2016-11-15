@@ -329,11 +329,80 @@
         					algorithmID : algorithmID_value
         					},
                 type: "GET",
-                success: function (response) {
+                success: function (boundryListJsonObject) {
                     
-	                  alert(response);
+	                  var jsonObject = eval("("+boundryListJsonObject+")");
+
+	                  var boundryListJsonObject = jsonObject.boundryList;
+	                  var boundryListSize = jsonObject.boundryList.length;
+	                  var destFolderLink = jsonObject.destFolderLink;
+	                  var concatStr = "";
+	                  var ImgIndex = 0;
+	                  var firstFlag = 1;
+	                  var columeCountFlag = 0;
+	                  concatStr = "";
+	                  $.each( boundryListJsonObject, function(index){
+	                  	
+                  		concatStr +=	" <div class=\"panel panel-default\"> "
+													    +" <div class=\"panel-heading\" role=\"tab\" id=\"headingOne\"> "
+													        +" <h4 class=\"panel-title\"> "
+													            +" <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse" + ImgIndex + "\" aria-expanded=\"false\" aria-controls=\"collapseOne\" class=\"collapsed\"> "
+													            +" 场景：#" + index + " "
+													            +" </a> "
+													        +" </h4> "
+													    +" </div> "
+													    +" <div id=\"collapse" + ImgIndex + "\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"headingOne\" aria-expanded=\"false\" style=\"height: 0px;\"> "
+														        +" <div class=\"panel-body\"> ";
+														    
+														            for( ; ImgIndex < jsonObject.boundryList[index]; ImgIndex++ ){
+														            	
+															            	if( firstFlag == 1){
+															            		
+			            			concatStr +=					            " <div class=\"row\"> "
+															            					+" <div class=\"col-md-2\"> "
+																			                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+ destFolderLink + ImgIndex +".jpg  \" style=\"height: 80px; width: 100%\"> "
+																			                +" </div> ";
+			            																firstFlag = 0;
+			            																columeCountFlag++;
+			            																if( ImgIndex + 1 == jsonObject.boundryList[index] ){
+	                	  							concatStr +=				" </div> ";            									                	  
+																		                  }
+															            	
+															            	}else if( columeCountFlag == 5 || ImgIndex + 1 == jsonObject.boundryList[index]){
+															            		
+								concatStr +=					            " <div class=\"col-md-2\"> "
+																	                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+  destFolderLink + ImgIndex +".jpg \" style=\"height: 80px; width: 100%\"> "
+																	                +" </div> "
+															            		+" </div> ";
+															            				firstFlag = 1;
+															            				columeCountFlag = 0;
+															            	}else{
+															            		
+									concatStr +=					            " <div class=\"col-md-2\"> "
+																		                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+ destFolderLink + ImgIndex +".jpg \" style=\"height: 80px; width: 100%\"> "
+																		                +" </div> ";
+																						columeCountFlag++;
+															            	}
+														           
+														            }
+														        
+						            concatStr +=		" </div> "
+														
+														        +" <div class=\"row\"> "
+														            +" <div class=\"col-md-4\"></div> "
+														            +" <div class=\"col-md-4\"> "
+														                +" <button type=\"button\" class=\"btn btn-danger\">对该场景进行进行关键帧提取</button> "
+														            +" </div> "
+														            +" <div class=\"col-md-4\"></div> "
+														        +" </div> "
+													    +" </div> "
+														        
+											+" </div> ";
+	                  });
 	                  
-                	
+	                  $("#result-div").html('');
+	                  $("#result-div").html(concatStr);
+	                  
                 }
             });
         })

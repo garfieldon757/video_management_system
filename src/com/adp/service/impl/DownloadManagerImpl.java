@@ -53,14 +53,19 @@ public class DownloadManagerImpl implements DownloadManager{
 	        InputStream inputStream = conn.getInputStream();    
 	        //获取自己数组  
 	        byte[] getData = readInputStream(inputStream);      
-	  
-	        //文件保存位置  
+	        
+	        fileName = URLDecoder.decode(fileName, "utf-8");
+	        int fileName_hashCode = fileName.substring( 0 , fileName.indexOf(".") ).hashCode();
+			fileName = fileName_hashCode + fileName.substring( fileName.indexOf(".") , fileName.length() );//解码中文视频名称，并将视频名称hashCode进行文件夹结构的命名
+			
+			//文件保存位置  
+			savePath = savePath + "/" + fileName_hashCode;
 	        File saveDir = new File(savePath);  
 	        if(!saveDir.exists()){  
 	            saveDir.mkdir();  
 	        }  
-	        String fileName1 = URLDecoder.decode(fileName, "utf-8");
-	        File file = new File(saveDir+File.separator+fileName1);      
+			
+	        File file = new File(saveDir+File.separator+fileName);      
 	        FileOutputStream fos = new FileOutputStream(file);       
 	        fos.write(getData);   
 	        if(fos!=null){  

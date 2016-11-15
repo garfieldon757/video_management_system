@@ -269,7 +269,7 @@
         
         $('#searchAuthListBtn').click(function(e) {
 
-        	var ApplyAuthUserID_value = $('#').val();
+        	var ApplyAuthUserID_value = $('#searchAuthListInput').val();
         	
         	$.ajax({
                 url: "ajax_searchProcessedAuthListByApplyAuthUserID",
