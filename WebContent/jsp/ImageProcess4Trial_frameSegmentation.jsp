@@ -154,142 +154,13 @@
 		                	<div class="well">
 			                        <div class="row">
 			                            <div class="col-md-1"></div>
-			                            <div class="col-md-10">
-			                                <h3>当前视频已通过算法分析，经检测，包含场景数目：x个；</h3>
+			                            <div class="col-md-10 text-center">
+			                                <h3>当前视频尚未进行算法分析，暂无结果。</h3>
 			                            </div>
 			                            <div class="col-md-1"></div>
 			                        </div>
-			                    </div>
-			
-			                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-			                        <div class="panel panel-default">
-			                            <div class="panel-heading" role="tab" id="headingOne">
-			                                <h4 class="panel-title">
-			                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
-			                                        场景：#1
-			                                    </a>
-			                                </h4>
-			                            </div>
-			                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
-			                                <div class="panel-body">
-			                                    <div class="row">
-			                                        <div class="col-md-2">
-			                                                <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                    </div>
-			                                </div>
-			
-			                                <div class="row">
-			                                    <div class="col-md-4"></div>
-			                                    <div class="col-md-4">
-			                                        <button type="button" class="btn btn-danger">对该场景进行进行关键帧提取</button>
-			                                    </div>
-			                                    <div class="col-md-4"></div>
-			                                </div>
-			
-			                            </div>
-			                        </div>
-			                        <div class="panel panel-default">
-			                            <div class="panel-heading" role="tab" id="headingTwo">
-			                                <h4 class="panel-title">
-			                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-			                                        场景：#2
-			                                    </a>
-			                                </h4>
-			                            </div>
-			                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
-			                                <div class="panel-body">
-			                                    <div class="row">
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                    </div>
-			
-			                                    <div class="row">
-			                                        <div class="col-md-4"></div>
-			                                        <div class="col-md-4">
-			                                            <button type="button" class="btn btn-danger">对该场景进行进行关键帧提取</button>
-			                                        </div>
-			                                        <div class="col-md-4"></div>
-			                                    </div>
-			
-			                                </div>
-			                            </div>
-			                        </div>
-			                        <div class="panel panel-default">
-			                            <div class="panel-heading" role="tab" id="headingThree">
-			                                <h4 class="panel-title">
-			                                    <a class="" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-			                                        场景 #3
-			                                    </a>
-			                                </h4>
-			                            </div>
-			                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
-			                                <div class="panel-body">
-			                                    <div class="row">
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                        <div class="col-md-2">
-			                                            <img data-src="holder.js/100%x180" alt="..." src="http://v.cnad.cn/vv/qqgg1/2014.07.23/Samsung Galaxy Note平板电脑广告创意篇_2014723173923.JPG" style="height: 80px; width: 100%">
-			                                        </div>
-			                                    </div>
-			                                </div>
-			
-			                                <div class="row">
-			                                    <div class="col-md-4"></div>
-			                                    <div class="col-md-4">
-			                                        <button type="button" class="btn btn-danger">对该场景进行进行关键帧提取</button>
-			                                    </div>
-			                                    <div class="col-md-4"></div>
-			                                </div>
-			
-			                            </div>
-			                        </div>
-			                    </div>
-		                
+			                </div>
+			                
 		                </div>
 		            </div>
 		
@@ -341,13 +212,24 @@
 	                  var firstFlag = 1;
 	                  var columeCountFlag = 0;
 	                  concatStr = "";
+	                  
+	                  concatStr += " <div class=\"well\"> "
+					                		    +" <div class=\"row\"> "
+						                	        +" <div class=\"col-md-1\"></div> "
+						                	        +" <div class=\"col-md-10\"> "
+						                	            +" <h3>当前视频已通过算法分析，经检测，包含场景数目：" + boundryListSize + "个；</h3> "
+						                	        +" </div> "
+						                	        +" <div class=\"col-md-1\"></div> "
+					                	        +" </div> "
+					                	+" </div> " ; 
+	                  concatStr += "<div class=\"panel-group\" id=\"accordion\" role=\"tablist\" aria-multiselectable=\"true\">";
 	                  $.each( boundryListJsonObject, function(index){
-	                  	
+	                	  
                   		concatStr +=	" <div class=\"panel panel-default\"> "
 													    +" <div class=\"panel-heading\" role=\"tab\" id=\"headingOne\"> "
 													        +" <h4 class=\"panel-title\"> "
 													            +" <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse" + ImgIndex + "\" aria-expanded=\"false\" aria-controls=\"collapseOne\" class=\"collapsed\"> "
-													            +" 场景：#" + index + " "
+													            +" 场景：#" + (index+1) + " "
 													            +" </a> "
 													        +" </h4> "
 													    +" </div> "
@@ -358,20 +240,24 @@
 														            	
 															            	if( firstFlag == 1){
 															            		
-			            			concatStr +=					            " <div class=\"row\"> "
+			            			concatStr +=					            "<br />"
+			            																+" <div class=\"row\"> "
 															            					+" <div class=\"col-md-2\"> "
-																			                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+ destFolderLink + ImgIndex +".jpg  \" style=\"height: 80px; width: 100%\"> "
+																			                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+ destFolderLink + (ImgIndex+1) +".jpg  \" style=\"height: 80px; width: 100%\"> "
 																			                +" </div> ";
 			            																firstFlag = 0;
 			            																columeCountFlag++;
 			            																if( ImgIndex + 1 == jsonObject.boundryList[index] ){
-	                	  							concatStr +=				" </div> ";            									                	  
+	                	  							concatStr +=				" </div> ";     
+	                	  																		firstFlag = 1;
+	                	  																		columeCountFlag = 0;
+	                	  																		continue;
 																		                  }
 															            	
 															            	}else if( columeCountFlag == 5 || ImgIndex + 1 == jsonObject.boundryList[index]){
 															            		
 								concatStr +=					            " <div class=\"col-md-2\"> "
-																	                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+  destFolderLink + ImgIndex +".jpg \" style=\"height: 80px; width: 100%\"> "
+																	                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+  destFolderLink + (ImgIndex+1) +".jpg \" style=\"height: 80px; width: 100%\"> "
 																	                +" </div> "
 															            		+" </div> ";
 															            				firstFlag = 1;
@@ -379,7 +265,7 @@
 															            	}else{
 															            		
 									concatStr +=					            " <div class=\"col-md-2\"> "
-																		                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+ destFolderLink + ImgIndex +".jpg \" style=\"height: 80px; width: 100%\"> "
+																		                    +" <img data-src=\"holder.js/100%x180\" alt=\"...\" src=\" "+ destFolderLink + (ImgIndex+1) +".jpg \" style=\"height: 80px; width: 100%\"> "
 																		                +" </div> ";
 																						columeCountFlag++;
 															            	}
@@ -396,9 +282,10 @@
 														            +" <div class=\"col-md-4\"></div> "
 														        +" </div> "
 													    +" </div> "
-														        
-											+" </div> ";
+												    +" </div> ";		        
+											
 	                  });
+	                  concatStr +=		" </div> ";
 	                  
 	                  $("#result-div").html('');
 	                  $("#result-div").html(concatStr);

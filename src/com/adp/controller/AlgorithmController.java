@@ -83,6 +83,7 @@ public class AlgorithmController {
 		/****************3.图片处理结果json返回 start*****************/
 		destFolderLink = URLDecoder.decode( destFolderLink , "utf-8" );
 		String resultTxtUrl = destFolderLink + "shotBoundary.txt" ;
+		destFolderLink = "http://localhost:8080/ADP/ImageProcess/" + userName + "/" + videoFolderName + "/frames/";
 		File file = new File( resultTxtUrl );
         String content = FileUtils.readFileToString(file);
         JSONArray jsonArray = JSONArray.fromObject(content);
