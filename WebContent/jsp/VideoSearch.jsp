@@ -50,7 +50,7 @@
 		<div  class="ng-scope">
 			<div class="horizontal-header ng-scope" ng-if="currentUser &amp;&amp; currentUser.isConsumer">
 			    <div class="container ">
-			        <img class="pic-thumb pull-left" src="/api/users/5807359745f8421c006a0a7b/picture?_=1476867524356">
+			        <img class="pic-thumb pull-left" src="img/logo.jpg">
 			        <h4 id="userName" class="ng-binding" value="${user.userName}">${user.userName}</h4>
 			        <a href="logout"><button type="button" class="btn btn-default pull-right">退出</button></a>
 			    </div>

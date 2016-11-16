@@ -25,9 +25,6 @@
 </head>
 <body >
 
-
-
-
   <div class="">
 
 
@@ -36,7 +33,7 @@
 
           <div class="ht-app__wrapper">
           <a class="ht-app__return js-return" href="backToMainPage" >
-	          <i class="ht-icon icon-ui-return"></i>
+          		<span class="glyphicon glyphicon-hand-left"></span>
 	          返回首页
 	        </a>
 

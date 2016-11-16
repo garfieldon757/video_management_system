@@ -26,7 +26,7 @@
     <div class="ht-app ht-app--register">
       <div ui-view="" class="ng-scope"><div class="ht-app__wrapper ng-scope">
       <a class="ht-app__return js-return" href="backToMainPage" >
-        <i class="ht-icon icon-ui-return"></i>
+      	<span class="glyphicon glyphicon-hand-left"></span>
         返回首页
       </a>
 

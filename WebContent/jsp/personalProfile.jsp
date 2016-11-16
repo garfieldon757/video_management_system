@@ -30,15 +30,19 @@
 		        <li id="dropdown_index" class="dropdown">
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
 	                <ul class="dropdown-menu" role="menu" >
-	                    <li>
-	                        <a href="edit_personalProfile_load">个人信息编辑</a>
-	                    </li>
-	                    <li>
-	                        <a href="authSettings_load">个人权限申请</a>
-	                    </li>
-	                    <li>
-	                        <a href="authProcess_load">角色申请处理</a>
-	                    </li>
+			                <li>
+			                    <a href="edit_personalProfile_load">个人信息编辑</a>
+			                </li>
+			                <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 } ">
+			                    <li>
+			                        <a href="authSettings_load">个人权限申请</a>
+			                    </li>
+			                </c:if>
+			                <c:if test="${ user.role.roleID == 3 }">
+			                    <li>
+			                        <a href="authProcess_load">角色申请处理</a>
+			                    </li>
+			                 </c:if>
 	                </ul>
 	            </li>
             </ul>
@@ -48,9 +52,9 @@
 <div ng-include="'/public/app/templates/horizontal-header.html'" class="ng-scope"><!-- ngIf: currentUser && currentUser.isConsumer -->
     <div class="horizontal-header ng-scope" ng-if="currentUser &amp;&amp; currentUser.isConsumer">
         <div class="container ">
-            <img class="pic-thumb pull-left" src="/api/users/5807359745f8421c006a0a7b/picture?_=1476867524356">
+            <img class="pic-thumb pull-left" src="img/logo.jpg">
             <h4 id="userName" class="ng-binding" value="${user.userName}">${user.userName}</h4>
-            <button type="button" class="btn btn-default pull-right" class="logout" >退出</button>
+            <button type="button" class="btn btn-default pull-right" class="logout" ><a href="logout">退出</a></button>
         </div>
     </div>
 </div>
@@ -65,15 +69,19 @@
                 </div>
                 <hr style="margin-top: 0;">
                 <ul class="nav nav-stacked side-nav">
-	                <li  class="active">
-	                    <a href="edit_personalProfile_load">个人信息编辑</a>
-	                </li>
-	                <li >
-	                    <a href="authSettings_load">个人权限申请</a>
-	                </li>
-	                <li >
-	                    <a href="authProcess_load">角色申请处理</a>
-	                </li>
+		                <li  class="active">
+			                <a href="edit_personalProfile_load">个人信息编辑</a>
+			            </li>
+			            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 } ">
+			                <li >
+			                    <a href="authSettings_load">个人权限申请</a>
+			                </li>
+			            </c:if>
+			            <c:if test="${ user.role.roleID == 3 }">
+			                <li >
+			                    <a href="authProcess_load">角色申请处理</a>
+			                </li>
+			            </c:if>
 	            </ul>
             </div>
         </div>

@@ -6,12 +6,10 @@
         <title>Private Home Care: Find &amp; Book Carers in the UK | HomeTouch</title>
 
         <link rel="stylesheet" type="text/css" href="css/material.custom.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap(1).css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/hometouch.css">
         <link rel="stylesheet" type="text/css" href="css/carer-badges.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
     </head>
@@ -22,7 +20,7 @@
     <header class="ht-header">
         <div class="row -padding-y-5">
             <div class="col-xs-5 col-sm-4 partial">
-                <a href="backToMainPage" class="ht-image -image-logo pull-left" ><img src="adVideoManagement/img/ht-logo.png" alt="logo"></a>
+                <a href="backToMainPage" class="ht-image -image-logo pull-left" ><img src="img/ht-logo.png" alt="logo"></a>
             </div>
             <div class="col-xs-7 col-sm-8 partial text-right">
                 <c:if test="${! (user == null) }">
@@ -66,7 +64,7 @@
                     <div class="ht-wrapper -wrapper-negative row">
                         <div class="col-md-4">
                             <div class="ht-box -box-intro clearfix">
-                                <i class="ht-icon icon-search"></i>
+                                <span class="glyphicon glyphicon-search"></span>
                                 <div class="content">
                                     <h3>1. 搜索待处理视频</h3>
                                     <div>输入你的搜索关键词来在<br>海量视频库中搜索视频资源。</div>
@@ -75,7 +73,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="ht-box -box-intro clearfix">
-                                <i class="ht-icon icon-talk"></i>
+                            	<span class="glyphicon glyphicon-signal"></span>
                                 <div class="content">
                                     <h3>2. 选取视频分析算法</h3>
                                     <div>根据平台提供的多个分析<br> 阶段的分析算法选取相应算法。</div>
@@ -84,7 +82,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="ht-box -box-intro clearfix">
-                                <i class="ht-icon icon-tick"></i>
+                            <span class="glyphicon glyphicon-ok"></span>
                                 <div class="content">
                                     <h3>3. 运行，得到结果</h3>
                                     <div>得到所选算法处理所选<br> 择视频的分析结果，可视化展示。</div>
@@ -100,7 +98,7 @@
                         <a href="videoSearchInit?videoCategoryID=1&page=1">
 	                        <button class="btn ht-btn -btn-blue -btn-lg">
 	                            <span>进入平台</span>
-	                            <i class="ht-icon icon-search"></i>
+	                            <span class="glyphicon glyphicon-hand-up"></span>
 	                        </button>
                         </a>
                     </div>
@@ -155,35 +153,7 @@
 
 
 <script src="js/jquery.min.js"></script>
-<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1027644270654279");fbq("track","PageView");fbq("track","ViewContent");</script>
-<noscript>&lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1027644270654279&amp;amp;ev=PageView&amp;amp;noscript=1"&gt;</noscript>
 
-<script src="js/js.cookie.js"></script>
-<script src="js/validator.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/app.js"></script>
-<script src="js/navigation.js"></script>
-<script src="js/quick-filter.js"></script>
-<script src="js/google-map.js"></script>
-<script src="js/init.js"></script>
-<script src="js/lead-capture.js"></script>
-<script src="js/contact.js"></script>
-<script src="js/tooltip.js"></script>
-<script src="js/popover.js"></script>
-<script src="js/dropdown.js"></script>
-<script src="js/lodash.js"></script>
-<script src="js/requestAnimationFrame.js"></script>
-<script src="js/material.min.js"></script>
-<script src="js/jquery.placeholder.js"></script>
-<!-- endbuild -->
-
-
-<script>
-    // Enable popover across the site
-    $('[data-toggle="popover"]').popover();
-</script>
-
-<!-- /SCRIPTS -->
 
 
 
