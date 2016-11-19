@@ -28,6 +28,7 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="roleID")
     private Role role;
+    private int apply_status;
     
     @OneToMany(mappedBy = "giveAuthUser", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
     private List<AuthorizationList> giveAuthUserList = new ArrayList<AuthorizationList>();
@@ -130,6 +131,14 @@ public class User {
 
 	public void setProcessLogList(List<ProcessLog> processLogList) {
 		this.processLogList = processLogList;
+	}
+
+	public int getApply_status() {
+		return apply_status;
+	}
+
+	public void setApply_status(int apply_status) {
+		this.apply_status = apply_status;
 	}
     
 }

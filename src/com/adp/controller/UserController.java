@@ -106,9 +106,13 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("AuthSettings");
 		User user = um.getSession(request, "user");//session获取当前用户对象
 		List<AuthorizationList> authList = um.getAuthListByApplyAuthUser(user);
-		if(user != null){
+		
+		int apply_status = user.getApply_status() ;//0代表未申请，1代表正在申请待审核
+		
+		if(user != null ){
 			mv.addObject(user);
 			mv.addObject("authList", authList);
+			mv.addObject("apply_status", apply_status);
 		}
 		return mv;//跳转至AuthSettings.jsp页面
 	}
@@ -119,9 +123,15 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("AuthSettings");
 		User user = um.elevationPrivilege2ProUser_apply(request);
 		List<AuthorizationList> authList = um.getAuthListByApplyAuthUser(user);
-		if(user != null){
+		
+		user.setApply_status(1);
+		um.updateUser(user);
+		int apply_status = user.getApply_status() ;//0代表未申请，1代表正在申请待审核
+		
+		if(user != null && authList != null){
 			mv.addObject(user);
 			mv.addObject("authList", authList);
+			mv.addObject("apply_status", apply_status);
 		}
 		return mv;
 	}
@@ -142,7 +152,12 @@ public class UserController {
 	public ModelAndView elevationPrivilege2ProUser_process_agree(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("AuthProcess");
 		int authListID = Integer.parseInt(request.getParameter("authListID"));
-		um.elevationPrivilege2ProUser_process_agree(request, authListID);
+		int applyAuthUserID = Integer.parseInt( request.getParameter("applyAuthUserID") );
+		um.elevationPrivilege2ProUser_process_agree(request, authListID , applyAuthUserID);
+		
+		User user = um.getUser(applyAuthUserID);
+		user.setApply_status(2);
+		um.updateUser(user);
 		
 		List<AuthorizationList> authList = um.getAllAuthList();
 		if(authList != null){
@@ -155,7 +170,12 @@ public class UserController {
 	public ModelAndView elevationPrivilege2ProUser_process_deny(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("AuthProcess");
 		int authListID = Integer.parseInt(request.getParameter("authListID"));
+		int applyAuthUserID = Integer.parseInt( request.getParameter("applyAuthUserID") );
 		um.elevationPrivilege2ProUser_process_deny(request, authListID);
+		
+		User user = um.getUser(applyAuthUserID);
+		user.setApply_status(3);
+		um.updateUser(user);
 		
 		List<AuthorizationList> authList = um.getAllAuthList();
 		if(authList != null){
@@ -172,6 +192,7 @@ public class UserController {
 		JsonConfig config = new JsonConfig();
 		config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		String s = JSONArray.fromObject(al , config).toString();
+//		String s = JSONArray.fromObject(al).toString();
 		
 		return s;	
 	}

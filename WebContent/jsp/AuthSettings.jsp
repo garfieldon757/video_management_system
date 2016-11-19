@@ -25,31 +25,32 @@
             <a class="navbar-brand" href="#/"></a>
         </div>
         <ul class="nav navbar-nav pull-right ng-scope">
-            <li  class="ng-scope" style="">
-	            <a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
-	        </li>
-	        <li id="dropdown_index" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu" >
-	                <li>
-		                <a href="edit_personalProfile_load">个人信息编辑</a>
-		            </li>
-		            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 } ">
-		                <li>
-		                    <a href="authSettings_load">个人权限申请</a>
-		                </li>
-		            </c:if>
-		            <c:if test="${ user.role.roleID == 3 }">
-		                <li>
-		                    <a href="authProcess_load">角色申请处理</a>
-		                </li>
-		             </c:if>
-                </ul>
-            </li>
+	            <li  class="ng-scope" style="">
+		            <a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+		        </li>
+		        <li id="dropdown_index" class="dropdown">
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+	                <ul class="dropdown-menu" role="menu" >
+			                <li>
+			                    <a href="edit_personalProfile_load">个人信息编辑</a>
+			                </li>
+			                <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 }">
+			                    <li>
+			                        <a href="authSettings_load">个人权限申请</a>
+			                    </li>
+			                </c:if>
+			                <c:if test="${ user.role.roleID == 3 }">
+			                    <li>
+			                        <a href="authProcess_load">角色申请处理</a>
+			                    </li>
+			                 </c:if>
+		            </ul>
+	            </li>
         </ul>
     </div>
 </div>
 </div>
+
 <div ng-include="'/public/app/templates/horizontal-header.html'" class="ng-scope"><!-- ngIf: currentUser && currentUser.isConsumer -->
 <div class="horizontal-header ng-scope" ng-if="currentUser &amp;&amp; currentUser.isConsumer">
     <div class="container ">
@@ -70,20 +71,20 @@
                     </div>
                     <hr style="margin-top: 0;">
                     <ul class="nav nav-stacked side-nav">
-		                    <li  >
-			                    <a href="edit_personalProfile_load">个人信息编辑</a>
-			                </li>
-			                <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 } ">
-			                    <li >
-			                        <a href="authSettings_load">个人权限申请</a>
-			                    </li>
-			                </c:if>
-			                <c:if test="${ user.role.roleID == 3 }">
-			                    <li class="active">
-			                        <a href="authProcess_load">角色申请处理</a>
-			                    </li>
-			                </c:if>
-	                </ul>
+			                <li  >
+				                <a href="edit_personalProfile_load">个人信息编辑</a>
+				            </li>
+				            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 }">
+				                <li class="active">
+				                    <a href="authSettings_load">个人权限申请</a>
+				                </li>
+				            </c:if>
+				            <c:if test="${ user.role.roleID == 3 }">
+				                <li >
+				                    <a href="authProcess_load">角色申请处理</a>
+				                </li>
+				            </c:if>
+		            </ul>
                 </div>
             </div>
             
@@ -148,14 +149,21 @@
                                                 <br><br>
                                                 <span class="label label-default" >视频分析算法上传</span>
                                                 <br><br>
-                                                <p>
-		                                                <c:if test="${user.role.roleID == 1 }">
-			                                                <a href="elevationPrivilege2ProUser_apply" class="btn btn-danger" role="button" style="display: block" >申请此角色</a>
-			                                                <a href="#" class="btn btn-default" role="button" style="display: none" >已经拥有当前角色</a>
+                                                <p> 
+                                                		
+                                                		<c:if test="${ apply_status != 1 }">
+			                                                <c:if test="${user.role.roleID == 1 }">
+				                                                <a href="elevationPrivilege2ProUser_apply" class="btn btn-danger" role="button" style="display: block" >申请此角色</a>
+				                                                <a href="#" class="btn btn-default" role="button" style="display: none" >已经拥有当前角色</a>
+				                                            </c:if>
+				                                            <c:if test="${user.role.roleID == 2 }">
+				                                                <a href="#" class="btn btn-default" role="button" style="display: block" disabled="true">已经拥有当前角色</a>
+				                                            </c:if>
 			                                            </c:if>
-			                                            <c:if test="${user.role.roleID == 2 }">
-			                                                <a href="#" class="btn btn-default" role="button" style="display: block" disabled="true">已经拥有当前角色</a>
+			                                            <c:if test="${ apply_status == 1 }">
+			                                            	<a href="#" class="btn btn-default" role="button" style="display: block" disabled="true">待审核中</a>
 			                                            </c:if>
+			                                            
                                                 </p>
                                             </div>
                                         </div>
@@ -263,74 +271,9 @@
 </footer>
 
 
-<!-- build:js(.) /public/js/vendor.js -->
+
 <script src="js/jquery.min.js"></script>
-<script src="js/lodash.js"></script>
-<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1027644270654279");fbq("track","PageView");fbq("track","ViewContent");</script>
-<noscript>&lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1027644270654279&amp;amp;ev=PageView&amp;amp;noscript=1"&gt;</noscript>
-
-<script src="js/moment.js"></script>
-<script src="js/js/bootstrap.min.js"></script>
-<script src="js.js"></script>
-<script src="js/angular-resource.js"></script>
-<script src="js/angular-cookies.js"></script>
-<script src="js/angular-sanitize.js"></script>
-<script src="js/release/angular-ui-router.js"></script>
-<script src="js/angular-animate.js"></script>
-<script src="js/ui-bootstrap-tpls.min.js"></script>
-<script src="js/checklist-model.js"></script>
-<script src="js/ng-file-upload-shim.js"></script>
-<script src="js/ng-file-upload.js"></script>
-<script src="js/mask.js"></script>
-<script src="js/angular-filter.js"></script>
-<script src="js/angular-strap.js"></script>
-<script src="js/angular-strap.tpl.js"></script>
-<script src="js/jquery.placeholder.js"></script>
-<!-- endbuild -->
-
-<script src="/app/config.js"></script>
-
-<!-- build:js(.) /public/js/app.js -->
-<script src="js/intercom.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/alerts.js"></script>
-<script src="js/remote-error.js"></script>
-<script src="js/l10n.js"></script>
-<script src="js/pw-check.js"></script>
-<script src="js/pagination.js"></script>
-<script src="js/days.js"></script>
-<script src="js/experience.js"></script>
-<script src="js/formatters.filter.js"></script>
-<script src="js/schedule-week.js"></script>
-<script src="js/ui-view-smooth-scroll.js"></script>
-<script src="js/intercom-communications.js"></script>
-<script src="js/app.js"></script>
-<script src="js/resources.js"></script>
-<script src="js/resources.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/messages.js"></script>
-<script src="js/messages.send.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/carers.js"></script>
-<script src="js/item/carers.item.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/contracts.js"></script>
-<script src="js/item/contracts.item.js"></script>
-<script src="js/contract-state-directive.js"></script>
-<script src="js/contract-time-table-directive.js"></script>
-<script src="js/contract-reject-form-directive.js"></script>
-<script src="js/logbook-table-directive.js"></script>
-<script src="js/ctrl.js"></script>
-<script src="js/payment-ctrl.js"></script>
-<script src="js/payment-list-directive.js"></script>
-
-<script src="js/account.controller.js"></script>
-<script src="js/dashboard.js"></script>
-<!-- endbuild -->
+<script src="js/bootstrap.min.js"></script>
 
 
 </div>

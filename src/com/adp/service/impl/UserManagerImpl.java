@@ -17,6 +17,7 @@ import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
 import com.adp.model.Role;
 import com.adp.model.User;
+import com.adp.model.VideoCategory;
 import com.adp.service.UserManager;
 
 @Service("um")
@@ -118,8 +119,8 @@ public class UserManagerImpl implements UserManager{
 	@Override
 	public User elevationPrivilege2ProUser_apply(HttpServletRequest request) {
 		User user = getSession(request, "user");//session获取当前用户对象
-		user = userDAO.updateUserRole(user);
-		user = updateSession (request, user) ;
+//		user = userDAO.updateUserRole(user);
+//		user = updateSession (request, user) ;
 		
 		Role role = userDAO.findRole(2);
 		
@@ -145,15 +146,19 @@ public class UserManagerImpl implements UserManager{
 	}
 
 	@Override
-	public void elevationPrivilege2ProUser_process_agree(HttpServletRequest request, int authListID) {
+	public void elevationPrivilege2ProUser_process_agree(HttpServletRequest request, int authListID, int applyAuthUserID) {
 		
 		User giveAuthUser = getSession(request, "user");//session获取当前用户对象
-		
 		Timestamp now = new Timestamp(System.currentTimeMillis()); 
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String processDateTime = df.format(now);
 		
+		User applyAuthUser = userDAO.getUserByID(applyAuthUserID);
+		Role rolePro = userDAO.findRole(2);
+		applyAuthUser.setRole(rolePro);
+		
 		userDAO.updateAuthorizationList(authListID, giveAuthUser, "2", processDateTime);//修改authStatus参数为2，表示处理申请为“同意”状态
+		userDAO.updateUser(applyAuthUser);
 		
 		return;
 	}
@@ -162,12 +167,16 @@ public class UserManagerImpl implements UserManager{
 	public void elevationPrivilege2ProUser_process_deny(HttpServletRequest request, int authListID) {
 		
 		User giveAuthUser = getSession(request, "user");//session获取当前用户对象
-		
 		Timestamp now = new Timestamp(System.currentTimeMillis()); 
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String processDateTime = df.format(now);
 		
+//		User applyAuthUser = userDAO.getUserByID(applyAuthUserID);
+//		Role rolePro = userDAO.findRole(2);
+//		applyAuthUser.setRole(rolePro);
+		
 		userDAO.updateAuthorizationList(authListID, giveAuthUser, "3", processDateTime);//修改authStatus参数为2，表示处理申请为“同意”状态
+//		userDAO.updateUser(applyAuthUser);
 		
 		return;
 	}
@@ -177,6 +186,20 @@ public class UserManagerImpl implements UserManager{
 		User applyAuthUser = userDAO.getUserByID(applyAuthUserID);
 		List<AuthorizationList> al = userDAO.getAuthListByApplyAuthUser(applyAuthUser);
 		return al;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		
+		User userReturn = userDAO.updateUser(user);//更新这条user数据到数据库
+		return userReturn;
+	}
+
+	@Override
+	public User getUser(int userID) {
+		
+		User user = userDAO.getUserByID(userID);
+		return user;
 	}
 
 	

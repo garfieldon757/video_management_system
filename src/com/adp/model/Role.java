@@ -21,7 +21,7 @@ public class Role {
 	private Integer roleID;
 	private String roleName;
 	
-	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	private List<User> userList = new ArrayList<User>();
 	
 	

@@ -33,7 +33,7 @@
 			                <li>
 			                    <a href="edit_personalProfile_load">个人信息编辑</a>
 			                </li>
-			                <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 } ">
+			                <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 }">
 			                    <li>
 			                        <a href="authSettings_load">个人权限申请</a>
 			                    </li>
@@ -72,7 +72,7 @@
 		                <li  class="active">
 			                <a href="edit_personalProfile_load">个人信息编辑</a>
 			            </li>
-			            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 } ">
+			            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 }">
 			                <li >
 			                    <a href="authSettings_load">个人权限申请</a>
 			                </li>
@@ -108,19 +108,15 @@
                                             <label for="sex">性别</label>
                                             <div id="sex_div">
                                                 <select class="form-control" id="sex" name="sex">
-                                                    <option selected="selected">${user.sex}</option>
-                                                    <option >${user.sex}</option>
                                                     
-                                                    <c:if test=" ${user.sex eq '男'} ">
+                                                    <c:if test="${user.sex == '男'}">
                                                     	<option>男</option>
                                                     	<option>女</option>
                                                     </c:if>
-                                                    <c:if test=" ${user.sex eq '女'} ">
+                                                    <c:if test="${user.sex == '女'}">
 	                                                	<option>女</option>
 	                                                	<option>男</option>
 	                                                </c:if>
-	                                                <!--???????????????????????????????????????? -->
-                                                    
                                                 </select>
                                             </div>
                                         </div>

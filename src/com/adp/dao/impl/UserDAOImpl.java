@@ -67,10 +67,10 @@ public class UserDAOImpl implements UserDAO{
 	}
 	
 	@Override
-	public void updateUser(User user) {
+	public User updateUser(User user) {
 		// TODO Auto-generated method stub
 		em.merge(user);
-		return;
+		return user;
 	}
 	@Override
 	public String existUser(String userName) {

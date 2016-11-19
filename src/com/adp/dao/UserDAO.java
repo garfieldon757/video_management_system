@@ -14,7 +14,7 @@ public interface UserDAO {
 	public User getUserByID(int userID);
 	public Role findRole(int roleID);
 	public AuthorizationList findAuthList(int authListID);
-	public void updateUser(User user);
+	public User updateUser(User user);
 	public String existUser(String userName);
 	public User updateUserRole(User user);
 	public AuthorizationList insertAuthorizationList(User applyAuthUser, Role role, String applyDateTime);

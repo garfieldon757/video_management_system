@@ -31,20 +31,20 @@
 		        <li id="dropdown_index" class="dropdown">
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
 	                <ul class="dropdown-menu" role="menu" >
-	                    <li>
-	                        <a href="edit_personalProfile_load">个人信息编辑</a>
-	                    </li>
-	                    <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 } ">
-		                    <li>
-		                        <a href="authSettings_load">个人权限申请</a>
-		                    </li>
-		                </c:if>
-		                <c:if test="${ user.role.roleID == 3 }">
-		                    <li>
-		                        <a href="authProcess_load">角色申请处理</a>
-		                    </li>
-		                 </c:if>
-	                </ul>
+			                <li>
+			                    <a href="edit_personalProfile_load">个人信息编辑</a>
+			                </li>
+			                <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 }">
+			                    <li>
+			                        <a href="authSettings_load">个人权限申请</a>
+			                    </li>
+			                </c:if>
+			                <c:if test="${ user.role.roleID == 3 }">
+			                    <li>
+			                        <a href="authProcess_load">角色申请处理</a>
+			                    </li>
+			                 </c:if>
+		            </ul>
 	            </li>
            </ul>
        </div>
@@ -70,20 +70,20 @@
                     </div>
                     <hr style="margin-top: 0;">
                     <ul class="nav nav-stacked side-nav">
-                    <li  >
-                        <a href="edit_personalProfile_load">个人信息编辑</a>
-                    </li>
-                    <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 } ">
-	                    <li >
-	                        <a href="authSettings_load">个人权限申请</a>
-	                    </li>
-                    </c:if>
-                    <c:if test="${ user.role.roleID == 3 }">
-	                    <li class="active">
-	                        <a href="authProcess_load">角色申请处理</a>
-	                    </li>
-                    </c:if>
-                </ul>
+			                <li  >
+				                <a href="edit_personalProfile_load">个人信息编辑</a>
+				            </li>
+				            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 }">
+				                <li >
+				                    <a href="authSettings_load">个人权限申请</a>
+				                </li>
+				            </c:if>
+				            <c:if test="${ user.role.roleID == 3 }">
+				                <li class="active">
+				                    <a href="authProcess_load">角色申请处理</a>
+				                </li>
+				            </c:if>
+		            </ul>
                 </div>
             </div>
             <div class="col-xs-9 col-xs-9-remove">
@@ -136,8 +136,8 @@
 					                					                                    <p>申请角色：专业用户</p>
 				                                                                        </div>
 				                                                                        <div class="col-md-3">
-				                                                                            <button type="submit" id="agreeAuthBtn" class="btn btn-success btn-lg btn-block" onclick="agreeAuthProcess(${al.authListID})">同意提升角色</button>
-				                                                                            <button type="submit" id="denyAuthBtn" class="btn btn-danger btn-lg btn-block" onclick="denyAuthProcess(${al.authListID})">拒绝提升角色</button>
+				                                                                            <button type="submit" id="agreeAuthBtn" class="btn btn-success btn-lg btn-block" onclick="agreeAuthProcess( ${al.authListID} , ${al.applyAuthUser.userID} )">同意提升角色</button>
+				                                                                            <button type="submit" id="denyAuthBtn" class="btn btn-danger btn-lg btn-block" onclick="denyAuthProcess( ${al.authListID} , ${al.applyAuthUser.userID} )">拒绝提升角色</button>
 				                                                                        </div>
 				                                                                        <div class="col-md-1"></div>
 				                                                                    </div>
@@ -352,16 +352,16 @@
 
     })
     
-    function agreeAuthProcess(authListID){
+    function agreeAuthProcess(authListID , applyAuthUserID){
 
-    	$('#process_form_'+authListID).attr("action", "elevationPrivilege2ProUser_process_agree?authListID=" + authListID);
+    	$('#process_form_'+authListID).attr("action", "elevationPrivilege2ProUser_process_agree?authListID=" + authListID + "&applyAuthUserID=" + applyAuthUserID);
     	$('#process_form_'+authListID).submit();
 
     }
     
     function denyAuthProcess(authListID){
-    	alert("deny");
-    	$('#process_form_'+authListID).attr("action", "elevationPrivilege2ProUser_process_deny?authListID=" + authListID);
+    	
+    	$('#process_form_'+authListID).attr("action", "elevationPrivilege2ProUser_process_deny?authListID=" + authListID + "&applyAuthUserID=" + applyAuthUserID);
     	$('#process_form_'+authListID).submit();
 
     }
