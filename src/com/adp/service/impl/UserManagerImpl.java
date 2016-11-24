@@ -144,6 +144,18 @@ public class UserManagerImpl implements UserManager{
 		List<AuthorizationList> authList = userDAO.getAllAuthList();
 		return authList;
 	}
+	
+	@Override
+	public List<AuthorizationList> getProcessingAuthList() {
+		List<AuthorizationList> authListProcessing = userDAO.getProcessingAuthList() ;
+		return authListProcessing;
+	}
+
+	@Override
+	public List<AuthorizationList> getProcessedAuthList() {
+		List<AuthorizationList> authListProcessed = userDAO.getProcessedAuthList();
+		return authListProcessed;
+	}
 
 	@Override
 	public void elevationPrivilege2ProUser_process_agree(HttpServletRequest request, int authListID, int applyAuthUserID) {
@@ -202,14 +214,17 @@ public class UserManagerImpl implements UserManager{
 		return user;
 	}
 
+	@Override
+	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName,
+			String applyDateTimeStart, String applyDateTimeEnd, String processDateTimeStart, String processDateTimeEnd,
+			String processResult) {
+		List<AuthorizationList> al = userDAO.searchProcessedAuthListByMultiParam(applyUserNickName , applyDateTimeStart , applyDateTimeEnd ,
+				processDateTimeStart , processDateTimeEnd , processResult);
+		
+		return al;
+	}
+
 	
-
-
-
-	
-
-	
-
 
 
 }

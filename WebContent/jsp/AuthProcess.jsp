@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html class="no-js">
 <head>
     <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
@@ -113,41 +114,49 @@
                                                         <div class="panel-body">
 
                                                             <br>
+                                                           
+                                                            <c:if test="${ empty authListProcessing}">
+	                                                        	<h2>暂时没有待处理申请</h2>
+	                                                        </c:if>
+	                                                        <c:if test="${ !empty authListProcessing}">
                                                             
-                                                            <c:if test="${!empty authList}">
-                                                            	<h2>暂时没有待处理申请</h2>
-                                                            </c:if>
-                                                            
-                                                            <c:forEach items="${authList}" var="al">    
-                                                   		 
-	                        			                        <c:if test="${al.authStatus == 1 }">
-			                        			                        
-	                        			                        		<form id="process_form_${al.authListID}" action="" method="post">
-				                                                            <div class="panel panel-default">
-				                                                                <div class="panel-body">
-				                                                                    <div class="row">
-				                                                                        <div class="col-md-1"></div>
-				                                                                        <div class="col-md-7">
-					                                                                        <p>当前申请ID：<bold name="authListID"> ${al.authListID} </bold> </p>
-					                	                                                    <p>申请请求时间：${al.applyDateTime}</p>
-					                	                                                    <p>申请处理时间：</p>
-					                	                                                    <p>申请权限人：${al.applyAuthUser.userName }(ID: ${ al.applyAuthUser.userID } )</p>
-					                					                                    <p>当前角色：普通用户</p>
-					                					                                    <p>申请角色：专业用户</p>
-				                                                                        </div>
-				                                                                        <div class="col-md-3">
-				                                                                            <button type="submit" id="agreeAuthBtn" class="btn btn-success btn-lg btn-block" onclick="agreeAuthProcess( ${al.authListID} , ${al.applyAuthUser.userID} )">同意提升角色</button>
-				                                                                            <button type="submit" id="denyAuthBtn" class="btn btn-danger btn-lg btn-block" onclick="denyAuthProcess( ${al.authListID} , ${al.applyAuthUser.userID} )">拒绝提升角色</button>
-				                                                                        </div>
-				                                                                        <div class="col-md-1"></div>
-				                                                                    </div>
-				                                                                </div>
-				                                                            </div>
-				                                                          </form>  
-		                                                            </c:if>
-		                                	                        
-		                                                        </c:forEach>
-                                                            
+                                                        		<table class="table table-hover">
+		                                                            <thead>
+		                                                              <tr>
+		                                                                <th>申请ID</th>
+		                                                                <th>申请人</th>
+		                                                                <th>申请时间</th>
+		                                                                <th>当前角色</th>
+		                                                                <th>专业角色</th>
+		                                                                <th>处理结果</th>
+		                                                              </tr>
+		                                                            </thead>
+		                                                            <tbody>
+		                                                            
+		                                                            	<c:forEach items="${authListProcessing}" var="al">
+	                                                            			
+					                                                              <tr>
+						                                                                <td>${al.authListID}</td>
+						                                                                <td>${al.applyAuthUser.userName }</td>
+						                                                                <td>${al.applyDateTime}</td>
+						                                                                <td>普通用户</td>
+						                                                                <td>专业用户</td>
+						                                                                <td>
+						                                                                	<a href="elevationPrivilege2ProUser_process_agree?authListID=${al.authListID}&applyAuthUserID=${al.applyAuthUser.userID}">
+						                                                                		<button type="button" id="agreeBtn_${al.authListID}" class="btn btn-success">同意</button>
+					                                                                		</a>
+						                                                                	<a href="elevationPrivilege2ProUser_process_deny?authListID=${al.authListID}&applyAuthUserID=${al.applyAuthUser.userID}">
+						                                                                		<button type="button" id="denyBtn_${al.authListID}" class="btn btn-danger">拒绝</button>
+					                                                                		</a>
+						                                                                </td>
+					                                                              </tr>
+				                                                             
+			                                                               </c:forEach>
+		                                                            </tbody>
+		                                                        </table>
+	                                                       
+		                                                      </c:if>
+		                                                        
                                                         </div>
                                                     </div>
 
@@ -159,56 +168,98 @@
 
                                                             <br>
                                                             
-                                                            <c:forEach items="${authList}" var="al">    
-                                                      		 
-	                        			                        <c:if test="${al.authStatus == 2 }">
-	                                                            
-		                                                            <div class="alert alert-success" role="alert">
-		                                                                <div class="row">
-		                                                                    <div class="col-md-1"></div>
-		                                                                    <div class="col-md-7">
-			                                                                    <p>当前申请ID：${al.authListID}</p>
-			            	                                                    <p>申请请求时间：${al.applyDateTime}</p>
-			            	                                                    <p>申请处理时间：${al.processDateTime}</p>
-			            	                                                    <p>申请权限人：${al.applyAuthUser.userName }(ID: ${ al.applyAuthUser.userID } )</p>
-			            					                                    <p>当前角色：普通用户</p>
-			            					                                    <p>申请角色：专业用户</p>
-		                                                                    </div>
-		                                                                    <div class="col-md-4" style="vertical-align: bottom">
-		                                                                        <p>已通过角色申请提醒</p>
-		                                                                    </div>
-		                                                                </div>
-		                                                            </div>
-		                                                            
-		                                                         </c:if>
-		                                                         
-		                                                         <c:if test="${al.authStatus == 3 }">
-		                                                            
-			                                                            <div class="alert alert-danger" role="alert">
-			                                                                <div class="row">
-			                                                                    <div class="col-md-1"></div>
-			                                                                    <div class="col-md-7">
-				                                                                    <p>当前申请ID：${al.authListID}</p>
-				            	                                                    <p>申请请求时间：${al.applyDateTime}</p>
-				            	                                                    <p>申请处理时间：${al.processDateTime}</p>
-				            	                                                    <p>申请权限人：${al.applyAuthUser.userName }(ID: ${ al.applyAuthUser.userID } )</p>
-				            					                                    <p>当前角色：普通用户</p>
-				            					                                    <p>申请角色：专业用户</p>
-			                                                                    </div>
-			                                                                    <div class="col-md-4">
-			                                                                        <p>已拒绝角色提升申请</p>
-			                                                                    </div>
-			                                                                </div>
+                                                            <form class="form-horizontal" action="processedAuthListSearch">
+                                                            
+                                                            	<div class="row">
+                                                            		<div class="col-md-8">
+                                                            		
+                                                            			<div class="form-group">
+			                                                              <label for="applyUserNickName" class="col-sm-2 control-label">用户昵称</label>
+			                                                              <div class="col-sm-6">
+			                                                                <input type="text" class="form-control" id="applyUserNickName" name="applyUserNickName" placeholder="输入用户名昵称">
+			                                                              </div>
 			                                                            </div>
-			                                                            
-			                                                      </c:if>
-			                                	                        
-				                                              </c:forEach>    
+			                                                            <div class="form-group">
+			                                                              <label for="inputPassword3" class="col-sm-2 control-label">申请时间</label>
+			                                                              <div class="col-sm-10">
+			                                                              	<input type="date"  name="applyDateTimeStart" style="float:left"/>
+			                                                              	<h3 style="float:left">_</h3>
+			                                                              	<input type="date" name="applyDateTimeEnd" style="float:left"/>
+			                                                              </div>
+			                                                            </div>
+			                                                            <div class="form-group">
+			                                                              <label for="inputPassword3" class="col-sm-2 control-label">处理时间</label>
+			                                                              <div class="col-sm-10">
+			                                                              	<input type="date" name="processDateTimeStart" style="float:left"/>
+			                                                              	<h3 style="float:left">_</h3>
+			                                                              	<input type="date" name="processDateTimeEnd" style="float:left"/>
+			                                                              </div>
+			                                                            </div>
+			                                                            <div class="form-group">
+			                                                              <label for="applyUserNickName" class="col-sm-2 control-label">处理结果</label>
+			                                                              <div id="radio" class="col-sm-6">
+				                                                              <input type="radio" name="processResult" value="2"  checked >申请通过</input>
+				                                                              <input type="radio" name="processResult" value="3"  >申请拒绝</input>
+			                                                              </div>
+			                                                            </div>
+			                                                          </div>
+			                                                         <div class="col-md-4">
+			                                                         		<div class="form-group">
+				                                                              <div class="col-sm-offset-2 col-sm-10">
+				                                                                <button type="submit" id="processedAuthListSearchBtn" class="btn btn-primary btn-lg" >查询</button>
+				                                                              </div>
+				                                                            </div>
+			                                                         </div>
+			                                                         
+                                                            	</div>
+	                                                            
+	                                                           
+	                                                          </form>
+                                                            <br>
+	                                                          
+                                                            <c:if test="${empty authListProcessed}">
+	                                                        	<h2>暂时没有处理过申请</h2>
+	                                                        </c:if>
+	                                                        <c:if test="${ !empty authListProcessed}">
+                                                            
+	                                                            <table class="table table-hover">
+		                                                            <thead>
+		                                                              <tr>
+		                                                                <th>申请ID</th>
+		                                                                <th>申请人</th>
+		                                                                <th>申请时间</th>
+		                                                                <th>处理时间</th>
+		                                                                <th>当前角色</th>
+		                                                                <th>专业角色</th>
+		                                                                <th>处理结果</th>
+		                                                              </tr>
+		                                                            </thead>
+		                                                            <tbody>
+				                                                        
+				                                                        <c:forEach items="${authListProcessed}" var="al">
+			                                                        
+				                                                              <tr>
+				                                                                <td>${al.authListID}</td>
+				                                                                <td>${al.applyAuthUser.userName }</td>
+				                                                                <td>${al.applyDateTime}</td>
+				                                                                <td>${al.processDateTime}</td>
+				                                                                <td>普通用户</td>
+				                                                                <td>专业用户</td>
+				                                                                <c:if test="${al.authStatus == 2 }">
+				                                                                	<td class="text-success">申请通过</td>
+				                                                                </c:if>
+						                                                         <c:if test="${al.authStatus == 3 }">
+						                                                         	<td class="text-danger">申请拒绝</td>
+				                                                                </c:if>
+				                                                              </tr>
 
-				                                              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#searchAuthListModal">
-					                                             搜索历史申请列表
-					                                           </button>
-				                                              
+				  	                                                        </c:forEach>
+			                                                              
+		                                                            </tbody>
+		                                                        </table>
+				                                             
+		                                                        </c:if>
+		                                                        
                                                         </div>
                                                     </div>
 
@@ -241,25 +292,6 @@
 </div>
 </body>
 
-<div class="modal fade" id="searchAuthListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		  <div class="modal-content">
-			    <div class="modal-header">
-			      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			      <h4 class="modal-title" id="myModalLabel">搜索历史申请列表</h4>
-			    </div>
-			    <div class="modal-body">
-			    	<form id="searchAuthListForm" action="">
-			    		<input type="text" id="searchAuthListInput" placeholder="请输入申请权限人ID"></input>
-			    		<button type="button" id="searchAuthListBtn" class="btn btn-primary">搜索</button>
-			    	</form>
-			    </div>
-			    <div id="modal-footer" class="modal-footer">
-			      	
-			    </div>
-		  </div>
-	</div>
-</div>
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -270,101 +302,38 @@
 
     $(document).ready(function(){
 
-        $('#myTab a').click(function (e) {
-
-            $(this).tab('show');
-        });
-        
-        $('#searchAuthListBtn').click(function(e) {
-
-        	var ApplyAuthUserID_value = $('#searchAuthListInput').val();
-        	
-        	$.ajax({
-                url: "ajax_searchProcessedAuthListByApplyAuthUserID",
-                data: { ApplyAuthUserID : ApplyAuthUserID_value},
-                type: "GET",
-                success: function (response) {
-                    
-	                  var json = eval(response);
-	                  var concatStr = "";
-	                  $.each(json, function(index){
-	                  	var authListID = json[index].authListID;
-	                  	var authStatus = json[index].authStatus;
-	                  	var applyAuthUserName = json[index].applyAuthUser.userName;
-	                  	var applyAuthUserID = json[index].applyAuthUser.userID;
-	                  	var giveAuthUserID = json[index].giveAuthUser.userID;
-	                  	var roleID = json[index].role.roleID;
-	                  	var applyDateTime = json[index].applyDateTime;
-	                  	var processDateTime = json[index].processDateTime;
-	//                  	concatStr += authListID + "__" + authStatus + "__" + applyAuthUserID + "__" 
-	//                  						+giveAuthUserID + "__" + roleID + "__" + applyDateTime + "__" + processDateTime;
-	                  	concatStr = "";
-	                  	if(authStatus == 2){
-	                  		
-	                  		concatStr =			 "<div class=\"alert alert-success\" role=\"alert\"> "
-	                  								+		"<div class=\"row\">"
-								                        +      "<div class=\"col-md-8\">"
-										                    +      "<p>当前申请ID：" + authListID + "</p>"
-										                    +      "<p>申请请求时间：" + applyDateTime + "</p>"
-								                            + 		"<p>申请处理时间：" + processDateTime + "</p>"
-								                            + 		"<p>申请权限人：" + applyAuthUserName + " ( ID : " + applyAuthUserID + " )</p>"
-								                            + 		"<p>当前角色：普通用户 </p>"
-								                            + 		"<p>申请角色：专业用户 </p>"
-						                             	+		"</div>"
-						                                +      "<div class=\"col-md-4\" style=\"vertical-align: bottom\">"
-						                                	+      "<p>已通过角色申请提醒</p>"
-						                                +      "</div>"
-					                                +   	 "</div>"
-				                                + 		 "</div>" ;
-					                                  		
-	                  	}else if(authStatus == 3){
-	                  		
-	                  		concatStr =			 "<div class=\"alert alert-danger\" role=\"alert\"> "
-				      								+		"<div class=\"row\">"
-								                        +      "<div class=\"col-md-7 text-left \">"
-										                    +      "<p >当前申请ID：" + authListID + "</p>"
-										                    +      "<p>申请请求时间：" + applyDateTime + "</p>"
-								                            + 		"<p>申请处理时间：" + processDateTime + "</p>"
-								                            + 		"<p>申请权限人：" + applyAuthUserName + " ( ID : " + applyAuthUserID + " )</p>"
-								                            + 		"<p>当前角色：普通用户 </p>"
-								                            + 		"<p>申请角色：专业用户 </p>"
-						                             	+		"</div>"
-						                                +      "<div class=\"col-md-4\" style=\"vertical-align: bottom\">"
-						                                	+      "<p><strong>已拒绝角色申请提醒</strong></p>"
-						                                +      "</div>"
-					                                +   	 "</div>"
-				                                + 		 "</div>" ;
-	                  		
-	                  	}
-	                  	
-	                  	
-	                  	
-	                  });
-	                  
-	                  $("#modal-footer").html('');
-	                  $("#modal-footer").html(concatStr);
-                	
-                }
-            });
-        	
-        });
+    	$('#processedAuthListSearchBtn').click(function(e){
+    		
+    		var applyUserNickName_value = $('#applyUserNickName').value();
+    		var applyDateTimeStart_value = $('#applyDateTimeStart').value();
+    		var applyDateTimeEnd_value = $('#applyDateTimeEnd').value() ;
+    		var processDateTimeStart_value = $('#processDateTimeStart').value();
+    		var processDateTimeEnd_value = $('#processDateTimeEnd').value();
+    		var processResult_value = $('#processResult').value();
+    		
+    		$.ajax({
+    			url:"processedAuthListSearch",
+    			data:{
+					applyUserNickName : applyUserNickName_value ,
+					applyDateTimeStart : applyDateTimeStart_value ,
+					applyDateTimeEnd : applyDateTimeEnd_value ,
+					processDateTimeStart : processDateTimeStart_value ,
+					processDateTimeEnd : processDateTimeEnd_value ,
+					processResult : processResult_value
+				},
+    			type:"GET",
+    			success:function(response){
+    			
+					
+					
+    		}
+    		})
+    		
+    	})
         
 
     })
     
-    function agreeAuthProcess(authListID , applyAuthUserID){
-
-    	$('#process_form_'+authListID).attr("action", "elevationPrivilege2ProUser_process_agree?authListID=" + authListID + "&applyAuthUserID=" + applyAuthUserID);
-    	$('#process_form_'+authListID).submit();
-
-    }
-    
-    function denyAuthProcess(authListID){
-    	
-    	$('#process_form_'+authListID).attr("action", "elevationPrivilege2ProUser_process_deny?authListID=" + authListID + "&applyAuthUserID=" + applyAuthUserID);
-    	$('#process_form_'+authListID).submit();
-
-    }
 
 
 </script>

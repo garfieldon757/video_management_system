@@ -21,10 +21,13 @@ public interface UserManager {
 	public User updateUser(User user);
 	public User elevationPrivilege2ProUser_apply(HttpServletRequest request);
 	public List<AuthorizationList> getAuthListByApplyAuthUser(User user);
-	public List<AuthorizationList> getAllAuthList();
+	public List<AuthorizationList> getAllAuthList();//是否需要细化？
+	public List<AuthorizationList> getProcessingAuthList();
+	public List<AuthorizationList> getProcessedAuthList();
 	public void elevationPrivilege2ProUser_process_agree(HttpServletRequest request, int authListID , int applyAuthUserID);
 	public void elevationPrivilege2ProUser_process_deny(HttpServletRequest request, int authListID);
 	public List<AuthorizationList> searchProcessedAuthListByApplyAuthUserID(int applyAuthUserID);
-	
+	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName , String applyDateTimeStart , 
+									String applyDateTimeEnd ,String processDateTimeStart ,String  processDateTimeEnd ,String processResult);
 	
 }

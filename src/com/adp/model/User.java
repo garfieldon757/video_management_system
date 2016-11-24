@@ -27,8 +27,8 @@ public class User {
     private String email;
     @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="roleID")
-    private Role role;
-    private int apply_status;
+    private Role role;////0代表未申请，1代表正在申请待审核
+    private int apply_status;// 0-未申请 1-申请待审核 2-申请通过 3-申请被拒绝
     
     @OneToMany(mappedBy = "giveAuthUser", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
     private List<AuthorizationList> giveAuthUserList = new ArrayList<AuthorizationList>();

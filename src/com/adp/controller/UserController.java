@@ -140,10 +140,12 @@ public class UserController {
 	public ModelAndView authProcess_load(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("AuthProcess");
 		User user = um.getSession(request, "user");//session获取当前用户对象
-		List<AuthorizationList> authList = um.getAllAuthList();
-		if(authList != null){
+		List<AuthorizationList> authListProcessing = um.getProcessingAuthList();
+		List<AuthorizationList> authListProcessed = um.getProcessedAuthList();
+		if(authListProcessing != null){
 			mv.addObject(user);
-			mv.addObject("authList", authList);
+			mv.addObject("authListProcessing", authListProcessing);
+			mv.addObject("authListProcessed", authListProcessed);
 		}
 		return mv;//跳转至AuthProcess.jsp页面
 	}
@@ -159,9 +161,12 @@ public class UserController {
 		user.setApply_status(2);
 		um.updateUser(user);
 		
-		List<AuthorizationList> authList = um.getAllAuthList();
-		if(authList != null){
-			mv.addObject("authList", authList);
+		List<AuthorizationList> authListProcessing = um.getProcessingAuthList();
+		List<AuthorizationList> authListProcessed = um.getProcessedAuthList();
+		if(authListProcessing != null){
+			mv.addObject(user);
+			mv.addObject("authListProcessing", authListProcessing);
+			mv.addObject("authListProcessed", authListProcessed);
 		}
 		return mv;//跳转至AuthProcess.jsp页面
 	}
@@ -177,9 +182,12 @@ public class UserController {
 		user.setApply_status(3);
 		um.updateUser(user);
 		
-		List<AuthorizationList> authList = um.getAllAuthList();
-		if(authList != null){
-			mv.addObject("authList", authList);
+		List<AuthorizationList> authListProcessing = um.getProcessingAuthList();
+		List<AuthorizationList> authListProcessed = um.getProcessedAuthList();
+		if(authListProcessing != null){
+			mv.addObject(user);
+			mv.addObject("authListProcessing", authListProcessing);
+			mv.addObject("authListProcessed", authListProcessed);
 		}
 		return mv;//跳转至AuthProcess.jsp页面
 	}
@@ -200,6 +208,27 @@ public class UserController {
 	@RequestMapping("backToMainPage")
 	public String backToMainPage(){
 		return "main_page";
+	}
+	
+	@RequestMapping("processedAuthListSearch")
+	@ResponseBody
+	public String ajax_processedAuthListSearch(HttpServletRequest request){
+		
+		String applyUserNickName = request.getParameter("applyUserNickName");
+		String applyDateTimeStart = request.getParameter("applyDateTimeStart");
+		String applyDateTimeEnd = request.getParameter("applyDateTimeEnd");
+		String processDateTimeStart = request.getParameter("processDateTimeStart");
+		String processDateTimeEnd = request.getParameter("processDateTimeEnd");
+		String processResult = request.getParameter("processResult");
+		
+		List<AuthorizationList> al = um.searchProcessedAuthListByMultiParam(applyUserNickName , applyDateTimeStart , applyDateTimeEnd ,
+																														processDateTimeStart , processDateTimeEnd , processResult);
+		JsonConfig config = new JsonConfig();
+		config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		String authListJson = JSONArray.fromObject(al , config).toString();		
+		
+		return authListJson;
+		
 	}
 	
 }

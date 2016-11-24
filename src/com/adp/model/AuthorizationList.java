@@ -30,7 +30,7 @@ public class AuthorizationList {
 	@JoinColumn(name="roleID")
     private Role role;
 	
-	private String authStatus;
+	private String authStatus; // 1--待审核; 2--申请通过; 3--申请被拒
 	private String applyDateTime;
 	private String processDateTime;
 	

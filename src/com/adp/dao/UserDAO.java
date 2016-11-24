@@ -21,6 +21,10 @@ public interface UserDAO {
 	public void updateAuthorizationList(int authListID, User giveAuthUser, String authStatus, String processDateTime);
 	public List<AuthorizationList> getAuthListByApplyAuthUser(User applyAuthUser);
 	public List<AuthorizationList> getAllAuthList();
+	public List<AuthorizationList> getProcessingAuthList();
+	public List<AuthorizationList> getProcessedAuthList();
 	public VideoCategory getVideoCategoryByVideoCategoryName(String videoCategoryName);
 	public void insertVideo(Video video);
+	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName , String applyDateTimeStart , 
+			String applyDateTimeEnd ,String processDateTimeStart ,String  processDateTimeEnd ,String processResult);
 }

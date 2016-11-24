@@ -75,7 +75,9 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public String existUser(String userName) {
 		String jpql = "select u from User u where u.userName =:userName";
-		List<User> resultList = em.createQuery(jpql).setParameter("userName", userName).getResultList();
+		List<User> resultList = em.createQuery(jpql)
+													.setParameter("userName", userName)
+													.getResultList();
 		if( resultList.isEmpty() ){
 			return "available";
 		}else{
@@ -132,6 +134,25 @@ public class UserDAOImpl implements UserDAO{
 		
 		return authList;
 	}
+	
+	@Override
+	public List<AuthorizationList> getProcessingAuthList() {
+		String jpql = "select al from AuthorizationList al where al.authStatus =:authStatus";
+		List<AuthorizationList> authList = em.createQuery(jpql)
+																	.setParameter("authStatus", "1")
+																	.getResultList();
+		return authList;
+	}
+	@Override
+	public List<AuthorizationList> getProcessedAuthList() {
+		String jpql = "select al from AuthorizationList al where al.authStatus =:authStatusAgree or al.authStatus =:authStatusDeny";
+		List<AuthorizationList> authList = em.createQuery(jpql)
+																.setParameter("authStatusAgree", "2")
+																.setParameter("authStatusDeny", "3")
+																.getResultList();
+		return authList;
+	}
+	
 	@Override
 	public VideoCategory getVideoCategoryByVideoCategoryName(String videoCategoryName) {
 		String jpql = "select vc from VideoCategory vc where vc.videoCategoryName =:videoCategoryName";
@@ -145,6 +166,33 @@ public class UserDAOImpl implements UserDAO{
 		em.persist(video);
 		return ;
 	}
+	@Override
+	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName,
+			String applyDateTimeStart, String applyDateTimeEnd, String processDateTimeStart, String processDateTimeEnd,
+			String processResult) {
+
+//		String jpql = "select al from AuthorizationListList al where al.applyAuthUser.userName =:applyUserNickName"
+//				+ "and al.applyDateTime >: applyDateTimeStart and al.applyDateTime <: applyDateTimeEnd "
+//				+ "and al.processDateTime >: processDateTimeStart and al.processDateTimeEnd =: processDateTimeEnd "
+//				+ "and al.authStatus =: processResult";
+//		List<AuthorizationList> al = em.createQuery(jpql).setParameter("applyUserNickName", applyUserNickName)
+//																					.setParameter("applyDateTimeStart", applyDateTimeStart)
+//																					.setParameter("applyDateTimeEnd", applyDateTimeEnd)
+//																					.setParameter("processDateTimeStart", processDateTimeStart)
+//																					.setParameter("processDateTimeEnd", processDateTimeEnd)
+//																					.setParameter("processResult", processResult)
+//																					.getResultList();
+		
+		String jpql = "select al from AuthorizationList al where "
+				+ "al.applyDateTime >:applyDateTimeStart and al.applyDateTime <:applyDateTimeEnd ";
+		List<AuthorizationList> al = em.createQuery(jpql).setParameter("applyDateTimeStart", applyDateTimeStart)
+																					.setParameter("applyDateTimeEnd", applyDateTimeEnd)
+																					.getResultList();
+		
+		
+		return al;
+	}
+	
 	
 
 	

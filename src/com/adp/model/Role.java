@@ -18,7 +18,7 @@ public class Role {
 	
 	@Id//声明此列为主�?
 	@GeneratedValue(strategy = GenerationType.AUTO)//根据不同数据库自动�?�择合�?�的id生成方案，这里使用mysql,为�?�增�?
-	private Integer roleID;
+	private Integer roleID;//1-普通用户 2-专业用户 3-管理员
 	private String roleName;
 	
 	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
