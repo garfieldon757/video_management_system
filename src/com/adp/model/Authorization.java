@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,6 +25,32 @@ public class Authorization {
 	
 	@OneToMany(mappedBy = "authorization", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	private List<AuthorizationRoleRelation> authRoleRelationList= new ArrayList<AuthorizationRoleRelation>();
+	
+	public List<AuthorizationRoleRelation> getAuthRoleRelationList() {
+		return authRoleRelationList;
+	}
+	public void setAuthRoleRelationList(List<AuthorizationRoleRelation> authRoleRelationList) {
+		this.authRoleRelationList = authRoleRelationList;
+	}
+	public Resource getResource() {
+		return resource;
+	}
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
+	public Operation getOperation() {
+		return operation;
+	}
+	public void setOperation(Operation operation) {
+		this.operation = operation;
+	}
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="resourceID")
+	private Resource resource;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="operationID")
+	private Operation operation;
 	
 	public Integer getAuthID() {
 		return authID;

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.adp.model.Algorithm;
+import com.adp.model.AuthorizationRoleRelation;
 import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.service.AlgorithmManager;
@@ -42,12 +44,23 @@ public class AlgorithmController {
 	
 	/**********************************视频场景分割页面（Trial+Pro）********************************/
 	@RequestMapping(value="loadImageProcess4Trial_frameSegmentation")
-	public ModelAndView loadImageProcess4Trial_keyFrameSegmentation(@RequestParam("videoID") int videoID){
+	public ModelAndView loadImageProcess4Trial_keyFrameSegmentation(HttpServletRequest request , @RequestParam("videoID") int videoID){
 		ModelAndView mv = new ModelAndView("ImageProcess4Trial_frameSegmentation");
 		Video video = vm.getVideoByVideoID(videoID);
+		/****做一个权限的小测试*****************/
+		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
+		for(int i = 0 ; i < authRoleRelationList.size(); i++){
+			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
+			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
+			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
+			
+			mv.addObject( resourceURI , operationValue );
+		}
+		
 		if(video != null){
 			mv.addObject("video", video);
 		}
+		/**************************************/
 		return mv;
 	}
 	

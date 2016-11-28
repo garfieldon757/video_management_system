@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
+import com.adp.model.AuthorizationRoleRelation;
 import com.adp.model.Role;
 import com.adp.model.User;
 import com.adp.model.Video;
@@ -191,6 +192,14 @@ public class UserDAOImpl implements UserDAO{
 		
 		
 		return al;
+	}
+	@Override
+	public List<AuthorizationRoleRelation> getAuthRoleRelationListByRole(Role role) {
+		
+		String jpql = "select arr from AuthorizationRoleRelation arr where arr.role =:role";
+		List<AuthorizationRoleRelation> authRoleRelationList = em.createQuery(jpql).setParameter("role", role).getResultList();
+		
+		return authRoleRelationList;
 	}
 	
 	

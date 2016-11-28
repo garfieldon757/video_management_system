@@ -60,7 +60,22 @@
 			</props>
 		</property>
 	</bean>
+	
+ 
 
+<!-- 指定了Hibernate的映射文件和配置信息 -->    
+    <bean id="sessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">    
+        <property name="dataSource" ref="ds" />     
+        <property name="hibernateProperties">    
+            <props>    
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>    
+                <prop key="show_sql">true</prop>    
+                <prop key="hibernate.jdbc.batch_size">20</prop>    
+                <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</prop>  
+            </props>    
+        </property>    
+        <property name="packagesToScan" value="*" />            
+    </bean>
 
 	<!-- Jpa 事务配置 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

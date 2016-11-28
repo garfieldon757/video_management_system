@@ -3,6 +3,7 @@ package com.adp.dao;
 import java.util.List;
 
 import com.adp.model.AuthorizationList;
+import com.adp.model.AuthorizationRoleRelation;
 import com.adp.model.Role;
 import com.adp.model.User;
 import com.adp.model.Video;
@@ -27,4 +28,5 @@ public interface UserDAO {
 	public void insertVideo(Video video);
 	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName , String applyDateTimeStart , 
 			String applyDateTimeEnd ,String processDateTimeStart ,String  processDateTimeEnd ,String processResult);
+	public List<AuthorizationRoleRelation> getAuthRoleRelationListByRole(Role role);
 }

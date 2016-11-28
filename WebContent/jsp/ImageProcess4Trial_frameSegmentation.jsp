@@ -19,7 +19,6 @@
 </head>
 <body class="ng-scope">
 
-
 		<div class="ng-scope">
 			<div class="navbar navbar-static-top ng-scope">
 			    <div class="container">
@@ -28,19 +27,29 @@
 			        </div>
 			        <ul class="nav navbar-nav pull-right ng-scope">
 			            <li  class="ng-scope" style="">
-				            <a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+			            	<c:if test="${ videoLibMainPageLink == 1 }">
+				            	<a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+			            	</c:if>
 				        </li>
 				        <li id="dropdown_index" class="dropdown">
-			                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+					        <c:if test="${ personalProfileDropDownList == 1 }">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+			            	</c:if>
 			                <ul class="dropdown-menu" role="menu" >
 			                    <li>
-			                        <a href="edit_personalProfile_load">个人信息编辑</a>
+				                    <c:if test="${ personalProfileEditLink == 1 }">
+				                        <a href="edit_personalProfile_load">个人信息编辑</a>
+			                        </c:if>
 			                    </li>
 			                    <li>
-			                        <a href="authSettings_load">个人权限申请</a>
+				                    <c:if test="${ authSettingsLink == 1 }">
+				                        <a href="authSettings_load">个人权限申请</a>
+			                        </c:if>
 			                    </li>
 			                    <li>
-			                        <a href="authProcess_load">角色申请处理</a>
+				                    <c:if test="${ authProcessLink == 1 }">
+				                        <a href="authProcess_load">角色申请处理</a>
+			                        </c:if>
 			                    </li>
 			                </ul>
 			            </li>
@@ -66,22 +75,26 @@
 		<div class="row">
 		    <div class="col-xs-3 ng-scope" >
 		        <div class="ng-scope">
-		            <div class="page-header">
-		                <h2>图像分析步骤</h2>
-		            </div>
-		            <hr style="margin-top: 0;">
-		            <ul class="nav nav-stacked side-nav">
-		                <li  class="active"><a href="">第一步：视频场景分割</a></li>
-		                <li >
-		                    <a href="">第二步：场景关键帧提取</a>
-		                </li>
-		                <li >
-		                    <a href="">第三步：图像对象检测</a>
-		                </li>
-		                <li >
-		                    <a href="">第四步：图像语义分析</a>
-		                </li>
-		            </ul>
+		        
+		        	<c:if test="${ imageAnalyseStepsLink == 1 }">
+				            <div class="page-header">
+				                <h2>图像分析步骤</h2>
+				            </div>
+				            <hr style="margin-top: 0;">
+				            <ul class="nav nav-stacked side-nav">
+				                <li  class="active"><a href="">第一步：视频场景分割</a></li>
+				                <li >
+				                    <a href="">第二步：场景关键帧提取</a>
+				                </li>
+				                <li >
+				                    <a href="">第三步：图像对象检测</a>
+				                </li>
+				                <li >
+				                    <a href="">第四步：图像语义分析</a>
+				                </li>
+				            </ul>
+			            </c:if>
+			            
 		        </div>
 		    </div>
 		    <div class="col-xs-9 col-xs-9-remove">
@@ -140,7 +153,9 @@
 		            </div>
 		           
 		            <div class="text-center">
-		            	<button id="execute_btn" type="button" class="btn btn-danger btn-lg">运行算法</button>
+			            <c:if test="${ runAlgorithmBtn == 1 }">
+			            	<button id="execute_btn" type="button" class="btn btn-danger btn-lg">运行算法</button>
+		            	</c:if>
 		            </div>
 		            
 		            <br/>
