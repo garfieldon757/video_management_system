@@ -184,12 +184,14 @@ public class UserDAOImpl implements UserDAO{
 //																					.setParameter("processResult", processResult)
 //																					.getResultList();
 		
-		String jpql = "select al from AuthorizationList al where "
-				+ "al.applyDateTime >:applyDateTimeStart and al.applyDateTime <:applyDateTimeEnd ";
-		List<AuthorizationList> al = em.createQuery(jpql).setParameter("applyDateTimeStart", applyDateTimeStart)
-																					.setParameter("applyDateTimeEnd", applyDateTimeEnd)
-																					.getResultList();
+//		String jpql = "select al from AuthorizationList al where "
+//				+ "al.applyDateTime >:applyDateTimeStart and al.applyDateTime <:applyDateTimeEnd ";
+//		List<AuthorizationList> al = em.createQuery(jpql).setParameter("applyDateTimeStart", applyDateTimeStart)
+//																					.setParameter("applyDateTimeEnd", applyDateTimeEnd)
+//																					.getResultList();
 		
+		String jpql = "select al from AuthorizationList al where al.authListID =:authListID";
+		List<AuthorizationList> al = em.createQuery(jpql).setParameter("authListID", 67531).getResultList();
 		
 		return al;
 	}

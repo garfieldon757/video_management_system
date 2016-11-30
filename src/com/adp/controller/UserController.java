@@ -39,6 +39,12 @@ public class UserController {
 	@Autowired(required=true)
 	VideoManager vm;
 	
+	@RequestMapping(value="controllerFunctionTest")
+	public String controllerFunctionTest(){
+		System.out.println("This is controllerFunctionTest in UserController!!!!!!!!!!!!!!!!!!!");
+		return "fuck the shit";
+	}
+	
 	@RequestMapping(value="login_page")
 	public String login_page(){
 		
