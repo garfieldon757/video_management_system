@@ -12,36 +12,35 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-@Component
 @Aspect
 public class ExecutionTimeLoggingAspectJ {
 	
-//	@Pointcut(" execution( com.adp.aspect.MyBean.sayHello(..)  ) ") //* com.adp.controller.UserController.controllerFunctionTest(..)    com.adp.aspect.MyBean.sayHello(..)
-//	protected void controllerFunctionTest(){
+	@Pointcut("execution(public void com.adp.controller.UserController.controllerFunctionTest(..) )") //public void com.adp.aspect.MyBean.sayHello(..)
+	protected void controllerFunctionTest(){
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	}
+	
+	@Before(  "controllerFunctionTest()" )
+	public void enableFilters(JoinPoint joinPoint){
+		System.out.println("This is aspect ,which runs before UserControllerFunctionTest() !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	}
+	
+//	@Around(" execution(public * com.adp.controller.UserController.controllerFunctionTest(..) ) ")  //execution(public * *(..))
+//	public Object profile(ProceedingJoinPoint pjp) throws Throwable {
+//		
+//		long startTime = System.nanoTime();
+//		String className = pjp.getTarget().getClass().getCanonicalName();
+//		String methodName = pjp.getSignature().getName();
+//		
+//		Object output = pjp.proceed();
+//		long elapsedTime = System.nanoTime() - startTime;
+//		System.out.println("Execution of " + className + "#" + methodName + "ended in " +
+//									new BigDecimal(elapsedTime).divide(new BigDecimal(1000000)) + 
+//									"millionsecounds" ) ;
+//		
+//		
+//		return output;
 //		
 //	}
-//	
-//	@Before(  "controllerFunctionTest()" )
-//	public void enableFilters(JoinPoint joinPoint){
-//		System.out.println("This is aspect ,which runs after UserControllerFunctionTest() !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//	}
-	
-	@Around(" execution(public void com.adp.aspect.MyBean.sayHello(..) ) ")  //execution(public * *(..))
-	public Object profile(ProceedingJoinPoint pjp) throws Throwable {
-		
-		long startTime = System.nanoTime();
-		String className = pjp.getTarget().getClass().getCanonicalName();
-		String methodName = pjp.getSignature().getName();
-		
-		Object output = pjp.proceed();
-		long elapsedTime = System.nanoTime() - startTime;
-		System.out.println("Execution of " + className + "#" + methodName + "ended in " +
-									new BigDecimal(elapsedTime).divide(new BigDecimal(1000000)) + 
-									"millionsecounds" ) ;
-		
-		
-		return output;
-		
-	}
 	
 }

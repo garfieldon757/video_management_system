@@ -40,9 +40,9 @@ public class UserController {
 	VideoManager vm;
 	
 	@RequestMapping(value="controllerFunctionTest")
-	public String controllerFunctionTest(){
+	public void controllerFunctionTest(){
 		System.out.println("This is controllerFunctionTest in UserController!!!!!!!!!!!!!!!!!!!");
-		return "fuck the shit";
+		return ;
 	}
 	
 	@RequestMapping(value="login_page")
