@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
@@ -9,10 +11,10 @@
     <link rel="shortcut icon" href="/public/images/favicons/favicon.ico">
 
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <!-- build:css(.) /public/css/app.min.css -->
+
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/app.css" rel="stylesheet" type="text/css">
-    <!-- endbuild -->
+
 </head>
 <body >
 
@@ -103,10 +105,16 @@
 
                                                         <ul class="list-group text-center">
                                                             <li class="list-group-item ">
-                                                                用户总数：<Strong>xx</Strong>个
+                                                                用户总数：<Strong>${userMonitorData["userTotalNum"]}</Strong>个
                                                             </li>
-                                                            <li class="list-group-item">
-                                                                ??
+                                                                <li class="list-group-item ">
+                                                                普通用户总数：<Strong>${userMonitorData["trialUserTotalNum"]}</Strong>个
+                                                            </li>
+                                                            <li class="list-group-item ">
+                                                                专业用户总数：<Strong>${userMonitorData["proUserTotalNum"]}</Strong>个
+                                                            </li>
+                                                                <li class="list-group-item ">
+                                                                管理员总数：<Strong>${userMonitorData["adminTotalNum"]}</Strong>个
                                                             </li>
                                                         </ul>
 
@@ -135,22 +143,22 @@
                                                         <ul class="list-group text-center">
                                                             <li class="list-group-item">
                                                                 <p>
-                                                                    权限申请总数：<Strong>xx</Strong>个
+                                                                    权限申请总数：<Strong>${authorizationListMonitorData["authListTotalNum"]}</Strong>个
                                                                 </p>
                                                             </li>
                                                             <li class="list-group-item">
                                                                 <p>
-                                                                    待审批申请数：<Strong>xx</Strong><Strong>xx</Strong>个
+                                                                    待审批申请数：<Strong>${authorizationListMonitorData["authList1TotalNum"]}</Strong>个
                                                                 </p>
                                                             </li>
                                                             <li class="list-group-item">
                                                                 <p>
-                                                                    审批通过数：<Strong>xx</Strong><Strong>xx</Strong>个
+                                                                    审批通过数：<Strong>${authorizationListMonitorData["authList2TotalNum"]}</Strong>个
                                                                 </p>
                                                             </li>
                                                             <li class="list-group-item">
                                                                 <p>
-                                                                    审批拒绝总数：<Strong>xx</Strong><Strong>xx</Strong>个
+                                                                    审批拒绝总数：<Strong>${authorizationListMonitorData["authList3TotalNum"]}</Strong>个
                                                                 </p>
                                                             </li>
                                                         </ul>
@@ -180,7 +188,7 @@
                                                     <div class="col-lg-5">
                                                         <ul class="list-group text-center">
                                                             <li class="list-group-item">
-                                                                视频总数：<Strong>xx</Strong>个
+                                                                视频总数：<Strong>${videoMonitorData["videoTotalNum"]}</Strong>个
                                                             </li>
                                                             <li class="list-group-item">
                                                                 ??
@@ -211,7 +219,7 @@
                                                     <div class="col-lg-5">
                                                         <ul class="list-group text-center">
                                                             <li class="list-group-item">
-                                                                算法库总数：<Strong>xx</Strong>个
+                                                                算法库总数：<Strong>${algorithmMonitorData["algorithmTotalNum"]}</Strong>个
                                                             </li>
                                                             <li class="list-group-item">
                                                                 ??

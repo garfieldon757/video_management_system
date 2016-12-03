@@ -1,5 +1,6 @@
 package com.adp.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,5 +30,9 @@ public interface UserManager {
 	public List<AuthorizationList> searchProcessedAuthListByApplyAuthUserID(int applyAuthUserID);
 	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName , String applyDateTimeStart , 
 									String applyDateTimeEnd ,String processDateTimeStart ,String  processDateTimeEnd ,String processResult);
+	public HashMap<String, Integer> getUserMonitorData();
+	public HashMap<String , Integer> getAuthListMonitorData();
+	public HashMap<String, Integer> getVideoMonitorData();
+	public HashMap<String, Integer> getAlgorithmMonitorData();
 	
 }

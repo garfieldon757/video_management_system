@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +58,7 @@ public class UserManagerImpl implements UserManager{
 		user.setUserPassword(userPassword);
 		user.setEmail(email);
 		
-		Role role = userDAO.findRole(1);//设置用户注册默认权限为“普通用户”,roleID为1			
+		Role role = userDAO.getRole(1);//设置用户注册默认权限为“普通用户”,roleID为1			
 		role.getUserList().add(user);
 		user.setRole(role);
 		userDAO.addUser(user);//存储这条user数据到数据库
@@ -96,7 +97,7 @@ public class UserManagerImpl implements UserManager{
 		String userPassword = request.getParameter("userPassword");
 		String email = request.getParameter("email");
 		int roleID = Integer.parseInt(request.getParameter("roleID")) ;
-		Role role = userDAO.findRole(roleID);//role_value  这两行从前端即可获取role对象
+		Role role = userDAO.getRole(roleID);//role_value  这两行从前端即可获取role对象
 		
 		user.setUserID(userID);
 		user.setSex(sex);
@@ -122,7 +123,7 @@ public class UserManagerImpl implements UserManager{
 //		user = userDAO.updateUserRole(user);
 //		user = updateSession (request, user) ;
 		
-		Role role = userDAO.findRole(2);
+		Role role = userDAO.getRole(2);
 		
 		Timestamp now = new Timestamp(System.currentTimeMillis()); 
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -166,7 +167,7 @@ public class UserManagerImpl implements UserManager{
 		String processDateTime = df.format(now);
 		
 		User applyAuthUser = userDAO.getUserByID(applyAuthUserID);
-		Role rolePro = userDAO.findRole(2);
+		Role rolePro = userDAO.getRole(2);
 		applyAuthUser.setRole(rolePro);
 		
 		userDAO.updateAuthorizationList(authListID, giveAuthUser, "2", processDateTime);//修改authStatus参数为2，表示处理申请为“同意”状态
@@ -184,7 +185,7 @@ public class UserManagerImpl implements UserManager{
 		String processDateTime = df.format(now);
 		
 //		User applyAuthUser = userDAO.getUserByID(applyAuthUserID);
-//		Role rolePro = userDAO.findRole(2);
+//		Role rolePro = userDAO.getRole(2);
 //		applyAuthUser.setRole(rolePro);
 		
 		userDAO.updateAuthorizationList(authListID, giveAuthUser, "3", processDateTime);//修改authStatus参数为2，表示处理申请为“同意”状态
@@ -216,13 +217,74 @@ public class UserManagerImpl implements UserManager{
 
 	@Override
 	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName,
-			String applyDateTimeStart, String applyDateTimeEnd, String processDateTimeStart, String processDateTimeEnd,
-			String processResult) {
+																														String applyDateTimeStart, 
+																														String applyDateTimeEnd, 
+																														String processDateTimeStart, 
+																														String processDateTimeEnd,
+																														String processResult) 
+	{
 		List<AuthorizationList> al = userDAO.searchProcessedAuthListByMultiParam(applyUserNickName , applyDateTimeStart , applyDateTimeEnd ,
-				processDateTimeStart , processDateTimeEnd , processResult);
+																																processDateTimeStart , processDateTimeEnd , processResult);
 		
 		return al;
 	}
+
+	@Override
+	public HashMap<String, Integer> getUserMonitorData() {
+		
+		HashMap<String , Integer> userMonitorData = new HashMap<String , Integer>();
+		int userTotalNum = userDAO.getUserTotalNum();
+		Role role_trial = userDAO.getRole(1);
+		int trialUserTotalNum = userDAO.getSpecificUserTotalNum(role_trial);
+		Role role_pro = userDAO.getRole(2);
+		int proUserTotalNum = userDAO.getSpecificUserTotalNum(role_pro); 
+		Role role_admin = userDAO.getRole(3);
+		int adminTotalNum = userDAO.getSpecificUserTotalNum(role_admin);
+		userMonitorData.put("userTotalNum", userTotalNum);
+		userMonitorData.put("trialUserTotalNum", trialUserTotalNum);
+		userMonitorData.put("proUserTotalNum", proUserTotalNum);
+		userMonitorData.put("adminTotalNum", adminTotalNum);
+		
+		return userMonitorData;
+	}
+	
+	@Override
+	public HashMap<String, Integer> getAuthListMonitorData() {
+		
+		HashMap<String , Integer> authMonitorData = new HashMap<String , Integer>();
+		int authListTotalNum = userDAO.getAuthListTotalNum();
+		int authList1TotalNum = userDAO.getSpecificAuthListTotalNum("1");//待审核
+		int authList2TotalNum = userDAO.getSpecificAuthListTotalNum("2");//审核通过
+		int authList3TotalNum = userDAO.getSpecificAuthListTotalNum("3");//审核被拒
+		authMonitorData.put("authListTotalNum", authListTotalNum);
+		authMonitorData.put("authList1TotalNum" , authList1TotalNum );
+		authMonitorData.put("authList2TotalNum" , authList2TotalNum );
+		authMonitorData.put("authList3TotalNum" , authList3TotalNum );
+		
+		return authMonitorData;
+	}
+
+	@Override
+	public HashMap<String, Integer> getVideoMonitorData() {
+		
+		HashMap<String , Integer>videoMonitorData = new HashMap<String , Integer>();
+		int videoTotalNum = userDAO.getVideoTotalNum();
+		videoMonitorData.put("videoTotalNum", videoTotalNum);
+		
+		return videoMonitorData;
+	}
+
+	@Override
+	public HashMap<String, Integer> getAlgorithmMonitorData() {
+
+		HashMap<String , Integer> algorithmMonitorData = new HashMap<String , Integer>();
+		int algorithmTotalNum = userDAO.getAlgorithmTotalNum();
+		algorithmMonitorData.put("algorithmTotalNum", algorithmTotalNum);
+		
+		return algorithmMonitorData;
+	}
+
+	
 
 	
 

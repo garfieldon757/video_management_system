@@ -13,7 +13,7 @@ public interface UserDAO {
 	public void addUser(User user);
 	public User getUserByEmail(String email);
 	public User getUserByID(int userID);
-	public Role findRole(int roleID);
+	public Role getRole(int roleID);
 	public AuthorizationList findAuthList(int authListID);
 	public User updateUser(User user);
 	public String existUser(String userName);
@@ -29,4 +29,10 @@ public interface UserDAO {
 	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName , String applyDateTimeStart , 
 			String applyDateTimeEnd ,String processDateTimeStart ,String  processDateTimeEnd ,String processResult);
 	public List<AuthorizationRoleRelation> getAuthRoleRelationListByRole(Role role);
+	public int getUserTotalNum();
+	public int getSpecificUserTotalNum(Role role);
+	public int getAuthListTotalNum();
+	public int getSpecificAuthListTotalNum(String authStatus);
+	public int getVideoTotalNum();
+	public int getAlgorithmTotalNum();
 }

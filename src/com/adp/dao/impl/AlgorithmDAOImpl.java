@@ -32,5 +32,12 @@ public class AlgorithmDAOImpl implements AlgorithmDAO{
 		List<Algorithm> algorithms = em.createQuery(jpql).getResultList();
 		return algorithms;
 	}
+
+	@Override
+	public List<Algorithm> getAllAlgorithm() {
+		String jpql = "select a from Algorithm a";
+		List<Algorithm> algorithms = em.createQuery(jpql).getResultList();
+		return algorithms;
+	}
 	
 }

@@ -51,7 +51,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public Role findRole(int roleID) {
+	public Role getRole(int roleID) {
 		// TODO Auto-generated method stub
 		String jpql = "select r from Role r where r.roleID=:roleID";
 		List<Role> resultList = em.createQuery(jpql).setParameter("roleID", roleID).getResultList();
@@ -88,7 +88,7 @@ public class UserDAOImpl implements UserDAO{
 	
 	@Override
 	public User updateUserRole(User user) {
-		Role role = findRole(2);
+		Role role = getRole(2);
 		user.setRole(role);
 		em.merge(user);//更新user的role信息
 		return user;
@@ -167,31 +167,23 @@ public class UserDAOImpl implements UserDAO{
 		em.persist(video);
 		return ;
 	}
+	
 	@Override
 	public List<AuthorizationList> searchProcessedAuthListByMultiParam(String applyUserNickName,
 			String applyDateTimeStart, String applyDateTimeEnd, String processDateTimeStart, String processDateTimeEnd,
 			String processResult) {
-
-//		String jpql = "select al from AuthorizationListList al where al.applyAuthUser.userName =:applyUserNickName"
-//				+ "and al.applyDateTime >: applyDateTimeStart and al.applyDateTime <: applyDateTimeEnd "
-//				+ "and al.processDateTime >: processDateTimeStart and al.processDateTimeEnd =: processDateTimeEnd "
-//				+ "and al.authStatus =: processResult";
-//		List<AuthorizationList> al = em.createQuery(jpql).setParameter("applyUserNickName", applyUserNickName)
-//																					.setParameter("applyDateTimeStart", applyDateTimeStart)
-//																					.setParameter("applyDateTimeEnd", applyDateTimeEnd)
-//																					.setParameter("processDateTimeStart", processDateTimeStart)
-//																					.setParameter("processDateTimeEnd", processDateTimeEnd)
-//																					.setParameter("processResult", processResult)
-//																					.getResultList();
 		
-//		String jpql = "select al from AuthorizationList al where "
-//				+ "al.applyDateTime >:applyDateTimeStart and al.applyDateTime <:applyDateTimeEnd ";
-//		List<AuthorizationList> al = em.createQuery(jpql).setParameter("applyDateTimeStart", applyDateTimeStart)
-//																					.setParameter("applyDateTimeEnd", applyDateTimeEnd)
-//																					.getResultList();
-		
-		String jpql = "select al from AuthorizationList al where al.authListID =:authListID";
-		List<AuthorizationList> al = em.createQuery(jpql).setParameter("authListID", 67531).getResultList();
+		String jpql = "select al from AuthorizationList al where al.applyAuthUser.userName =:applyUserNickName"
+				+ " and al.applyDateTime >:applyDateTimeStart and al.applyDateTime <:applyDateTimeEnd "
+				+ " and al.processDateTime >:processDateTimeStart and al.processDateTime <:processDateTimeEnd "
+				+ " and al.authStatus =:processResult";
+		List<AuthorizationList> al = em.createQuery(jpql).setParameter("applyUserNickName", applyUserNickName)
+																					.setParameter("applyDateTimeStart", applyDateTimeStart)
+																					.setParameter("applyDateTimeEnd", applyDateTimeEnd)
+																					.setParameter("processDateTimeStart", processDateTimeStart)
+																					.setParameter("processDateTimeEnd", processDateTimeEnd)
+																					.setParameter("processResult", processResult)
+																					.getResultList();
 		
 		return al;
 	}
@@ -203,6 +195,48 @@ public class UserDAOImpl implements UserDAO{
 		
 		return authRoleRelationList;
 	}
+	@Override
+	public int getUserTotalNum() {
+		String jpql = "select count(u) from User u";
+		int userTotalNum =  Integer.parseInt( em.createQuery(jpql).getResultList().get(0).toString() ) ;
+		return userTotalNum;
+	}
+	@Override
+	public int getSpecificUserTotalNum(Role role) {
+		String jpql = "select count(u) from User u where u.role =:role";
+		int specificUserTotalNum = Integer.parseInt( em.createQuery(jpql).setParameter("role", role).getResultList().get(0).toString() );
+		return specificUserTotalNum;
+	}
+	
+	@Override
+	public int getAuthListTotalNum() {
+		String jpql = "select al from AuthorizationList al";
+		List<AuthorizationList> al = em.createQuery(jpql).getResultList();
+		//int authListTotalNum =  Integer.parseInt( em.createQuery(jpql).getResultList().get(0).toString() ) ;
+		return 1;//authListTotalNum;
+	}
+	
+	@Override
+	public int getSpecificAuthListTotalNum(String authStatus) {
+		String jpql = "select count(al) from AuthorizationList al where al.authStatus =:authStatus";
+		int authListSpecificTotalNum =  Integer.parseInt( em.createQuery(jpql).setParameter("authStatus", authStatus ).getResultList().get(0).toString() ) ;
+		return authListSpecificTotalNum;
+	}
+	
+	@Override
+	public int getVideoTotalNum() {
+		String jpql = "select count(v) from Video v";
+		int videoTotalNum =  Integer.parseInt( em.createQuery(jpql).getResultList().get(0).toString() ) ;
+		return videoTotalNum;
+	}
+	@Override
+	public int getAlgorithmTotalNum() {
+		String jpql = "select count(al) from Algorithm al";
+		int algorithmTotalNum =  Integer.parseInt( em.createQuery(jpql).getResultList().get(0).toString() ) ;
+		return algorithmTotalNum;
+	}
+	
+	
 	
 	
 

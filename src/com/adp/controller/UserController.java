@@ -2,6 +2,7 @@ package com.adp.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,9 @@ public class UserController {
 	
 	@Autowired(required=true)
 	VideoManager vm;
+	
+	@Autowired(required=true)
+	AlgorithmManager am;
 	
 	@RequestMapping(value="controllerFunctionTest")
 	public void controllerFunctionTest(){
@@ -227,14 +231,31 @@ public class UserController {
 		String processDateTimeEnd = request.getParameter("processDateTimeEnd");
 		String processResult = request.getParameter("processResult");
 		
-		List<AuthorizationList> al = um.searchProcessedAuthListByMultiParam(applyUserNickName , applyDateTimeStart , applyDateTimeEnd ,
-																														processDateTimeStart , processDateTimeEnd , processResult);
-		JsonConfig config = new JsonConfig();
-		config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-		String authListJson = JSONArray.fromObject(al , config).toString();		
+//		List<AuthorizationList> al = um.searchProcessedAuthListByMultiParam(applyUserNickName , applyDateTimeStart , applyDateTimeEnd ,
+//																														processDateTimeStart , processDateTimeEnd , processResult);
+		
+		List<Algorithm> a = am.getAllAlgorithm();
+		
+//		JsonConfig config = new JsonConfig();
+//		config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		String authListJson = JSONArray.fromObject(a).toString();		
 		
 		return authListJson;
 		
+	}
+	
+	@RequestMapping("dashboard_load")
+	public ModelAndView dashboard_load(){
+		ModelAndView mv = new ModelAndView("Monitor");
+		HashMap<String, Integer> userMonitorData = um.getUserMonitorData();//用户信息查询
+		HashMap<String , Integer> authorizationListMonitorData = um.getAuthListMonitorData();//提权信息查询
+		HashMap<String , Integer> videoMonitorData = um.getVideoMonitorData();//视频库查询
+		HashMap<String , Integer> algorithmMonitorData = um.getAlgorithmMonitorData();//算法库查询
+		mv.addObject("userMonitorData", userMonitorData);
+		mv.addObject("authorizationListMonitorData", authorizationListMonitorData);
+		mv.addObject("videoMonitorData", videoMonitorData);
+		mv.addObject("algorithmMonitorData", algorithmMonitorData);
+		return mv;
 	}
 	
 }

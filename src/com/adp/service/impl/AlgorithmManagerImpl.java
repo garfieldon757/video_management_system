@@ -49,5 +49,11 @@ public class AlgorithmManagerImpl implements AlgorithmManager{
 		System.out.println("end");
 
 	}
+
+	@Override
+	public List<Algorithm> getAllAlgorithm() {
+		List<Algorithm> algorithms = algorithmDAO.getAllAlgorithm();
+		return algorithms;
+	}
 	
 }

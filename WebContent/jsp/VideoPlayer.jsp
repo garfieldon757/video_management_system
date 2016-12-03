@@ -154,6 +154,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
+
 	$(document).ready(function(){
 	
 	    $('#downloadBtn').click(function(e) {

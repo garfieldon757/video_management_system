@@ -9,4 +9,5 @@ public interface AlgorithmDAO {
 	
 	public AlgorithmCategory getAlgorithmCategoryByAlgorithmCategoryID(int AlgorithmCategoryID); 
 	public List<Algorithm> getAlgorithmsByCategory(AlgorithmCategory algorithmCategory);
+	public List<Algorithm> getAllAlgorithm();
 }
