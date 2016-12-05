@@ -28,6 +28,12 @@ public class UserManagerImpl implements UserManager{
 	private UserDAO userDAO;
 	
 	@Override
+	public void aopTest() {
+		System.out.println("com.adp.service.ipml  userManagerIpml aopTest.");
+		
+	}
+	
+	@Override
 	public String login(HttpServletRequest request) {
 		
 		String email = request.getParameter("email");
@@ -58,7 +64,7 @@ public class UserManagerImpl implements UserManager{
 		user.setUserPassword(userPassword);
 		user.setEmail(email);
 		
-		Role role = userDAO.getRole(1);//设置用户注册默认权限为“普通用户”,roleID为1			
+		Role role = userDAO.getRole(1);//设置用户注册默认权限为“普通用户”,roleID为1	
 		role.getUserList().add(user);
 		user.setRole(role);
 		userDAO.addUser(user);//存储这条user数据到数据库
@@ -283,6 +289,8 @@ public class UserManagerImpl implements UserManager{
 		
 		return algorithmMonitorData;
 	}
+
+
 
 	
 

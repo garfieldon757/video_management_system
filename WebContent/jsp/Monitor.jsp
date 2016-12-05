@@ -24,40 +24,53 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#/"></a>
                 </div>
-                <ul class="nav navbar-nav pull-right ">
-                    <li class="ng-scope ng-hide"><a href="/app/login">登陆</a></li>
-                    <li class="ng-scope"><a style="padding-left: 0;">登出</a></li>
-                    <li id="dropdown_index" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu" >
-                            <li  >
-                                <a href="monitoring">管理员平台监控</a>
-                            </li>
-                            <li  >
-                                <a href="edit_personalProfile_load">个人信息编辑</a>
-                            </li>
-                            <li class="active">
-                                <a href="authSettings_load">个人权限申请</a>
-                            </li>
-                            <li >
-                                <a href="authProcess_load">角色申请处理</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
+                <ul class="nav navbar-nav pull-right ng-scope">
+		            <li  class="ng-scope" style="">
+		            	<c:if test="${ videoLibMainPageLink == 1 }">
+			            	<a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+		            	</c:if>
+			        </li>
+			        <li id="dropdown_index" class="dropdown">
+				        <c:if test="${ personalProfileDropDownList == 1 }">
+				        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+		            	</c:if>
+		                <ul class="dropdown-menu" role="menu" >
+		                    <li>
+			                    <c:if test="${ personalProfileEditLink == 1 }">
+			                        <a href="edit_personalProfile_load">个人信息编辑</a>
+		                        </c:if>
+		                    </li>
+		                    <li>
+			                    <c:if test="${ authSettingsLink == 1 }">
+			                        <a href="authSettings_load">个人权限申请</a>
+		                        </c:if>
+		                    </li>
+		                    <li>
+			                    <c:if test="${ authProcessLink == 1 }">
+			                        <a href="authProcess_load">角色申请处理</a>
+		                        </c:if>
+		                    </li>
+		                    <li>
+		                    <c:if test="${ monitorLink == 1 }">
+		                        <a href="monitor_load">后台运行监控台</a>
+	                        </c:if>
+	                    </li>
+		                </ul>
+		            </li>
+		        </ul>
             </div>
         </div>
     </div>
 
-    <div  class="ng-scope"><!-- ngIf: currentUser && currentUser.isConsumer -->
-        <div class="horizontal-header ng-scope" ng-if="currentUser &amp;&amp; currentUser.isConsumer">
-            <div class="container">
-                <img class="pic-thumb pull-left" src="/api/users/5807359745f8421c006a0a7b/picture?_=1476867524356">
-                <h4 class="ng-binding">oliver fan</h4>
-            </div>
-        </div><!-- end ngIf: currentUser && currentUser.isConsumer -->
-    </div>
+    <div ng-include="'/public/app/templates/horizontal-header.html'" class="ng-scope"><!-- ngIf: currentUser && currentUser.isConsumer -->
+		<div class="horizontal-header ng-scope" ng-if="currentUser &amp;&amp; currentUser.isConsumer">
+		    <div class="container ">
+		    	<img class="pic-thumb pull-left" src="img/logo.jpg">
+		        <h4 id="userName" class="ng-binding" value="${user.userName}">${user.userName}</h4>
+		        <button type="button" class="btn btn-default pull-right" class="logout" ><a href="logout">退出</a></button>
+		    </div>
+		</div>
+	</div>
 
     <div id="main">
         <div class="container">
@@ -69,14 +82,29 @@
                         </div>
                         <hr style="margin-top: 0;">
                         <ul class="nav nav-stacked side-nav">
-                            <li  class="active"><a href="">管理员平台监控</a></li>
-                            <li >
-                                <a href="">个人信息编辑</a>
-                            </li>
-                            <li >
-                                <a href="">个人权限申请</a>
-                            </li>
-                        </ul>
+    	                
+				                <c:if test="${ personalProfileEditLink == 1 }">
+				                	<li  >
+			                        	<a href="edit_personalProfile_load">个人信息编辑</a>
+			                        </li>
+			                    </c:if>
+					            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 and authSettingsLink == 1 }">
+					                <li >
+					                    <a href="authSettings_load">个人权限申请</a>
+					                </li>
+					            </c:if>
+					            <c:if test="${ user.role.roleID == 3 and authProcessLink == 1 }">
+					                <li >
+					                    <a href="authProcess_load">角色申请处理</a>
+					                </li>
+					            </c:if>
+					            <c:if test="${ monitorLink == 1 }">
+						            <li class="active">
+					                    <a href="monitor_load">后台运行监控台</a>
+					                </li>
+			                    </c:if>
+			                    
+			            </ul>
                     </div>
                 </div>
                 <div class="col-xs-9 col-xs-9-remove">

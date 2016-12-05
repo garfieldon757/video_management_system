@@ -25,27 +25,38 @@
             </div>
             <ul class="nav navbar-nav pull-right ng-scope">
 	            <li  class="ng-scope" style="">
-		            <a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+	            	<c:if test="${ videoLibMainPageLink == 1 }">
+		            	<a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+	            	</c:if>
 		        </li>
 		        <li id="dropdown_index" class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+			        <c:if test="${ personalProfileDropDownList == 1 }">
+			        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+	            	</c:if>
 	                <ul class="dropdown-menu" role="menu" >
-			                <li>
-			                    <a href="edit_personalProfile_load">个人信息编辑</a>
-			                </li>
-			                <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 }">
-			                    <li>
-			                        <a href="authSettings_load">个人权限申请</a>
-			                    </li>
-			                </c:if>
-			                <c:if test="${ user.role.roleID == 3 }">
-			                    <li>
-			                        <a href="authProcess_load">角色申请处理</a>
-			                    </li>
-			                 </c:if>
+	                    <li>
+		                    <c:if test="${ personalProfileEditLink == 1 }">
+		                        <a href="edit_personalProfile_load">个人信息编辑</a>
+	                        </c:if>
+	                    </li>
+	                    <li>
+		                    <c:if test="${ authSettingsLink == 1 }">
+		                        <a href="authSettings_load">个人权限申请</a>
+	                        </c:if>
+	                    </li>
+	                    <li>
+		                    <c:if test="${ authProcessLink == 1 }">
+		                        <a href="authProcess_load">角色申请处理</a>
+	                        </c:if>
+	                    </li>
+	                    <li>
+	                    <c:if test="${ monitorLink == 1 }">
+	                        <a href="monitor_load">后台运行监控台</a>
+	                    </c:if>
+	                </li>
 	                </ul>
 	            </li>
-            </ul>
+	        </ul>
         </div>
     </div>
 </div>
@@ -69,19 +80,28 @@
                 </div>
                 <hr style="margin-top: 0;">
                 <ul class="nav nav-stacked side-nav">
-		                <li  class="active">
-			                <a href="edit_personalProfile_load">个人信息编辑</a>
-			            </li>
-			            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 }">
+		                
+		                <c:if test="${ personalProfileEditLink == 1 }">
+		                	<li  class="active">
+	                        	<a href="edit_personalProfile_load">个人信息编辑</a>
+	                        </li>
+	                    </c:if>
+			            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 and authSettingsLink == 1 }">
 			                <li >
 			                    <a href="authSettings_load">个人权限申请</a>
 			                </li>
 			            </c:if>
-			            <c:if test="${ user.role.roleID == 3 }">
+			            <c:if test="${ user.role.roleID == 3 and authProcessLink == 1 }">
 			                <li >
 			                    <a href="authProcess_load">角色申请处理</a>
 			                </li>
 			            </c:if>
+			            <c:if test="${ monitorLink == 1 }">
+				            <li >
+			                    <a href="monitor_load">后台运行监控台</a>
+			                </li>
+	                    </c:if>
+	                    
 	            </ul>
             </div>
         </div>

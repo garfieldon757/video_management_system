@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +18,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.adp.aspect.Main;
+import com.adp.aspect.MyBean;
 import com.adp.model.Algorithm;
 import com.adp.model.AuthorizationList;
+import com.adp.model.AuthorizationRoleRelation;
+import com.adp.model.Role;
 import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
 import com.adp.service.AlgorithmManager;
 import com.adp.service.UserManager;
 import com.adp.service.VideoManager;
+import com.adp.service.impl.UserManagerImpl;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -46,6 +53,9 @@ public class UserController {
 	@RequestMapping(value="controllerFunctionTest")
 	public void controllerFunctionTest(){
 		System.out.println("This is controllerFunctionTest in UserController!!!!!!!!!!!!!!!!!!!");
+		ApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml" , Main.class);
+		UserManagerImpl umi = context.getBean(UserManagerImpl.class);
+		umi.aopTest();;
 		return ;
 	}
 	
@@ -85,6 +95,18 @@ public class UserController {
 	@RequestMapping("edit_personalProfile_load")
 	public ModelAndView edit_personalProfile_load( HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("personalProfile");
+		
+		/****做一个权限的小测试 start*****************/
+		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
+		for(int i = 0 ; i < authRoleRelationList.size(); i++){
+			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
+			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
+			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
+			
+			mv.addObject( resourceURI , operationValue );
+		}
+		/****做一个权限的小测试 end*****************/
+		
 		User user = um.getSession(request, "user");//session获取当前用户对象
 		if(user != null){
 			mv.addObject(user);
@@ -118,6 +140,18 @@ public class UserController {
 		List<AuthorizationList> authList = um.getAuthListByApplyAuthUser(user);
 		
 		int apply_status = user.getApply_status() ;//0代表未申请，1代表正在申请待审核
+		
+		/****做一个权限的小测试 start*****************/
+		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
+		for(int i = 0 ; i < authRoleRelationList.size(); i++){
+			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
+			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
+			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
+			
+			mv.addObject( resourceURI , operationValue );
+		}
+		/****做一个权限的小测试 end*****************/
+		
 		
 		if(user != null ){
 			mv.addObject(user);
@@ -157,6 +191,18 @@ public class UserController {
 			mv.addObject("authListProcessing", authListProcessing);
 			mv.addObject("authListProcessed", authListProcessed);
 		}
+		
+		/****做一个权限的小测试 start*****************/
+		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
+		for(int i = 0 ; i < authRoleRelationList.size(); i++){
+			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
+			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
+			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
+			
+			mv.addObject( resourceURI , operationValue );
+		}
+		/****做一个权限的小测试 end*****************/
+		
 		return mv;//跳转至AuthProcess.jsp页面
 	}
 	
@@ -221,8 +267,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("processedAuthListSearch")
-	@ResponseBody
-	public String ajax_processedAuthListSearch(HttpServletRequest request){
+	//@ResponseBody
+	public ModelAndView processedAuthListSearch(HttpServletRequest request){		//ajax_
+		ModelAndView mv = new ModelAndView("AuthProcess");
 		
 		String applyUserNickName = request.getParameter("applyUserNickName");
 		String applyDateTimeStart = request.getParameter("applyDateTimeStart");
@@ -231,21 +278,35 @@ public class UserController {
 		String processDateTimeEnd = request.getParameter("processDateTimeEnd");
 		String processResult = request.getParameter("processResult");
 		
-//		List<AuthorizationList> al = um.searchProcessedAuthListByMultiParam(applyUserNickName , applyDateTimeStart , applyDateTimeEnd ,
-//																														processDateTimeStart , processDateTimeEnd , processResult);
+		List<AuthorizationList> al = um.searchProcessedAuthListByMultiParam(applyUserNickName , applyDateTimeStart , applyDateTimeEnd ,
+																														processDateTimeStart , processDateTimeEnd , processResult);
 		
-		List<Algorithm> a = am.getAllAlgorithm();
+		User user = um.getSession(request, "user");//session获取当前用户对象
+		mv.addObject(user);
+		mv.addObject("authListProcessing", null);
+		mv.addObject("authListProcessed", al);
+		//String a = "[{ 'firstName': 'Brett' }]";
+
+//		Role r = new Role();
+//		r.setRoleID(4);
+//		r.setRoleName("fachrs");
 		
+		
+//		List<Algorithm> a = am.getAllAlgorithm();
+//		List<AuthorizationList> al = um.getAllAuthList();
+		
+		
+//		
 //		JsonConfig config = new JsonConfig();
 //		config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-		String authListJson = JSONArray.fromObject(a).toString();		
+//		String authListJson = JSONArray.fromObject(u).toString();		
 		
-		return authListJson;
+		return mv;//authListJson;
 		
 	}
 	
-	@RequestMapping("dashboard_load")
-	public ModelAndView dashboard_load(){
+	@RequestMapping("monitor_load")
+	public ModelAndView dashboard_load(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("Monitor");
 		HashMap<String, Integer> userMonitorData = um.getUserMonitorData();//用户信息查询
 		HashMap<String , Integer> authorizationListMonitorData = um.getAuthListMonitorData();//提权信息查询
@@ -255,6 +316,18 @@ public class UserController {
 		mv.addObject("authorizationListMonitorData", authorizationListMonitorData);
 		mv.addObject("videoMonitorData", videoMonitorData);
 		mv.addObject("algorithmMonitorData", algorithmMonitorData);
+		
+		/****做一个权限的小测试 start*****************/
+		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
+		for(int i = 0 ; i < authRoleRelationList.size(); i++){
+			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
+			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
+			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
+			
+			mv.addObject( resourceURI , operationValue );
+		}
+		/****做一个权限的小测试 end*****************/
+		
 		return mv;
 	}
 	

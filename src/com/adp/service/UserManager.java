@@ -12,6 +12,7 @@ import com.adp.model.User;
 
 public interface UserManager {
 
+	public void aopTest();
 	public String login(HttpServletRequest request);
 	public String signUp(HttpServletRequest request);
 	public User getSession(HttpServletRequest request, String sessionKey);

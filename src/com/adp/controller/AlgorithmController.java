@@ -47,7 +47,8 @@ public class AlgorithmController {
 	public ModelAndView loadImageProcess4Trial_keyFrameSegmentation(HttpServletRequest request , @RequestParam("videoID") int videoID){
 		ModelAndView mv = new ModelAndView("ImageProcess4Trial_frameSegmentation");
 		Video video = vm.getVideoByVideoID(videoID);
-		/****做一个权限的小测试*****************/
+		
+		/****做一个权限的小测试 start*****************/
 		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
 		for(int i = 0 ; i < authRoleRelationList.size(); i++){
 			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
@@ -56,6 +57,7 @@ public class AlgorithmController {
 			
 			mv.addObject( resourceURI , operationValue );
 		}
+		/****做一个权限的小测试 end*****************/
 		
 		if(video != null){
 			mv.addObject("video", video);

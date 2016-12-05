@@ -25,15 +25,18 @@
             <div class="col-xs-7 col-sm-8 partial text-right">
                 <c:if test="${! (user == null) }">
                     <ul class="ht-list -list-main">
-                    
-                        
                         <li class="list-item -login">
-                        	<a href="edit_personalProfile_load">用户名： ${ user.userName }</a>
+                        		<h2>${user.role.roleID}</h2>
+                        		<c:if test="${ (user.role.roleID == 3) }">
+                        			<a href="authProcess_load">用户名： ${ user.userName }</a>
+                        		</c:if>
+                        		<c:if test="${! (user.role.roleID == 3) }">
+	                    			<a href="edit_personalProfile_load">用户名： ${ user.userName }</a>
+	                    		</c:if>
 	                    </li>
                         <li class="list-item -login">
                             <a href="logout">退出</a>
                         </li>
-
                     </ul>
                 </c:if>
 

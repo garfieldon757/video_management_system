@@ -9,8 +9,5 @@ public class Main {
 		ApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml" , Main.class);
 		MyBean myBean = context.getBean(MyBean.class);
 		myBean.sayHello();
-		
-		MyOtherBean myOtherBean = context.getBean(MyOtherBean.class);
-		myOtherBean.sayHelloDelay();
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.adp.model.AuthorizationRoleRelation;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
 import com.adp.service.DownloadManager;
@@ -40,7 +41,7 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value="videoSearchInit")
-	public ModelAndView videoSearchInit(@RequestParam("videoCategoryID") int videoCategoryID , @RequestParam("page") int page){
+	public ModelAndView videoSearchInit(@RequestParam("videoCategoryID") int videoCategoryID , @RequestParam("page") int page , HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("VideoSearch");
 		List<VideoCategory> videoCategoryList = vm.getVideoCategoryList();
 		List<Video> videoList = vm.getVideoListByVideoCategroyIDAndPage(videoCategoryID , page);
@@ -52,6 +53,17 @@ public class VideoController {
 			mv.addObject("videoCategoryID", videoCategoryID);
 			mv.addObject("page", page);
 		}
+		/****做一个权限的小测试 start*****************/
+		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
+		for(int i = 0 ; i < authRoleRelationList.size(); i++){
+			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
+			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
+			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
+			
+			mv.addObject( resourceURI , operationValue );
+		}
+		/****做一个权限的小测试 end*****************/
+		
 		return mv;
 	}
 	
@@ -61,12 +73,24 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value="videoPlay")
-	public ModelAndView videoPlay(@RequestParam("videoID") int videoID){
+	public ModelAndView videoPlay(@RequestParam("videoID") int videoID , HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("VideoPlayer");
 		Video video = vm.getVideoByVideoID(videoID);
 		if(video != null){
 			mv.addObject("video", video);
 		}
+		
+		/****做一个权限的小测试 start*****************/
+		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
+		for(int i = 0 ; i < authRoleRelationList.size(); i++){
+			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
+			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
+			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
+			
+			mv.addObject( resourceURI , operationValue );
+		}
+		/****做一个权限的小测试 end*****************/
+		
 		return mv;
 	}
 	

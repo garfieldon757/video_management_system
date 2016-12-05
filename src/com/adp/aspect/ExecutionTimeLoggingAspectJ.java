@@ -12,20 +12,21 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+@Component
 @Aspect
 public class ExecutionTimeLoggingAspectJ {
 	
-	@Pointcut("execution(public void com.adp.controller.UserController.controllerFunctionTest(..) )") //public void com.adp.aspect.MyBean.sayHello(..)
-	protected void controllerFunctionTest(){
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	@Pointcut("execution( public void com.adp.service.impl.UserManagerImpl.aopTest(..) )") //com.adp.controller.UserController.controllerFunctionTest(..)public void com.adp.aspect.MyBean.sayHello(..)
+			public void controllerFunctionTest(){
+//		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	}
 	
 	@Before(  "controllerFunctionTest()" )
-	public void enableFilters(JoinPoint joinPoint){
+			public void enableFilters(JoinPoint joinPoint){
 		System.out.println("This is aspect ,which runs before UserControllerFunctionTest() !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 	
-//	@Around(" execution(public * com.adp.controller.UserController.controllerFunctionTest(..) ) ")  //execution(public * *(..))
+//	@Around(" execution(public * *(..)) ")  //public * com.adp.controller.UserController.controllerFunctionTest(..)
 //	public Object profile(ProceedingJoinPoint pjp) throws Throwable {
 //		
 //		long startTime = System.nanoTime();

@@ -51,6 +51,11 @@
 				                        <a href="authProcess_load">角色申请处理</a>
 			                        </c:if>
 			                    </li>
+			                    <li>
+			                    <c:if test="${ monitorLink == 1 }">
+			                        <a href="monitor_load">后台运行监控台</a>
+		                        </c:if>
+		                    </li>
 			                </ul>
 			            </li>
 			        </ul>
