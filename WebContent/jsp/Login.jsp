@@ -27,7 +27,6 @@
 
   <div class="">
 
-
       <section>
         <div class="ht-app" ng-controller="LoginCtrl">
 

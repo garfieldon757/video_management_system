@@ -40,25 +40,24 @@
 
 
       <form  class="ht-app__form" action="signUp" name="form">
+        
         <div class="ht-app__field-wrapper" >
-          <input id="sex" name="sex" class="ht-app__form-input" type="text" placeholder="性别">
-          <div id="checkDiv_Sex" >
-            <br id="br_Sex" style="display: block">
-            <p id="error_Sex" style="display:none; color:red">该输入不符合要求</p>
-            <p id="success_Sex"><img src="" /></p>
-          </div>
-        </div>
-
-
-        <div class="ht-app__field-wrapper" >
-          <input id="username" name="userName" class="ht-app__form-input" type="text" placeholder="昵称">
+          <input id="userName" name="userName" class="ht-app__form-input" type="text" placeholder="昵称">
           <div id="checkDiv_userName" >
             <br id="br_userName" style="display: block">
             <p id="error_userName" style="display:none; color:red">该输入不符合要求</p>
-            <p id="success_userName"><img src="" /></p>
+            <p id="success_userName"style="display:none; color:green">该输入符合要求</p>
           </div>
         </div>
 
+        <div class="ht-app__field-wrapper" >
+	        <input id="sex" name="sex" class="ht-app__form-input" type="text" placeholder="性别">
+	        <div id="checkDiv_Sex" >
+	          <br id="br_Sex" style="display: block">
+	          <p id="error_Sex" style="display:none; color:red">该输入不符合要求</p>
+	          <p id="success_Sex"><img src="" /></p>
+	        </div>
+	      </div>
 
         <div class="ht-app__field-wrapper">
 	        <input id="userPassword" name="userPassword" class="ht-app__form-input" type="text" placeholder="密码">
@@ -114,7 +113,94 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
 
+
+$(document).ready(function(){
+	
+
+    $("#userName").blur(function () {
+
+
+         var userNameValue = $('#userName').val();
+        $.ajax({
+            url: "ajax_userNameValidation",
+            data: { userName : userNameValue},
+            type: "GET",
+            success: function (response) {
+                
+                reg_result = response ;//返回用户名和当前页面session的用户名就不做为
+                									//,返回"available"表示userName可用，“unavailable“表示不可用
+                alert(response);
+//                if(reg_result == "available"){
+//                    $("#userName_div").removeClass("has-error");
+//                    $("#userName_div").addClass("has-success");
+//                    $("#checkDiv_userName > p:last").css('display', 'block');
+//                    $("#checkDiv_userName > p:first").css('display', 'none');
+//                    alert("用户名可用");
+//                }else if( reg_result != "available" ){
+//                	
+//                	if( reg_result == $("#userName").val() ){
+//                        
+//                		//不作为
+//                		
+//                    }else if(reg_result == "unavailable"){
+//                    	$("#userName_div").removeClass("has-success");
+//                        $("#userName_div").addClass("has-error");
+//                        $("#checkDiv_userName > p:first").css('display', 'none');
+//                        $("#checkDiv_userName > p:last").css('display', 'block');
+//                        alert("用户名已被占用");
+//                    }
+//                	
+//                }
+                
+            }
+        });
+        
+    });
+
+    $("#userPassword").blur(function () {
+        /*
+        var reg =  new RegExp(" "); // 检测密码是否符合足够的密码强度
+        var userPassword = $('#userPassword').val();
+        reg_result = reg.test(userPassword);
+
+        if(reg_result){
+            $("#userPassword_div").removeClass("has-error");
+            $("#userPassword_div").addClass("has-success");
+            $("#userPassword_div > span:last").css('display', 'none');
+            $("#userPassword_div > span:first").css('display', 'block');
+        }else {
+            $("#userPassword_div").removeClass("has-success");
+            $("#userPassword_div").addClass("has-error");
+            $("#userPassword_div > span:first").css('display', 'none');
+            $("#userPassword_div > span:last").css('display', 'block');
+        }
+        */
+    });
+
+    $("#email").blur(function () {
+        var reg =  new RegExp(".*@.*\.?.*?\.(com|cn)");
+        var email = $('#email').val();
+        reg_result = reg.test(email);
+
+        if(reg_result){
+            $("#email_div").removeClass("has-error");
+            $("#email_div").addClass("has-success");
+            $("#email_div > span:last").css('display', 'none');
+            $("#email_div > span:first").css('display', 'block');
+        }else {
+            $("#email_div").removeClass("has-success");
+            $("#email_div").addClass("has-error");
+            $("#email_div > span:first").css('display', 'none');
+            $("#email_div > span:last").css('display', 'block');
+        }
+
+    });
+})
+
+
+</script>
 
 
 </body>

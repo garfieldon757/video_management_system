@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
 
-
+@Component
 @Controller
 public class UserController {
 	@Autowired(required=true)
@@ -53,9 +54,11 @@ public class UserController {
 	@RequestMapping(value="controllerFunctionTest")
 	public void controllerFunctionTest(){
 		System.out.println("This is controllerFunctionTest in UserController!!!!!!!!!!!!!!!!!!!");
-		ApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml" , Main.class);
-		UserManagerImpl umi = context.getBean(UserManagerImpl.class);
-		umi.aopTest();;
+		
+//		ApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml" , Main.class);
+//		UserManagerImpl umi = context.getBean(UserManagerImpl.class);
+//		umi.aopTest();
+		
 		return ;
 	}
 	

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class ExecutionTimeLoggingAspectJ {
 	
-	@Pointcut("execution( public void com.adp.service.impl.UserManagerImpl.aopTest(..) )") //com.adp.controller.UserController.controllerFunctionTest(..)public void com.adp.aspect.MyBean.sayHello(..)
+	@Pointcut("execution( public void com.adp.controller.UserController.controllerFunctionTest(..) )") //com.adp.controller.UserController.controllerFunctionTest(..)public void com.adp.aspect.MyBean.sayHello(..)
 			public void controllerFunctionTest(){
 //		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	}
