@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationRoleRelation;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
@@ -32,6 +33,9 @@ public class VideoController {
 	
 	@Autowired(required=true)
 	DownloadManager dm;
+	
+	@Autowired(required=true)
+	private UserDAO userDAO;
 	
 	@RequestMapping(value="parse_json")
 	public void parse_json() throws IOException{
@@ -63,6 +67,8 @@ public class VideoController {
 			mv.addObject( resourceURI , operationValue );
 		}
 		/****做一个权限的小测试 end*****************/
+		
+		userDAO.testDaoAspect();
 		
 		return mv;
 	}

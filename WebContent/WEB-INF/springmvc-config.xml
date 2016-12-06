@@ -35,6 +35,7 @@
             <mvc:exclude-mapping path="/fonts/"/>  
             <mvc:exclude-mapping path="/util/"/>
             <mvc:exclude-mapping path="/signUp_page"/>
+            <mvc:exclude-mapping path="/signUp"/>
             <mvc:exclude-mapping path="/login"/>
             <mvc:exclude-mapping path="ajax_userNameValidation"/>
             <bean class="com.adp.interceptor.TestInterceptor"/>

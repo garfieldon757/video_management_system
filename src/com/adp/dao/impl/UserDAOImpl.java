@@ -23,9 +23,17 @@ public class UserDAOImpl implements UserDAO{
 
 	@PersistenceContext(name="un")
 	private EntityManager em ;
+	
+	@Override
+	public void testDaoAspect(){
+		System.out.println("This is userDAOIpml.testDaoAspect().");
+		return ;
+	}
+	
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
+		
 		em.persist(user);
 	}
 	@Override

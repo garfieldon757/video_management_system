@@ -10,6 +10,8 @@ import com.adp.model.Video;
 import com.adp.model.VideoCategory;
 
 public interface UserDAO {
+	
+	public void testDaoAspect();
 	public void addUser(User user);
 	public User getUserByEmail(String email);
 	public User getUserByID(int userID);

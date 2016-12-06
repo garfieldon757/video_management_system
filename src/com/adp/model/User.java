@@ -44,6 +44,10 @@ public class User {
     
     @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	private List<ProcessLog> processLogList = new ArrayList<ProcessLog>();
+    
+    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	private List<DaoFunctionLog> daoFunctionLog = new ArrayList<DaoFunctionLog>();
+
 
 	public Integer getUserID() {
 		return userID;
@@ -139,6 +143,14 @@ public class User {
 
 	public void setApply_status(int apply_status) {
 		this.apply_status = apply_status;
+	}
+	
+	public List<DaoFunctionLog> getDaoFunctionLog() {
+		return daoFunctionLog;
+	}
+
+	public void setDaoFunctionLog(List<DaoFunctionLog> daoFunctionLog) {
+		this.daoFunctionLog = daoFunctionLog;
 	}
     
 }
