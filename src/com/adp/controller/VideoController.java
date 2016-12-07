@@ -57,18 +57,9 @@ public class VideoController {
 			mv.addObject("videoCategoryID", videoCategoryID);
 			mv.addObject("page", page);
 		}
-		/****做一个权限的小测试 start*****************/
-		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
-		for(int i = 0 ; i < authRoleRelationList.size(); i++){
-			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
-			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
-			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
-			
-			mv.addObject( resourceURI , operationValue );
-		}
-		/****做一个权限的小测试 end*****************/
 		
-		userDAO.testDaoAspect();
+		userDAO.fuck(1, "sfasfdfsf");
+//		userDAO.getRole(1);
 		
 		return mv;
 	}
@@ -85,17 +76,6 @@ public class VideoController {
 		if(video != null){
 			mv.addObject("video", video);
 		}
-		
-		/****做一个权限的小测试 start*****************/
-		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
-		for(int i = 0 ; i < authRoleRelationList.size(); i++){
-			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
-			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
-			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
-			
-			mv.addObject( resourceURI , operationValue );
-		}
-		/****做一个权限的小测试 end*****************/
 		
 		return mv;
 	}

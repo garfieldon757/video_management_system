@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
 import com.adp.model.AuthorizationRoleRelation;
+import com.adp.model.DaoFunctionLog;
 import com.adp.model.Role;
 import com.adp.model.User;
 import com.adp.model.Video;
@@ -27,6 +28,13 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public void testDaoAspect(){
 		System.out.println("This is userDAOIpml.testDaoAspect().");
+		return ;
+	}
+	
+	@Override
+	public void fuck(int a, String s) {
+		System.out.println(a);
+		System.out.println(s);
 		return ;
 	}
 	
@@ -243,6 +251,22 @@ public class UserDAOImpl implements UserDAO{
 		int algorithmTotalNum =  Integer.parseInt( em.createQuery(jpql).getResultList().get(0).toString() ) ;
 		return algorithmTotalNum;
 	}
+
+	@Override
+	public List<DaoFunctionLog> getDaoFunctionLogByMultiParam(String userName, 
+																											String logDateTimeStart,
+																											String logDateTimeEnd) {
+		String jpql = "select dfl from DaoFunctionLog dfl where dfl.user.userName =:userName"
+				+ " and dfl.dateTime >:logDateTimeStart and dfl.dateTime <:logDateTimeEnd ";
+		List<DaoFunctionLog> dfl = em.createQuery(jpql).setParameter("userName", userName)
+																					.setParameter("logDateTimeStart", logDateTimeStart)
+																					.setParameter("logDateTimeEnd", logDateTimeEnd)
+																					.getResultList();
+		
+		return dfl;
+	}
+
+	
 	
 	
 	

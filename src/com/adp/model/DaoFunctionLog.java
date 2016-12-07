@@ -26,6 +26,24 @@ public class DaoFunctionLog {
 	private DaoFunction daoFunction;
 	
 	private String dateTime;
+	private String oldValeu;
+	private String newValue;
+
+	public String getOldValeu() {
+		return oldValeu;
+	}
+
+	public void setOldValeu(String oldValeu) {
+		this.oldValeu = oldValeu;
+	}
+
+	public String getNewValue() {
+		return newValue;
+	}
+
+	public void setNewValue(String newValue) {
+		this.newValue = newValue;
+	}
 
 	public Integer getDaoFunctionLogID() {
 		return daoFunctionLogID;

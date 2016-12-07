@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.adp.dao.AspectDAO;
 import com.adp.model.DaoFunction;
 import com.adp.model.DaoFunctionLog;
+import com.adp.model.DaoFunctionTableFieldRelation;
 import com.adp.model.User;
 
 @Repository("asd")
@@ -33,6 +34,25 @@ public class AspectDAOImpl implements AspectDAO {
 		dfl.setDaoFunction(daoFunction);
 		dfl.setDateTime(dateTime);
 		
+//		String daoFunctionType = daoFunction.getDaoFunctionType();
+//		switch(daoFunctionType)
+//		{
+//			case "insert":
+//				break;
+//			case "delete":
+//				break;
+//			case "update":
+////				int daoFunctionID = daoFunction.getDaoFunctionID();
+////				DaoFunctionTableFieldRelation dftfr = getDaoFunctionTableFieldRelationByDaoFunctionID(daoFunctionID);
+//				//??
+//				break;
+//			case "select":
+//				break;
+//			default:
+//				break;
+//		}
+		
+		
 		em.persist(dfl);
 		
 	}
@@ -43,6 +63,15 @@ public class AspectDAOImpl implements AspectDAO {
 		DaoFunction df = (DaoFunction) em.createQuery(jpql).setParameter("daoFunctionName", daoFunctionName)
 																							.getResultList().get(0);
 		return df;
+	}
+
+	@Override
+	public DaoFunctionTableFieldRelation getDaoFunctionTableFieldRelationByDaoFunctionID(int daoFunctionID) {
+		String jpql = "select dftfr from DaoFunctionTableFieldRelation dftfr where dftfr.daoFunctionID =:daoFunctionID";
+		DaoFunctionTableFieldRelation dftfr = (DaoFunctionTableFieldRelation) em.createQuery(jpql)
+																															.setParameter( "daoFunctionID" , daoFunctionID)
+																															.getResultList();
+		return dftfr;
 	}
 	
 	

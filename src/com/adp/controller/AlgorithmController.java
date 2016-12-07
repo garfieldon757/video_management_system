@@ -48,17 +48,6 @@ public class AlgorithmController {
 		ModelAndView mv = new ModelAndView("ImageProcess4Trial_frameSegmentation");
 		Video video = vm.getVideoByVideoID(videoID);
 		
-		/****做一个权限的小测试 start*****************/
-		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
-		for(int i = 0 ; i < authRoleRelationList.size(); i++){
-			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
-			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
-			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
-			
-			mv.addObject( resourceURI , operationValue );
-		}
-		/****做一个权限的小测试 end*****************/
-		
 		if(video != null){
 			mv.addObject("video", video);
 		}

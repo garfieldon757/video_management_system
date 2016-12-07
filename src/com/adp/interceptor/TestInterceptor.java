@@ -53,8 +53,21 @@ public class TestInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        System.out.println("postHandle");  //todo 可以用来修改信息，跳转等;ModelAndView是接受controller返回的对象
+    public void postHandle(HttpServletRequest request, HttpServletResponse httpServletResponse, Object o, ModelAndView mv) throws Exception {
+        
+    	System.out.println("postHandle----start"); 
+    	/****做一个权限的小测试 start*****************/
+		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
+		for(int i = 0 ; i < authRoleRelationList.size(); i++){
+			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
+			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
+			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
+			
+			mv.addObject( resourceURI , operationValue );
+		}
+		/****做一个权限的小测试 end*****************/
+    	
+    	System.out.println("postHandle----end");  //todo 可以用来修改信息，跳转等;ModelAndView是接受controller返回的对象
     }
 
     @Override

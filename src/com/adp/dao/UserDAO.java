@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.adp.model.AuthorizationList;
 import com.adp.model.AuthorizationRoleRelation;
+import com.adp.model.DaoFunctionLog;
 import com.adp.model.Role;
 import com.adp.model.User;
 import com.adp.model.Video;
@@ -12,6 +13,7 @@ import com.adp.model.VideoCategory;
 public interface UserDAO {
 	
 	public void testDaoAspect();
+	public void fuck(int a, String s);
 	public void addUser(User user);
 	public User getUserByEmail(String email);
 	public User getUserByID(int userID);
@@ -37,4 +39,5 @@ public interface UserDAO {
 	public int getSpecificAuthListTotalNum(String authStatus);
 	public int getVideoTotalNum();
 	public int getAlgorithmTotalNum();
+	public List<DaoFunctionLog> getDaoFunctionLogByMultiParam(String userName , String logDateTimeStart , String logDateTimeEnd);
 }

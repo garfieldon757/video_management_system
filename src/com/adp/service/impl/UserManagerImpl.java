@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
+import com.adp.model.DaoFunctionLog;
 import com.adp.model.Role;
 import com.adp.model.User;
 import com.adp.model.VideoCategory;
@@ -288,6 +289,14 @@ public class UserManagerImpl implements UserManager{
 		algorithmMonitorData.put("algorithmTotalNum", algorithmTotalNum);
 		
 		return algorithmMonitorData;
+	}
+
+	@Override
+	public List<DaoFunctionLog> getDaoFunctionLogByMultiParam(String userName, 
+																											String logDateTimeStart,
+																											String logDateTimeEnd) {
+		List<DaoFunctionLog> dfl = userDAO.getDaoFunctionLogByMultiParam(userName , logDateTimeStart , logDateTimeEnd);
+		return dfl;
 	}
 
 

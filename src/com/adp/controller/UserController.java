@@ -24,6 +24,7 @@ import com.adp.aspect.MyBean;
 import com.adp.model.Algorithm;
 import com.adp.model.AuthorizationList;
 import com.adp.model.AuthorizationRoleRelation;
+import com.adp.model.DaoFunctionLog;
 import com.adp.model.Role;
 import com.adp.model.User;
 import com.adp.model.Video;
@@ -99,17 +100,6 @@ public class UserController {
 	public ModelAndView edit_personalProfile_load( HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("personalProfile");
 		
-		/****做一个权限的小测试 start*****************/
-		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
-		for(int i = 0 ; i < authRoleRelationList.size(); i++){
-			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
-			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
-			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
-			
-			mv.addObject( resourceURI , operationValue );
-		}
-		/****做一个权限的小测试 end*****************/
-		
 		User user = um.getSession(request, "user");//session获取当前用户对象
 		if(user != null){
 			mv.addObject(user);
@@ -143,18 +133,6 @@ public class UserController {
 		List<AuthorizationList> authList = um.getAuthListByApplyAuthUser(user);
 		
 		int apply_status = user.getApply_status() ;//0代表未申请，1代表正在申请待审核
-		
-		/****做一个权限的小测试 start*****************/
-		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
-		for(int i = 0 ; i < authRoleRelationList.size(); i++){
-			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
-			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
-			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
-			
-			mv.addObject( resourceURI , operationValue );
-		}
-		/****做一个权限的小测试 end*****************/
-		
 		
 		if(user != null ){
 			mv.addObject(user);
@@ -194,17 +172,6 @@ public class UserController {
 			mv.addObject("authListProcessing", authListProcessing);
 			mv.addObject("authListProcessed", authListProcessed);
 		}
-		
-		/****做一个权限的小测试 start*****************/
-		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
-		for(int i = 0 ; i < authRoleRelationList.size(); i++){
-			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
-			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
-			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
-			
-			mv.addObject( resourceURI , operationValue );
-		}
-		/****做一个权限的小测试 end*****************/
 		
 		return mv;//跳转至AuthProcess.jsp页面
 	}
@@ -320,16 +287,29 @@ public class UserController {
 		mv.addObject("videoMonitorData", videoMonitorData);
 		mv.addObject("algorithmMonitorData", algorithmMonitorData);
 		
-		/****做一个权限的小测试 start*****************/
-		List<AuthorizationRoleRelation> authRoleRelationList = (List<AuthorizationRoleRelation>) request.getSession().getAttribute("authRoleRelationList");
-		for(int i = 0 ; i < authRoleRelationList.size(); i++){
-			AuthorizationRoleRelation authRoleRelation= authRoleRelationList.get(i);
-			String resourceURI = authRoleRelation.getAuthorization().getResource().getResourceURI();//资源URL
-			String operationValue = authRoleRelation.getAuthorization().getOperation().getOperationValue();//操作值
-			
-			mv.addObject( resourceURI , operationValue );
-		}
-		/****做一个权限的小测试 end*****************/
+		return mv;
+	}
+	
+	@RequestMapping("logMonitor_load")
+	public ModelAndView logMonitor_load(HttpServletRequest request){
+		
+		ModelAndView mv = new ModelAndView("LogMonitor");
+		
+		
+		return mv;
+	}
+	
+	@RequestMapping("logSearch")
+	public ModelAndView logSearch(HttpServletRequest request){
+		
+		ModelAndView mv = new ModelAndView("LogMonitor");
+		
+		String userName = request.getParameter("userName");
+		String logDateTimeStart = request.getParameter("logDateTimeStart");
+		String logDateTimeEnd = request.getParameter("logDateTimeEnd");
+		List<DaoFunctionLog> dfl = um.getDaoFunctionLogByMultiParam(userName , logDateTimeStart , logDateTimeEnd);
+		
+		mv.addObject("daoFunctionLogs", dfl );
 		
 		return mv;
 	}
