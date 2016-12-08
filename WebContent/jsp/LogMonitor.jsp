@@ -156,6 +156,20 @@
                                         </form>
                                         <br>
 
+                                        <div class="panel panel-default">
+	                                        <div class="panel-body">
+	
+	                                            <ul class="list-group">
+	                                            
+	                                                <li class="list-group-item">
+	                                                	
+	                                                </li>
+	                                                
+	                                            </ul>
+	
+	                                        </div>
+	                                    </div>
+                                        
                                         <c:if test="${empty daoFunctionLogs}">
                                             <h2>暂时没有日志查询结果</h2>
                                         </c:if>

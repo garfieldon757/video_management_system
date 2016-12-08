@@ -32,13 +32,13 @@ public class ControllerAspect {
 	{	}
 	
 	@Around(  value="Controller_Aspect()")
-	public void Controller_Aspect(ProceedingJoinPoint joinPoint) throws Throwable
+	public Object Controller_Aspect(ProceedingJoinPoint joinPoint) throws Throwable
 	{
 		Timestamp now = new Timestamp(System.currentTimeMillis()); 
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
 		
-		joinPoint.proceed();
+		Object result = joinPoint.proceed();
 		
 		now = new Timestamp(System.currentTimeMillis()); 
 		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
@@ -51,7 +51,7 @@ public class ControllerAspect {
 		ControllerFunction controllerFunction = aspectDAO.getControllerFunction(controllerFunctionUrl); //获取ControllerFunction对象
 
 		aspectDAO.addControllerFunctionLog(dateTimeStart, dateTimeEnd, user, controllerFunction);
-	
+		return result;
 	}	
 
 	

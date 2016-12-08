@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
+import com.adp.model.ControllerFunctionLog;
 import com.adp.model.DaoFunctionLog;
 import com.adp.model.Role;
+import com.adp.model.ServiceFunctionLog;
 import com.adp.model.User;
 import com.adp.model.VideoCategory;
 import com.adp.service.UserManager;
@@ -293,10 +295,26 @@ public class UserManagerImpl implements UserManager{
 
 	@Override
 	public List<DaoFunctionLog> getDaoFunctionLogByMultiParam(String userName, 
-																											String logDateTimeStart,
-																											String logDateTimeEnd) {
-		List<DaoFunctionLog> dfl = userDAO.getDaoFunctionLogByMultiParam(userName , logDateTimeStart , logDateTimeEnd);
+																											String daoLogDateTimeStart,
+																											String daoLogDateTimeEnd) {
+		List<DaoFunctionLog> dfl = userDAO.getDaoFunctionLogByMultiParam(userName , daoLogDateTimeStart , daoLogDateTimeEnd);
 		return dfl;
+	}
+	
+	@Override
+	public List<ServiceFunctionLog> getServiceFunctionLogByMultiParam(String userName, 
+																											String serviceLogDateTimeStart,
+																											String serviceLogDateTimeEnd) {
+		List<ServiceFunctionLog> sfl = userDAO.getServiceFunctionLogByMultiParam(userName, serviceLogDateTimeStart, serviceLogDateTimeEnd);
+		return sfl;
+	}
+	
+	@Override
+	public List<ControllerFunctionLog> getControllerFunctionLogByMultiParam(String userName, 
+																											String controllerLogDateTimeStart,
+																											String controllerLogDateTimeEnd) {
+		List<ControllerFunctionLog> cfl = userDAO.getControllerFunctionLogByMultiParam(userName, controllerLogDateTimeStart, controllerLogDateTimeEnd);
+		return cfl;
 	}
 
 

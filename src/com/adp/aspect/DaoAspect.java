@@ -4,7 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -14,7 +16,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.adp.dao.AspectDAO;
-import com.adp.dao.UserDAO;
 import com.adp.model.DaoFunction;
 import com.adp.model.User;
 
@@ -26,12 +27,14 @@ public class DaoAspect {
 	private AspectDAO aspectDAO;
 	
 	@Pointcut("execution( public * com.adp.dao.impl.UserDAOImpl.updateUser(..) )") 
-	public void UserDAOImpl_UpdateUser_Aspect()
+	public void Dao_Aspect()
 	{	}
 	
-	@AfterReturning(  value="UserDAOImpl_UpdateUser_Aspect()" , returning="returnValue" )
-	public void UserDAOImpl_UpdateUser_Aspect(JoinPoint joinPoint , Object returnValue)
+	@Around(  value="Dao_Aspect()" )
+	public Object Dao_Aspect(ProceedingJoinPoint joinPoint) throws Throwable
 	{
+		
+		Object result = joinPoint.proceed();
 		
 		ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
 		HttpSession session=attr.getRequest().getSession(true);
@@ -39,11 +42,9 @@ public class DaoAspect {
 
 		String daoFunctionUrl = joinPoint.getSignature().getName();
 		DaoFunction daoFunction = aspectDAO.getDaoFunction( daoFunctionUrl );//获取DaoFunction对象
-		//System.out.println(returnValue);
-		//对修改过的DaoFunctionLog表进行一些字段的插入.....
-		
 		aspectDAO.addDaoFunctionLog(user, daoFunction);
 		
+		return result;
 	}	
 
 //	@Pointcut("execution( public * com.adp.dao.impl.UserDAOImpl.*(..) )") 
