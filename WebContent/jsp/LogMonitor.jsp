@@ -155,56 +155,38 @@
 
                                         </form>
                                         <br>
-
-                                        <div class="panel panel-default">
-	                                        <div class="panel-body">
-	
-	                                            <ul class="list-group">
-	                                            
-	                                                <li class="list-group-item">
-	                                                	
-	                                                </li>
-	                                                
-	                                            </ul>
-	
-	                                        </div>
-	                                    </div>
                                         
-                                        <c:if test="${empty daoFunctionLogs}">
-                                            <h2>暂时没有日志查询结果</h2>
+                                        <c:if test="${empty controllerFunctionLogUtilList}">
+		                                        <div class="panel panel-default">
+			                                        <div class="panel-body  bg-success">
+			                                        	<h2>暂时没有日志查询结果</h2>
+			                                        </div>
+		                                        </div>
                                         </c:if>
-                                        <c:if test="${ !empty daoFunctionLogs}">
+                                        <c:if test="${ !empty controllerFunctionLogUtilList}">
 
-                                            <table class="table table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>序号</th>
-                                                    <th>操作人</th>
-                                                    <th>操作时间</th>
-                                                    <th>方法Url</th>
-                                                    <th>方法名称</th>
-                                                    <th>操作类型</th>
-                                                    <th>后续操作</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                <c:forEach items="${daoFunctionLogs}" var="dfl">
-
-                                                    <tr>
-                                                        <td>${dfl.daoFunctionLogID}</td>
-                                                        <td>${ dfl.user.userName }</td>
-                                                        <td>${ dfl.dateTime }</td>
-                                                        <td>${ dfl.daoFunction.daoFunctionUrl }</td>
-                                                        <td>${ dfl.daoFunction.daoFunctionName }</td>
-                                                        <td>${ dfl.daoFunction.daoFunctionType }</td>
-                                                        <td>??</td>
-                                                    </tr>
-
-                                                </c:forEach>
-
-                                                </tbody>
-                                            </table>
+		                                        <div class="panel panel-default">
+			                                        <div class="panel-body  bg-success">
+			
+			                                            <ul class="list-group">
+				                                            <c:forEach items="${ controllerFunctionLogUtilList }" var="controllerFunctionLogUtil">
+				                                                <li class="list-group-item">
+				                                                	<p class="text-success"> ${ fn:substring( controllerFunctionLogUtil.controllerFunctionLog.dateTimeStart , 0 , 19 ) }    ：【Controller】${ controllerFunctionLogUtil.controllerFunctionLog.controllerFunction.controllerFunctionUrl }</p>
+					                                                <c:forEach items="${ controllerFunctionLogUtil.serviceFunctionLogUtilList }" var="serviceFunctionLogUtil">
+					                                                	<p class="text-muted">${ fn:substring( serviceFunctionLogUtil.serviceFunctionLog.dateTimeStart , 0 , 19 ) }   ：【Service】${ serviceFunctionLogUtil.serviceFunctionLog.serviceFunction.serviceFunctionUrl }</p>
+					                                                	<c:forEach items="${ serviceFunctionLogUtil.daoFunctionLogList }" var="daoFunctionLog">
+						                                                	<p class="text-danger">
+						                                                		${ fn:substring( daoFunctionLog.dateTime , 0 , 19 ) }   ：【DAO】${ daoFunctionLog.daoFunction.daoFunctionUrl }
+						                                                		<button type="button" id="??" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">数据库操作详情</button>
+					                                                		</p>
+						                                                </c:forEach>
+					                                                </c:forEach>
+				                                                </li>
+				                                             </c:forEach >
+			                                            </ul>
+			
+			                                        </div>
+			                                    </div>
 
                                         </c:if>
 
@@ -222,6 +204,7 @@
         </div>
     </div>
 </div>
+<button id="btn1" type="button" data-toggle="modal" data-target="#daoLogDetail">adsffsff</button>
 <footer>
     <div class="container">
         <ul class="nav">
@@ -231,7 +214,23 @@
         </ul>
     </div>
 </footer>
+
+<div id="daoLogDetail" class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false">
+	<div class="modal-dialog modal-lg">
+		  <div class="modal-content">
+		
+			    <div class="modal-header">
+			      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			      <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+			    </div>
+			    <div class="modal-body">
+			      ...
+			    </div>
+			      
+		  </div>
+	</div>
 </div>
+
 </body>
 
 
@@ -241,7 +240,11 @@
 
 <script type="text/javascript">
 
-
+	$("ducument").ready(function(){
+		
+		
+		
+	})
 
 </script>
 

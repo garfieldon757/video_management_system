@@ -322,6 +322,9 @@ public class UserController {
 		for(int i = 0; i < controllerFunctionLogList.size(); i++){
 			/*******************设置一个controllerFunctionLogUtil**********************/
 			ControllerFunctionLogUtil controllerFunctionLogUtil = new ControllerFunctionLogUtil();
+			if( controllerFunctionLogList.get(i).getControllerFunction().getControllerFunctionUrl().equals("logSearch") ){
+				continue;
+			}//将“logSearch”这一controllerFunction加入黑名单，因为查询负担太重
 			controllerFunctionLogUtil.setControllerFunctionLog( controllerFunctionLogList.get(i) );//controllerFunctionLog对应值
 			List<ServiceFunctionLog> serviceFunctionLogList = um.getServiceFunctionLogByMultiParam(userName, 
 																																						controllerFunctionLogList.get(i).getDateTimeStart() , 
@@ -336,11 +339,11 @@ public class UserController {
 																																					serviceFunctionLogList.get(j).getDateTimeEnd());
 				serviceFunctionLogUtil.setDaoFunctionLogList(daoFunctionLogList);
 				/********************************************************************************/
-				serviceFunctionLogUtilList.add( j , serviceFunctionLogUtil );
+				serviceFunctionLogUtilList.add( serviceFunctionLogUtil );
 			}
 			controllerFunctionLogUtil.setServiceFunctionLogUtilList(serviceFunctionLogUtilList);//serviceFunctionLogUtil对应值
 			/********************************************************************************/
-			controllerFunctionLogUtilList.add( i , controllerFunctionLogUtil );
+			controllerFunctionLogUtilList.add( controllerFunctionLogUtil );
 		}
 		//先根据条件查询controller，在根据时间约束，逐条查询service；同样的，进行查询dao。
 		//最后返回值组成一个ArrayList。

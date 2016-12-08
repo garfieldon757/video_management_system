@@ -26,7 +26,7 @@ public class DaoAspect {
 	@Autowired(required=true)
 	private AspectDAO aspectDAO;
 	
-	@Pointcut("execution( public * com.adp.dao.impl.UserDAOImpl.updateUser(..) )") 
+	@Pointcut("execution( public * com.adp.dao.impl.UserDAOImpl.*(..) )") 
 	public void Dao_Aspect()
 	{	}
 	
