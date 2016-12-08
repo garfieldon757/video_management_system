@@ -276,7 +276,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("monitor_load")
-	public ModelAndView dashboard_load(HttpServletRequest request){
+	public ModelAndView monitor_load(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("Monitor");
 		HashMap<String, Integer> userMonitorData = um.getUserMonitorData();//用户信息查询
 		HashMap<String , Integer> authorizationListMonitorData = um.getAuthListMonitorData();//提权信息查询

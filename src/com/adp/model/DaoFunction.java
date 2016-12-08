@@ -24,10 +24,6 @@ public class DaoFunction {
 	private String daoFunctionUrl;//方法名
 	private String daoFunctionName;//业务名称
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="tableFieldID")
-	private TableField tableField;//操作的数据库表格以及字段信息
-	
 	private String daoFunctionType;//数据库操作类型
 	
 	@OneToMany(mappedBy = "daoFunction", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
@@ -58,14 +54,6 @@ public class DaoFunction {
 
 	public void setDaoFunctionName(String daoFunctionName) {
 		this.daoFunctionName = daoFunctionName;
-	}
-
-	public TableField getTableField() {
-		return tableField;
-	}
-
-	public void setTableField(TableField tableField) {
-		this.tableField = tableField;
 	}
 
 	public String getDaoFunctionType() {

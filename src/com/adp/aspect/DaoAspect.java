@@ -29,8 +29,6 @@ public class DaoAspect {
 	public void UserDAOImpl_UpdateUser_Aspect()
 	{	}
 	
-
-	
 	@AfterReturning(  value="UserDAOImpl_UpdateUser_Aspect()" , returning="returnValue" )
 	public void UserDAOImpl_UpdateUser_Aspect(JoinPoint joinPoint , Object returnValue)
 	{
