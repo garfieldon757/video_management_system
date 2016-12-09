@@ -26,39 +26,44 @@
                <a class="navbar-brand" href="#/"></a>
            </div>
            <ul class="nav navbar-nav pull-right ng-scope">
-	           <li  class="ng-scope" style="">
-	           	<c:if test="${ videoLibMainPageLink == 1 }">
-		            	<a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
-	           	</c:if>
-		        </li>
-		        <li id="dropdown_index" class="dropdown">
-			        <c:if test="${ personalProfileDropDownList == 1 }">
-			        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
-	           	</c:if>
-	               <ul class="dropdown-menu" role="menu" >
-	                   <li>
-		                    <c:if test="${ personalProfileEditLink == 1 }">
-		                        <a href="edit_personalProfile_load">个人信息编辑</a>
-	                       </c:if>
-	                   </li>
-	                   <li>
-		                    <c:if test="${ authSettingsLink == 1 }">
-		                        <a href="authSettings_load">个人权限申请</a>
-	                       </c:if>
-	                   </li>
-	                   <li>
-		                    <c:if test="${ authProcessLink == 1 }">
-		                        <a href="authProcess_load">角色申请处理</a>
-	                       </c:if>
-	                   </li>
-	                   <li>
-	                   <c:if test="${ monitorLink == 1 }">
-	                       <a href="monitor_load">后台运行监控台</a>
-	                   </c:if>
-	               </li>
-	               </ul>
-	           </li>
-	       </ul>
+		           <li  class="ng-scope" style="">
+		           	<c:if test="${ videoLibMainPageLink == 1 }">
+			            	<a href="videoSearchInit?videoCategoryID=1&page=1" class="icon-settings">视频库主页</a>
+		           	</c:if>
+			        </li>
+			        <li id="dropdown_index" class="dropdown">
+				        <c:if test="${ personalProfileDropDownList == 1 }">
+				        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">个人设置<span class="caret"></span></a>
+		           	</c:if>
+		           	<ul class="dropdown-menu" role="menu" >
+		               <li>
+		                   <c:if test="${ personalProfileEditLink == 1 }">
+		                       <a href="edit_personalProfile_load">个人信息编辑</a>
+		                   </c:if>
+		               </li>
+		               <li>
+		                   <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 and authSettingsLink == 1 }">
+		                       <a href="authSettings_load">个人权限申请</a>
+		                   </c:if>
+		               </li>
+		               <li>
+		                   <c:if test="${ authProcessLink == 1 }">
+		                       <a href="authProcess_load">角色申请处理</a>
+		                   </c:if>
+		               </li>
+		               <li>
+		                   <c:if test="${ monitorLink == 1 }">
+		                       <a href="monitor_load">后台运行监控台</a>
+		                   </c:if>
+		               </li>
+		               <li>
+		                   <c:if test="${ logMonitorLink == 1 }">
+		                       <a href="logSearch_load">日志检索</a>
+		                   </c:if>
+		               </li>
+		           </ul>
+		       </li>
+		   </ul>
        </div>
    </div>
 </div>
@@ -103,6 +108,11 @@
 				                    <a href="monitor_load">后台运行监控台</a>
 				                </li>
 		                    </c:if>
+		                    <c:if test="${ logMonitorLink == 1 }">
+		                        <li >
+		                            <a href="logSearch_load">日志检索</a>
+		                        </li>
+		                    </c:if>
 		                    
 		            </ul>
                 </div>
@@ -136,7 +146,11 @@
                                                             <br>
                                                            
                                                             <c:if test="${ empty authListProcessing}">
-	                                                        	<h2>暂时没有待处理申请</h2>
+		                                                            <div class="panel panel-default">
+			        			                                        <div class="panel-body  bg-success">
+			        			                                        	<h2>暂时没有待处理申请</h2>
+			        			                                        </div>
+			        		                                        </div>
 	                                                        </c:if>
 	                                                        <c:if test="${ !empty authListProcessing}">
                                                             
@@ -238,7 +252,11 @@
                                                             <br>
 	                                                          
                                                             <c:if test="${empty authListProcessed}">
-	                                                        	<h2>暂时没有处理过申请</h2>
+	                                                            <div class="panel panel-default">
+		        			                                        <div class="panel-body  bg-success">
+		        			                                        	<h2>尚未查询</h2>
+		        			                                        </div>
+		        		                                        </div>
 	                                                        </c:if>
 	                                                        <c:if test="${ !empty authListProcessed}">
                                                             

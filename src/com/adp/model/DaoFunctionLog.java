@@ -5,12 +5,28 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
-@Table(name = "DaoFunctionLog")//声明在数据库中自动生成的表名为
+@Table(name = "DaoFunctionLog",
+			indexes = {
+					@Index(
+							name = "IDX_daoFunctionLogID",
+							columnList = "daoFunctionLogID"
+					),
+					@Index(
+							name = "IDX_userID",
+							columnList = "userID"
+					),
+					@Index(
+						name = "IDX_dateTime",
+						columnList = "dateTime"
+					)
+			}
+		)
 public class DaoFunctionLog {
 
 	@Id//声明此列为主�?

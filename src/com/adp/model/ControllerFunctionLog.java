@@ -5,12 +5,32 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
-@Table(name = "ControllerFunctionLog")//声明在数据库中自动生成的表名为
+@Table(name = "ControllerFunctionLog",
+			indexes = {
+					@Index(
+							name = "IDX_controllerFunctionLogID",
+							columnList = "controllerFunctionLogID"
+					),
+					@Index(
+							name = "IDX_userID",
+							columnList = "userID"
+					),
+					@Index(
+						name = "IDX_dateTimeStart",
+						columnList = "dateTimeStart"
+					),
+					@Index(
+							name = "IDX_dateTimeEnd",
+							columnList = "dateTimeEnd"
+					)
+			}
+		)
 public class ControllerFunctionLog {
 
 	@Id//声明此列为主�?

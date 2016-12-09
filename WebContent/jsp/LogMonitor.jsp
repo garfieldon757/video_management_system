@@ -42,7 +42,7 @@
                             </c:if>
                         </li>
                         <li>
-                            <c:if test="${ authSettingsLink == 1 }">
+                            <c:if test="${ user.role.roleID == 1 or user.role.roleID == 2 and authSettingsLink == 1 }">
                                 <a href="authSettings_load">个人权限申请</a>
                             </c:if>
                         </li>
@@ -56,6 +56,11 @@
                                 <a href="monitor_load">后台运行监控台</a>
                             </c:if>
                         </li>
+                        <li>
+	                        <c:if test="${ logMonitorLink == 1 }">
+	                            <a href="logSearch_load">日志检索</a>
+	                        </c:if>
+	                    </li>
                     </ul>
                 </li>
             </ul>
@@ -94,7 +99,7 @@
                             </li>
                         </c:if>
                         <c:if test="${ user.role.roleID == 3 and authProcessLink == 1 }">
-                            <li class="active">
+                            <li >
                                 <a href="authProcess_load">角色申请处理</a>
                             </li>
                         </c:if>
@@ -103,14 +108,18 @@
                                 <a href="monitor_load">后台运行监控台</a>
                             </li>
                         </c:if>
-
+                        <c:if test="${ logMonitorLink == 1 }">
+	                        <li class="active">
+	                            <a href="logSearch_load">日志检索</a>
+	                        </li>
+	                    </c:if>
                     </ul>
                 </div>
             </div>
             <div class="col-xs-9 col-xs-9-remove">
                 <div class="ng-scope">
                     <div class="page-header ng-scope">
-                        <h1>角色申请处理</h1>
+                        <h1>日志检索</h1>
                     </div>
                     <div class="ng-scope">
                         <div ng-switch-when="form" class="ng-scope">

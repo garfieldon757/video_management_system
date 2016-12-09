@@ -26,7 +26,6 @@
                 <c:if test="${! (user == null) }">
                     <ul class="ht-list -list-main">
                         <li class="list-item -login">
-                        		<h2>${user.role.roleID}</h2>
                         		<c:if test="${ (user.role.roleID == 3) }">
                         			<a href="authProcess_load">用户名： ${ user.userName }</a>
                         		</c:if>

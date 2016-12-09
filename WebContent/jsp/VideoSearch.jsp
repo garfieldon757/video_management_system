@@ -162,7 +162,7 @@
 		                    
 		                    	<fmt:formatNumber value="${ videoListSize / 16}" pattern="0" var="totalPageNum"></fmt:formatNumber>
 		                        <c:if test="${ page - 4 > 0 }">
-			                        <li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=1">1</a></li>
+			                        <li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=1">首页</a></li>
 			                        <li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=2">2</a></li>
 		                        	<li><a href="">...</a></li>
 		                        	<li><a href="videoSearchInit?videoCategoryID=${videoCategoryID}&page=${page-2}">${page - 2}</a></li>
