@@ -22,10 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.adp.model.Algorithm;
 import com.adp.model.AuthorizationList;
 import com.adp.model.AuthorizationRoleRelation;
-import com.adp.model.ControllerFunctionLog;
-import com.adp.model.DaoFunctionLog;
+import com.adp.model.FunctionLog;
 import com.adp.model.Role;
-import com.adp.model.ServiceFunctionLog;
 import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
@@ -34,6 +32,7 @@ import com.adp.service.UserManager;
 import com.adp.service.VideoManager;
 import com.adp.service.impl.UserManagerImpl;
 import com.adp.util.ControllerFunctionLogUtil;
+import com.adp.util.FunctionLogUtil;
 import com.adp.util.ServiceFunctionLogUtil;
 
 import net.sf.json.JSON;
@@ -317,34 +316,13 @@ public class UserController {
 		String logDateTimeStart = request.getParameter("logDateTimeStart");
 		String logDateTimeEnd = request.getParameter("logDateTimeEnd");
 		
-		List<ControllerFunctionLog> controllerFunctionLogList = um.getControllerFunctionLogByMultiParam(userName, logDateTimeStart, logDateTimeEnd);
-		List<ControllerFunctionLogUtil> controllerFunctionLogUtilList = new ArrayList<ControllerFunctionLogUtil>();
-		for(int i = 0; i < controllerFunctionLogList.size(); i++){
-			/*******************设置一个controllerFunctionLogUtil**********************/
-			ControllerFunctionLogUtil controllerFunctionLogUtil = new ControllerFunctionLogUtil();
-			if( controllerFunctionLogList.get(i).getControllerFunction().getControllerFunctionUrl().equals("logSearch") ){
-				continue;
-			}//将“logSearch”这一controllerFunction加入黑名单，因为查询负担太重
-			controllerFunctionLogUtil.setControllerFunctionLog( controllerFunctionLogList.get(i) );//controllerFunctionLog对应值
-			List<ServiceFunctionLog> serviceFunctionLogList = um.getServiceFunctionLogByMultiParam(userName, 
-																																						controllerFunctionLogList.get(i).getDateTimeStart() , 
-																																						controllerFunctionLogList.get(i).getDateTimeEnd() ) ;
-			List<ServiceFunctionLogUtil> serviceFunctionLogUtilList = new ArrayList<ServiceFunctionLogUtil>();
-			for(int j = 0; j < serviceFunctionLogList.size(); j++){
-				/*******************设置一个controllerFunctionLogUtil**********************/
-				ServiceFunctionLogUtil serviceFunctionLogUtil = new ServiceFunctionLogUtil();
-				serviceFunctionLogUtil.setServiceFunctionLog( serviceFunctionLogList.get(j) );
-				List<DaoFunctionLog> daoFunctionLogList = um.getDaoFunctionLogByMultiParam(userName, 
-																																					serviceFunctionLogList.get(j).getDateTimeStart(), 
-																																					serviceFunctionLogList.get(j).getDateTimeEnd());
-				serviceFunctionLogUtil.setDaoFunctionLogList(daoFunctionLogList);
-				/********************************************************************************/
-				serviceFunctionLogUtilList.add( serviceFunctionLogUtil );
-			}
-			controllerFunctionLogUtil.setServiceFunctionLogUtilList(serviceFunctionLogUtilList);//serviceFunctionLogUtil对应值
-			/********************************************************************************/
-			controllerFunctionLogUtilList.add( controllerFunctionLogUtil );
-		}
+		List<FunctionLog> functionLogList = um.getFunctionLogByDatetime(logDateTimeStart, logDateTimeEnd);
+		List<FunctionLogUtil> functionLogUtil = new ArrayList<FunctionLogUtil>();
+		for( int i = 0 ; i < functionLogList.size() ; i++ ){
+			??
+		} 
+		
+		
 		//先根据条件查询controller，在根据时间约束，逐条查询service；同样的，进行查询dao。
 		//最后返回值组成一个ArrayList。
 		//返回给前台，去显示。

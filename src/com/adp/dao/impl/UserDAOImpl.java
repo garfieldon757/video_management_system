@@ -12,10 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
 import com.adp.model.AuthorizationRoleRelation;
-import com.adp.model.ControllerFunctionLog;
-import com.adp.model.DaoFunctionLog;
+import com.adp.model.FunctionLog;
 import com.adp.model.Role;
-import com.adp.model.ServiceFunctionLog;
 import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
@@ -253,59 +251,26 @@ public class UserDAOImpl implements UserDAO{
 		int algorithmTotalNum =  Integer.parseInt( em.createQuery(jpql).getResultList().get(0).toString() ) ;
 		return algorithmTotalNum;
 	}
-
+	
 	@Override
-	public List<DaoFunctionLog> getDaoFunctionLogByMultiParam(String userName, 
-																											String daoLogDateTimeStart,
-																											String daoLogDateTimeEnd) {
-		String jpql = "select dfl from DaoFunctionLog dfl where dfl.user.userName =:userName"
-				+ " and dfl.dateTime >:daoLogDateTimeStart and dfl.dateTime <:daoLogDateTimeEnd ";
-		List<DaoFunctionLog> dfl = em.createQuery(jpql).setParameter("userName", userName)
-																					.setParameter("daoLogDateTimeStart", daoLogDateTimeStart)
-																					.setParameter("daoLogDateTimeEnd", daoLogDateTimeEnd)
-																					.getResultList();
-		
-		return dfl;
+	public List<FunctionLog> getFunctionLogByDatetime(String dateTimeStart, String dateTimeEnd) {
+		String jpql = "select fl FunctionLog fl where fl.dateTimeStart > dateTimeStart and fl.dateTimeEnd < dateTimeEnd";
+		List<FunctionLog> functionLogList = em.createQuery(jpql).setParameter("dateTimeStart", dateTimeStart)
+																									.setParameter("dateTimeEnd", dateTimeEnd)
+																									.getResultList();
+		return functionLogList;
 	}
 
 	@Override
-	public List<ServiceFunctionLog> getServiceFunctionLogByMultiParam(String userName, String serviceLogDateTimeStart,
-																																					String serviceLogDateTimeEnd) {
+	public List<FunctionLog> getSubFunctionLogByFatherFunctionID(int fatherFunctionID) {
 		
-		String jpql = "select sfl from ServiceFunctionLog sfl where sfl.user.userName =:userName"
-				+ " and sfl.dateTimeStart >:serviceLogDateTimeStart and sfl.dateTimeEnd <:serviceLogDateTimeEnd ";
-		List<ServiceFunctionLog> sfl = em.createQuery(jpql).setParameter("userName", userName)
-																					.setParameter("serviceLogDateTimeStart", serviceLogDateTimeStart)
-																					.setParameter("serviceLogDateTimeEnd", serviceLogDateTimeEnd)
-																					.getResultList();
-		
-		return sfl;
+		String jpql = "select fl from FunctionLog fl where fl.fatherFunctionID =:fatherFunctionID ";
+		List<FunctionLog> subFunctionLogList = em.createQuery(jpql).setParameter("fatherFunctionID", fatherFunctionID).getResultList();
+				
+		return subFunctionLogList;
 	}
 
-	@Override
-	public List<ControllerFunctionLog> getControllerFunctionLogByMultiParam(String userName, String controllerLogDateTimeStart, 
-																																								String controllerLogDateTimeEnd) {
-		
-		String jpql = "select cfl from ControllerFunctionLog cfl where cfl.user.userName =:userName"
-				+ " and cfl.dateTimeStart >:controllerLogDateTimeStart and cfl.dateTimeEnd <:controllerLogDateTimeEnd ";
-		List<ControllerFunctionLog> cfl = em.createQuery(jpql).setParameter("userName", userName)
-																					.setParameter("controllerLogDateTimeStart", controllerLogDateTimeStart)
-																					.setParameter("controllerLogDateTimeEnd", controllerLogDateTimeEnd)
-																					.getResultList();
-		
-		return cfl;
-	}
 
-	
-	
-	
-	
-	
-
-	
-
-	
-	
 	
 
 }

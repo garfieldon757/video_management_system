@@ -4,10 +4,8 @@ import java.util.List;
 
 import com.adp.model.AuthorizationList;
 import com.adp.model.AuthorizationRoleRelation;
-import com.adp.model.ControllerFunctionLog;
-import com.adp.model.DaoFunctionLog;
+import com.adp.model.FunctionLog;
 import com.adp.model.Role;
-import com.adp.model.ServiceFunctionLog;
 import com.adp.model.User;
 import com.adp.model.Video;
 import com.adp.model.VideoCategory;
@@ -41,9 +39,8 @@ public interface UserDAO {
 	public int getSpecificAuthListTotalNum(String authStatus);
 	public int getVideoTotalNum();
 	public int getAlgorithmTotalNum();
-	public List<DaoFunctionLog> getDaoFunctionLogByMultiParam(String userName , String daoLogDateTimeStart , String daoLogDateTimeEnd);
-	public List<ServiceFunctionLog> getServiceFunctionLogByMultiParam(String userName , String serviceLogDateTimeStart , String serviceLogDateTimeEnd);
-	public List<ControllerFunctionLog> getControllerFunctionLogByMultiParam(String userName , String controllerLogDateTimeStart , String controllerLogDateTimeEnd);
+	public List<FunctionLog> getFunctionLogByDatetime(String dateTimeStart , String dateTimeEnd);
+	public List<FunctionLog> getSubFunctionLogByFatherFunctionID(int fatherFunctionID);
 	
 	
 }
