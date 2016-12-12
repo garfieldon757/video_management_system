@@ -28,7 +28,7 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="roleID")
     private Role role;////0代表未申请，1代表正在申请待审核
-    private int apply_status;// 0-未申请 1-申请待审核 2-申请通过 3-申请被拒绝
+    private Integer apply_status;// 0-未申请 1-申请待审核 2-申请通过 3-申请被拒绝
     
     @OneToMany(mappedBy = "giveAuthUser", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
     private List<AuthorizationList> giveAuthUserList = new ArrayList<AuthorizationList>();
@@ -46,8 +46,8 @@ public class User {
 	private List<ProcessLog> processLogList = new ArrayList<ProcessLog>();
     
     @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
-	private List<DaoFunctionLog> daoFunctionLog = new ArrayList<DaoFunctionLog>();
-
+	private List<FunctionLog> functionLogList = new ArrayList<FunctionLog>();
+    
 
 	public Integer getUserID() {
 		return userID;
@@ -137,20 +137,13 @@ public class User {
 		this.processLogList = processLogList;
 	}
 
-	public int getApply_status() {
+	public Integer getApply_status() {
 		return apply_status;
 	}
 
-	public void setApply_status(int apply_status) {
+	public void setApply_status(Integer apply_status) {
 		this.apply_status = apply_status;
 	}
-	
-	public List<DaoFunctionLog> getDaoFunctionLog() {
-		return daoFunctionLog;
-	}
 
-	public void setDaoFunctionLog(List<DaoFunctionLog> daoFunctionLog) {
-		this.daoFunctionLog = daoFunctionLog;
-	}
     
 }

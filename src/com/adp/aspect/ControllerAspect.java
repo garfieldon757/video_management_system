@@ -17,7 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.adp.dao.AspectDAO;
-import com.adp.model.ControllerFunction;
+import com.adp.model.Function;
 import com.adp.model.User;
 
 @Component
@@ -47,10 +47,10 @@ public class ControllerAspect {
 		HttpSession session=attr.getRequest().getSession(true);
 		User user = (User) session.getAttribute("user");
 		
-		String controllerFunctionUrl = joinPoint.getSignature().getName();
-		ControllerFunction controllerFunction = aspectDAO.getControllerFunction(controllerFunctionUrl); //获取ControllerFunction对象
+		String functionUrl = joinPoint.getSignature().getName();
+		Function function = aspectDAO.getFunction(functionUrl); //获取ControllerFunction对象
 
-		aspectDAO.addControllerFunctionLog(dateTimeStart, dateTimeEnd, user, controllerFunction);
+		aspectDAO.addFunctionLog(dateTimeStart, dateTimeEnd, user, function);
 		return result;
 	}	
 

@@ -31,6 +31,10 @@ public class Resource {
 	
 	@OneToMany(mappedBy = "resource", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	private List<Authorization> authList= new ArrayList<Authorization>();
+	
+	@OneToMany(mappedBy = "resource", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+	private List<Function> functionList= new ArrayList<Function>();
+
 
 	public Integer getResourceID() {
 		return resourceID;
@@ -72,6 +76,13 @@ public class Resource {
 		this.authList = authList;
 	}
 
+	public List<Function> getFunctionList() {
+		return functionList;
+	}
+
+	public void setFunctionList(List<Function> functionList) {
+		this.functionList = functionList;
+	}
 	
 	
 	

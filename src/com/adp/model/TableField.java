@@ -22,11 +22,19 @@ public class TableField {
 	private String tableName;
 	private String fieldName;
 	
-	@OneToMany(mappedBy = "daoFunction", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
-	private List<DaoFunctionTableFieldRelation> daoFunctionTableFieldRelationList = new ArrayList<DaoFunctionTableFieldRelation>();
+	@OneToMany(mappedBy = "tableField", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	private List<DaoFunctionUpdateDetail> daoFunctionUpdateDetailList = new ArrayList<DaoFunctionUpdateDetail>();
 
 	public Integer getTableFieldID() {
 		return tableFieldID;
+	}
+
+	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailList() {
+		return daoFunctionUpdateDetailList;
+	}
+
+	public void setDaoFunctionUpdateDetailList(List<DaoFunctionUpdateDetail> daoFunctionUpdateDetailList) {
+		this.daoFunctionUpdateDetailList = daoFunctionUpdateDetailList;
 	}
 
 	public void setTableFieldID(Integer tableFieldID) {
@@ -49,13 +57,13 @@ public class TableField {
 		this.fieldName = fieldName;
 	}
 
-	public List<DaoFunctionTableFieldRelation> getDaoFunctionTableFieldRelationList() {
-		return daoFunctionTableFieldRelationList;
+	public List<DaoFunctionUpdateDetail> getDaoFunctionTableFieldRelationList() {
+		return daoFunctionUpdateDetailList;
 	}
 
 	public void setDaoFunctionTableFieldRelationList(
-			List<DaoFunctionTableFieldRelation> daoFunctionTableFieldRelationList) {
-		this.daoFunctionTableFieldRelationList = daoFunctionTableFieldRelationList;
+			List<DaoFunctionUpdateDetail> daoFunctionUpdateDetailList) {
+		this.daoFunctionUpdateDetailList = daoFunctionUpdateDetailList;
 	}
 
 	
