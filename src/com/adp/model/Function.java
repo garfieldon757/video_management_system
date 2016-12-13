@@ -9,13 +9,20 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
-@Table(name = "Function")
+@Table(name = "Function",
+indexes = {
+		@Index( name="functionIndex",
+					  columnList=  "functionType , functionUrl, fatherFunctionID,resourceID"
+					)
+				}
+		)
 public class Function {
 
 	@Id//声明此列为主�?
@@ -26,7 +33,7 @@ public class Function {
 	private String functionType;
 	private String daoFunctionOpetationType;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="resourceID")
 	private Resource resource;
 	

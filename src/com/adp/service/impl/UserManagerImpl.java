@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
+import com.adp.model.DaoFunctionUpdateDetail;
 import com.adp.model.FunctionLog;
 import com.adp.model.Role;
 import com.adp.model.User;
@@ -292,17 +293,23 @@ public class UserManagerImpl implements UserManager{
 	}
 	
 	@Override
-	public List<FunctionLog> getFunctionLogByDatetime(String dateTimeStart, String dateTimeEnd) {
-		List<FunctionLog> functionLogList = userDAO.getFunctionLogByDatetime(dateTimeStart, dateTimeEnd);
+	public List<FunctionLog> getFunctionLogByDatetime(String userName, String dateTimeStart, String dateTimeEnd) {
+		List<FunctionLog> functionLogList = userDAO.getFunctionLogByDatetime(userName, dateTimeStart, dateTimeEnd);
 		return functionLogList;
 	}
 
 	@Override
-	public List<FunctionLog> getSubFunctionLogByFatherFunctionID(int fatherFunctionID) {
+	public List<FunctionLog> getSubFunctionLogByFatherFunctionIDAndDateTime(int fatherFunctionID, String dateTimeStart, String dateTimeEnd) {
 		
-		List<FunctionLog> subFunctionLogList = userDAO.getSubFunctionLogByFatherFunctionID(fatherFunctionID);
+		List<FunctionLog> subFunctionLogList = userDAO.getSubFunctionLogByFatherFunctionIDAndDateTime(fatherFunctionID, dateTimeStart, dateTimeEnd);
 		
 		return subFunctionLogList;
+	}
+
+	@Override
+	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailByFunctionLogID(String functionLogID) {
+		List<DaoFunctionUpdateDetail> daoFunctionUpdateDetail = userDAO.getDaoFunctionUpdateDetailByFunctionLogID(functionLogID);
+		return daoFunctionUpdateDetail;
 	}
 
 

@@ -1,6 +1,7 @@
 package com.adp.controller;
 
-import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,31 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.adp.model.Algorithm;
 import com.adp.model.AuthorizationList;
-import com.adp.model.AuthorizationRoleRelation;
+import com.adp.model.DaoFunctionUpdateDetail;
 import com.adp.model.FunctionLog;
-import com.adp.model.Role;
 import com.adp.model.User;
-import com.adp.model.Video;
-import com.adp.model.VideoCategory;
 import com.adp.service.AlgorithmManager;
 import com.adp.service.UserManager;
 import com.adp.service.VideoManager;
-import com.adp.service.impl.UserManagerImpl;
-import com.adp.util.ControllerFunctionLogUtil;
 import com.adp.util.FunctionLogUtil;
-import com.adp.util.ServiceFunctionLogUtil;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -53,13 +43,101 @@ public class UserController {
 	@Autowired(required=true)
 	AlgorithmManager am;
 	
-	@RequestMapping(value="controllerFunctionTest")
-	public void controllerFunctionTest(){
-		System.out.println("This is controllerFunctionTest in UserController!!!!!!!!!!!!!!!!!!!");
+	@RequestMapping(value="plainTest")
+	public void plainTest(){
 		
-//		ApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml" , Main.class);
-//		UserManagerImpl umi = context.getBean(UserManagerImpl.class);
-//		umi.aopTest();
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
+		
+		for(int i=0; i<32; i++){
+			for(int j=0; j<5; j++){
+				for(int k=0; k<3; k++){
+					
+				}
+			}
+		}
+		System.out.println("***********************plain test1*********************");
+		now = new Timestamp(System.currentTimeMillis()); 
+		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
+		
+		System.out.println("************************" + dateTimeStart + "************************");
+		System.out.println("************************" + dateTimeEnd + "************************");
+		
+		return ;
+	}
+	
+	@RequestMapping(value="plainTest2")
+	public void plainTest2(){
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
+		
+		for(int i=0; i<32; i++){
+			for(int j=0; j<5; j++){
+				for(int k=0; k<3; k++){
+					um.getFunctionLogByDatetime("maninit", "2016-12-13 15:30:43" , "2016-12-13 15:32:43");
+				}
+			}
+		}
+		System.out.println("***********************plain test2*********************");
+		now = new Timestamp(System.currentTimeMillis()); 
+		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
+		
+		System.out.println("************************" + dateTimeStart + "************************");
+		System.out.println("************************" + dateTimeEnd + "************************");
+		
+		return ;
+	}
+	
+	@RequestMapping(value="plainTest3")
+	public void plainTest3(){
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
+		
+		for(int i=0; i<32; i++){
+			for(int j=0; j<5; j++){
+				um.getFunctionLogByDatetime("maninit", "2016-12-13 15:30:43" , "2016-12-13 15:32:43");
+				for(int k=0; k<3; k++){
+					um.getFunctionLogByDatetime("maninit", "2016-12-13 15:30:43" , "2016-12-13 15:32:43");
+				}
+			}
+		}
+		System.out.println("***********************plain test3*********************");
+		now = new Timestamp(System.currentTimeMillis()); 
+		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
+		
+		System.out.println("************************" + dateTimeStart + "************************");
+		System.out.println("************************" + dateTimeEnd + "************************");
+		
+		return ;
+	}
+	
+	@RequestMapping(value="plainTest4")
+	public void plainTest4(){
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
+		
+		um.getFunctionLogByDatetime("maninit", "2016-12-13 15:30:43" , "2016-12-13 15:32:43");
+		
+		for(int i=0; i<32; i++){
+			um.getSubFunctionLogByFatherFunctionIDAndDateTime(121, "2016-12-13 15:30:43" , "2016-12-13 15:32:43");
+			for(int j=0; j<5; j++){
+
+				um.getSubFunctionLogByFatherFunctionIDAndDateTime(121, "2016-12-13 15:30:43" , "2016-12-13 15:32:43");
+			}
+		}
+		System.out.println("***********************plain test4*********************");
+		now = new Timestamp(System.currentTimeMillis()); 
+		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
+		
+		System.out.println("************************" + dateTimeStart + "************************");
+		System.out.println("************************" + dateTimeEnd + "************************");
 		
 		return ;
 	}
@@ -316,10 +394,29 @@ public class UserController {
 		String logDateTimeStart = request.getParameter("logDateTimeStart");
 		String logDateTimeEnd = request.getParameter("logDateTimeEnd");
 		
-		List<FunctionLog> functionLogList = um.getFunctionLogByDatetime(logDateTimeStart, logDateTimeEnd);
-		List<FunctionLogUtil> functionLogUtil = new ArrayList<FunctionLogUtil>();
-		for( int i = 0 ; i < functionLogList.size() ; i++ ){
-			??
+		List<FunctionLog> controllerFunctionLogList = um.getFunctionLogByDatetime(userName, logDateTimeStart, logDateTimeEnd);
+		List<FunctionLogUtil> controllerFunctionLogUtilList = new ArrayList<FunctionLogUtil>();
+		for( int i = 0 ; i < controllerFunctionLogList.size() ; i++ ){
+			if( controllerFunctionLogList.get(i).getFunction().getFunctionUrl().equals("logSearch") ){
+                continue;
+            }//将“logSearch”这一controllerFunction加入黑名单，因为查询负担太重
+			FunctionLogUtil controllerFunctionLogUtil = new FunctionLogUtil();
+			controllerFunctionLogUtil.setFunctionLog( controllerFunctionLogList.get(i) );
+			
+			List<FunctionLog> serviceFunctionLogList = um.getSubFunctionLogByFatherFunctionIDAndDateTime( controllerFunctionLogList.get(i).getFunction().getFunctionID() , controllerFunctionLogList.get(i).getDateTimeStart(), controllerFunctionLogList.get(i).getDateTimeEnd() );
+			List<FunctionLogUtil> serviceFunctionLogUtilList = new ArrayList<FunctionLogUtil>();
+			for(int j=0; j < serviceFunctionLogList.size(); j++){
+				FunctionLogUtil serviceFunctionLogUtil = new FunctionLogUtil();
+				serviceFunctionLogUtil.setFunctionLog( serviceFunctionLogList.get(j) );
+				
+				List<FunctionLog> daoFunctionLogList = um.getSubFunctionLogByFatherFunctionIDAndDateTime( serviceFunctionLogList.get(j).getFunction().getFunctionID() , serviceFunctionLogList.get(j).getDateTimeStart(), serviceFunctionLogList.get(j).getDateTimeEnd() );
+				
+				serviceFunctionLogUtil.setSubFunctionLogList( daoFunctionLogList );;
+				serviceFunctionLogUtilList.add( serviceFunctionLogUtil );
+			}
+			
+			controllerFunctionLogUtil.setSubFunctionLogUtilList( serviceFunctionLogUtilList );
+			controllerFunctionLogUtilList.add( controllerFunctionLogUtil );
 		} 
 		
 		
@@ -330,6 +427,17 @@ public class UserController {
 		mv.addObject( "controllerFunctionLogUtilList" , controllerFunctionLogUtilList  );
 		
 		return mv;
+	}
+	
+	@RequestMapping("ajax_searchDaoFunctionUpdateDetailByFunctionLogID")
+	@ResponseBody
+	public String ajax_searchDaoFunctionUpdateDetailByFunctionLogID(String functionLogID){
+		
+		List<DaoFunctionUpdateDetail> daoFunctionUpdateDetail = um.getDaoFunctionUpdateDetailByFunctionLogID(functionLogID);
+
+		String s = JSONArray.fromObject(daoFunctionUpdateDetail).toString();
+		
+		return s;	
 	}
 	
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.adp.model.AuthorizationList;
+import com.adp.model.DaoFunctionUpdateDetail;
 import com.adp.model.FunctionLog;
 import com.adp.model.User;
 
@@ -36,6 +37,7 @@ public interface UserManager {
 	public HashMap<String , Integer> getAuthListMonitorData();
 	public HashMap<String, Integer> getVideoMonitorData();
 	public HashMap<String, Integer> getAlgorithmMonitorData();
-	public List<FunctionLog> getFunctionLogByDatetime(String dateTimeStart , String dateTimeEnd);
-	public List<FunctionLog> getSubFunctionLogByFatherFunctionID(int fatherFunctionID);
+	public List<FunctionLog> getFunctionLogByDatetime(String userName, String dateTimeStart , String dateTimeEnd);
+	public List<FunctionLog> getSubFunctionLogByFatherFunctionIDAndDateTime(int fatherFunctionID, String dateTimeStart, String dateTimeEnd);
+	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailByFunctionLogID(String functionLogID);
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.adp.dao.UserDAO;
 import com.adp.model.AuthorizationList;
 import com.adp.model.AuthorizationRoleRelation;
+import com.adp.model.DaoFunctionUpdateDetail;
 import com.adp.model.FunctionLog;
 import com.adp.model.Role;
 import com.adp.model.User;
@@ -253,21 +254,34 @@ public class UserDAOImpl implements UserDAO{
 	}
 	
 	@Override
-	public List<FunctionLog> getFunctionLogByDatetime(String dateTimeStart, String dateTimeEnd) {
-		String jpql = "select fl FunctionLog fl where fl.dateTimeStart > dateTimeStart and fl.dateTimeEnd < dateTimeEnd";
-		List<FunctionLog> functionLogList = em.createQuery(jpql).setParameter("dateTimeStart", dateTimeStart)
+	public List<FunctionLog> getFunctionLogByDatetime(String userName, String dateTimeStart, String dateTimeEnd) {
+		String functionType = "controller";
+		String jpql = "select fl from FunctionLog fl where fl.user.userName =:userName and fl.dateTimeStart >:dateTimeStart and fl.dateTimeEnd <:dateTimeEnd and fl.function.functionType =:functionType";
+		List<FunctionLog> functionLogList = em.createQuery(jpql).setParameter("userName", userName)
+																									.setParameter("dateTimeStart", dateTimeStart)
 																									.setParameter("dateTimeEnd", dateTimeEnd)
+																									.setParameter("functionType", functionType )
 																									.getResultList();
 		return functionLogList;
 	}
 
 	@Override
-	public List<FunctionLog> getSubFunctionLogByFatherFunctionID(int fatherFunctionID) {
+	public List<FunctionLog> getSubFunctionLogByFatherFunctionIDAndDateTime(int fatherFunctionID, String dateTimeStart, String dateTimeEnd) {
 		
-		String jpql = "select fl from FunctionLog fl where fl.fatherFunctionID =:fatherFunctionID ";
-		List<FunctionLog> subFunctionLogList = em.createQuery(jpql).setParameter("fatherFunctionID", fatherFunctionID).getResultList();
+		String jpql = "select fl from FunctionLog fl where fl.function.function.functionID =:fatherFunctionID and fl.dateTimeStart >=:dateTimeStart and fl.dateTimeEnd <=:dateTimeEnd ";
+		List<FunctionLog> subFunctionLogList = em.createQuery(jpql).setParameter("fatherFunctionID", fatherFunctionID)
+																											.setParameter("dateTimeStart", dateTimeStart)
+																											.setParameter("dateTimeEnd", dateTimeEnd)
+																											.getResultList();
 				
 		return subFunctionLogList;
+	}
+
+	@Override
+	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailByFunctionLogID(String functionLogID) {
+		String jpql = "select dfud from DaoFunctionUpdateDetail dfud where dfud.functionLog.functionLogID =:functionLogID ";
+		List<DaoFunctionUpdateDetail> daoFunctionUpdateDetail = em.createQuery(jpql).setParameter("functionLogID", Integer.parseInt( functionLogID ) ).getResultList();
+		return daoFunctionUpdateDetail;
 	}
 
 

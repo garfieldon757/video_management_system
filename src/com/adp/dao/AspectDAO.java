@@ -10,7 +10,7 @@ public interface AspectDAO {
 
 	
 	//整理是重构之后的新方法
-	public Function getFunction(String functionUrl);
+	public Function getFunction(String functionUrl , String functionType);
 	public Integer addFunctionLog(String dateTimeStart, String dateTimeEnd, User user, Function function );
 	public FunctionLog getFunctionLogByFunctionLogID(int FunctionLogID);
 	public TableField getTableFieldByFieldName(String fieldName);

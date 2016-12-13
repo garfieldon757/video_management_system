@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.adp.model.AuthorizationList;
 import com.adp.model.AuthorizationRoleRelation;
+import com.adp.model.DaoFunctionUpdateDetail;
 import com.adp.model.FunctionLog;
 import com.adp.model.Role;
 import com.adp.model.User;
@@ -39,8 +40,8 @@ public interface UserDAO {
 	public int getSpecificAuthListTotalNum(String authStatus);
 	public int getVideoTotalNum();
 	public int getAlgorithmTotalNum();
-	public List<FunctionLog> getFunctionLogByDatetime(String dateTimeStart , String dateTimeEnd);
-	public List<FunctionLog> getSubFunctionLogByFatherFunctionID(int fatherFunctionID);
-	
+	public List<FunctionLog> getFunctionLogByDatetime(String userName, String dateTimeStart , String dateTimeEnd);
+	public List<FunctionLog> getSubFunctionLogByFatherFunctionIDAndDateTime(int fatherFunctionID, String dateTimeStart, String dateTimeEnd);
+	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailByFunctionLogID(String functionLogID);
 	
 }

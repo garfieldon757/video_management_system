@@ -9,13 +9,20 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
-@Table(name = "FunctionLog")
+@Table(name = "FunctionLog",
+	indexes = {
+			@Index( name="functionLogIndex",
+						  columnList=  "userID , functionID"
+						)
+					}
+			)
 public class FunctionLog {
 
 	@Id//声明此列为主�?

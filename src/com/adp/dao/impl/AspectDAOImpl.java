@@ -2,6 +2,7 @@ package com.adp.dao.impl;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,11 +28,16 @@ public class AspectDAOImpl implements AspectDAO {
 	//从这里开始，是重构之后开始写的方法
 	
 	@Override
-	public Function getFunction(String functionUrl) {
-		String jpql = "select f from Function f where f.functionUrl =:functionUrl";
-		Function f =  (Function) em.createQuery(jpql).setParameter("functionUrl", functionUrl)
-																							.getResultList().get(0);
-		return f;
+	public Function getFunction(String functionUrl , String functionType) {
+		String jpql = "select f from Function f where f.functionUrl =:functionUrl and f.functionType =:functionType ";
+		List<Function> fList = em.createQuery(jpql).setParameter("functionUrl", functionUrl)
+																			.setParameter("functionType", functionType)
+																			.getResultList();
+		if(fList.size() != 0){
+			return fList.get(0);
+		}else{
+			return null;
+		}
 	}
 	
 	@Override
@@ -50,7 +56,7 @@ public class AspectDAOImpl implements AspectDAO {
 	
 	@Override
 	public FunctionLog getFunctionLogByFunctionLogID(int functionLogID) {
-		String jpql = "select dfl from DaoFunctionLog dfl where dfl.functionLogID =:functionLogID";
+		String jpql = "select fl from FunctionLog fl where fl.functionLogID =:functionLogID";
 		FunctionLog functionLog = (FunctionLog) em.createQuery(jpql).setParameter("functionLogID", functionLogID)
 																								.getResultList().get(0);
 		return functionLog;

@@ -8,8 +8,9 @@ public class FunctionLogUtil {
 
 	private FunctionLog functionLog;
 	private List<FunctionLogUtil> subFunctionLogUtilList;
+	private List<FunctionLog> subFunctionLogList;//dao层使用
 	
-	
+
 	public FunctionLog getFunctionLog() {
 		return functionLog;
 	}
@@ -23,4 +24,10 @@ public class FunctionLogUtil {
 		this.subFunctionLogUtilList = subFunctionLogUtilList;
 	}
 	
+	public List<FunctionLog> getSubFunctionLogList() {
+		return subFunctionLogList;
+	}
+	public void setSubFunctionLogList(List<FunctionLog> subFunctionLogList) {
+		this.subFunctionLogList = subFunctionLogList;
+	}
 }

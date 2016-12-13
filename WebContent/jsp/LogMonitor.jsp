@@ -180,13 +180,14 @@
 			                                            <ul class="list-group">
 				                                            <c:forEach items="${ controllerFunctionLogUtilList }" var="controllerFunctionLogUtil">
 				                                                <li class="list-group-item">
-				                                                	<p class="text-success"> ${ fn:substring( controllerFunctionLogUtil.controllerFunctionLog.dateTimeStart , 0 , 19 ) }    ：【Controller】${ controllerFunctionLogUtil.controllerFunctionLog.controllerFunction.controllerFunctionUrl }</p>
-					                                                <c:forEach items="${ controllerFunctionLogUtil.serviceFunctionLogUtilList }" var="serviceFunctionLogUtil">
-					                                                	<p class="text-muted">${ fn:substring( serviceFunctionLogUtil.serviceFunctionLog.dateTimeStart , 0 , 19 ) }   ：【Service】${ serviceFunctionLogUtil.serviceFunctionLog.serviceFunction.serviceFunctionUrl }</p>
-					                                                	<c:forEach items="${ serviceFunctionLogUtil.daoFunctionLogList }" var="daoFunctionLog">
+				                                                <p class="text-success">【资源描述】${ controllerFunctionLogUtil.functionLog.function.resource.resourceDescription }</p>
+				                                                	<p class="text-success"> ${ fn:substring( controllerFunctionLogUtil.functionLog.dateTimeStart , 0 , 19 ) }    ：【Controller】${ controllerFunctionLogUtil.functionLog.function.functionUrl }</p>
+					                                                <c:forEach items="${ controllerFunctionLogUtil.subFunctionLogUtilList }" var="serviceFunctionLogUtil">
+					                                                	<p class="text-muted">${ fn:substring( serviceFunctionLogUtil.functionLog.dateTimeStart , 0 , 19 ) }   ：【Service】${ serviceFunctionLogUtil.functionLog.function.functionUrl }</p>
+					                                                	<c:forEach items="${ serviceFunctionLogUtil.subFunctionLogList }" var="daoFunctionLog">
 						                                                	<p class="text-danger">
-						                                                		${ fn:substring( daoFunctionLog.dateTime , 0 , 19 ) }   ：【DAO】${ daoFunctionLog.daoFunction.daoFunctionUrl }
-						                                                		<button type="button" id="??" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">数据库操作详情</button>
+						                                                		${ fn:substring( daoFunctionLog.dateTimeStart , 0 , 19 ) }   ：【DAO】${ daoFunctionLog.function.functionUrl }
+						                                                		<button type="button" id="${ daoFunctionLog.functionLogID }" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="fillDataIntoModelDiv( ${ daoFunctionLog.functionLogID } )">数据库操作详情</button>
 					                                                		</p>
 						                                                </c:forEach>
 					                                                </c:forEach>
@@ -232,8 +233,10 @@
 			      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 			      <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
 			    </div>
-			    <div class="modal-body">
-			      ...
+			    <div id="modal-body" class="modal-body">
+			      		
+			    	
+			    
 			    </div>
 			      
 		  </div>
@@ -248,6 +251,23 @@
 
 
 <script type="text/javascript">
+
+	function fillDataIntoModelDiv( functionLogID ){
+		//alert(functionLogID);
+		$.ajax({
+			url:"ajax_searchDaoFunctionUpdateDetailByFunctionLogID",
+			data:{
+				functionLogID : 85517//functionLogID
+			},
+			type:"GET",
+			success:function(response){
+			
+				alert(response);
+				
+		}
+		})
+		
+	}
 
 	$("ducument").ready(function(){
 		

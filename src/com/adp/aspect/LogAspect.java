@@ -29,12 +29,12 @@ public class LogAspect {
 	@Autowired(required=true)
 	private UserDAO userDAO;
 	
-	@Pointcut( value="execution( public * com.adp.controller.UserController.*(..)) || execution( public * com.adp.dao.impl.UserDAOImpl.*(..)) || execution( public * com.adp.service.impl.UserManagerImpl.*(..)) " ) 
-	public void log_Aspect()
+	@Pointcut( value="execution( public * com.adp.controller.UserController.*(..))" ) 
+	public void log_controller_Aspect()
 	{	}
 	
-	@Around(  value="log_Aspect()" )
-	public Object log_Aspect(ProceedingJoinPoint joinPoint) throws Throwable
+	@Around(  value="log_controller_Aspect()" )
+	public Object log_controller_Aspect(ProceedingJoinPoint joinPoint) throws Throwable
 	{
 		Timestamp now = new Timestamp(System.currentTimeMillis()); 
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
@@ -50,7 +50,64 @@ public class LogAspect {
 		User user = (User) session.getAttribute("user");
 
 		String functionUrl = joinPoint.getSignature().getName();
-		Function function = aspectDAO.getFunction( functionUrl );//获取DaoFunction对象
+		String functionType = "controller";
+		Function function = aspectDAO.getFunction( functionUrl , functionType );//获取controllerFunction对象
+		aspectDAO.addFunctionLog( dateTimeStart, dateTimeEnd, user, function);
+		
+		return result;
+	}	
+	
+	@Pointcut( value="execution( public * com.adp.service.impl.UserManagerImpl.*(..))" ) 
+	public void log_service_Aspect()
+	{	}
+	
+	@Around(  value="log_service_Aspect()" )
+	public Object log_service_Aspect(ProceedingJoinPoint joinPoint) throws Throwable
+	{
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
+		
+		Object result = joinPoint.proceed();
+		
+		now = new Timestamp(System.currentTimeMillis()); 
+		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
+		
+		ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+		HttpSession session=attr.getRequest().getSession(true);
+		User user = (User) session.getAttribute("user");
+
+		String functionUrl = joinPoint.getSignature().getName();
+		String functionType = "service";
+		Function function = aspectDAO.getFunction( functionUrl , functionType );//获取serviceFunction对象
+		aspectDAO.addFunctionLog( dateTimeStart, dateTimeEnd, user, function);
+		
+		return result;
+	}	
+	
+	@Pointcut( value=" execution( public * com.adp.dao.impl.UserDAOImpl.*(..)) && !execution( public * com.adp.dao.impl.UserDAOImpl.updateUser(..) ) " ) 
+	public void log_dao_Aspect()
+	{	}
+	
+	@Around(  value="log_dao_Aspect()" )
+	public Object log_dao_Aspect(ProceedingJoinPoint joinPoint) throws Throwable
+	{
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
+		
+		Object result = joinPoint.proceed();
+		
+		now = new Timestamp(System.currentTimeMillis()); 
+		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
+		
+		ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+		HttpSession session=attr.getRequest().getSession(true);
+		User user = (User) session.getAttribute("user");
+
+		String functionUrl = joinPoint.getSignature().getName();
+		String functionType = "dao";
+		Function function = aspectDAO.getFunction( functionUrl , functionType );//获取DaoFunction对象
 		aspectDAO.addFunctionLog( dateTimeStart, dateTimeEnd, user, function);
 		
 		return result;
@@ -83,7 +140,8 @@ public class LogAspect {
 		User user = (User) session.getAttribute("user");
 
 		String functionUrl = joinPoint.getSignature().getName();
-		Function function = aspectDAO.getFunction( functionUrl );//获取DaoFunction对象
+		String functionType = "dao";
+		Function function = aspectDAO.getFunction( functionUrl , functionType );//获取DaoFunction对象
 		int functionLogID = aspectDAO.addFunctionLog( dateTimeStart, dateTimeEnd, user, function);
 		
 		
@@ -101,7 +159,6 @@ public class LogAspect {
 		
 		//向DaoFunctionUpdateDetail表中插入
 		for(int i = 0 ; i < updateFieldList.size() ; i++){
-			
 			aspectDAO.addDaoFunctionUpdateDetail( functionLogID , updateFieldList.get(i), oldValueList.get(i), newValueList.get(i) );
 		}
 		/*********************************************************************************************************************/
