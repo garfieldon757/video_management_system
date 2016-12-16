@@ -42,6 +42,13 @@
         </mvc:interceptor>
     </mvc:interceptors>
     
+    <!--  <mvc:interceptors> 
+        开启openSessionInView
+        <bean class="org.springframework.orm.hibernate5.support.OpenSessionInViewInterceptor">  
+          <property name="sessionFactory" ref="sessionFactory" />  
+        </bean>
+    </mvc:interceptors> -->
+    
     <aop:aspectj-autoproxy proxy-target-class="false"/>
     
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -1,5 +1,7 @@
 package com.adp.dao.impl;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -257,11 +259,24 @@ public class UserDAOImpl implements UserDAO{
 	public List<FunctionLog> getFunctionLogByDatetime(String userName, String dateTimeStart, String dateTimeEnd) {
 		String functionType = "controller";
 		String jpql = "select fl from FunctionLog fl where fl.user.userName =:userName and fl.dateTimeStart >:dateTimeStart and fl.dateTimeEnd <:dateTimeEnd and fl.function.functionType =:functionType";
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+		String dateTimeStart_dao = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
+		
+		System.out.println("dao:" + dateTimeStart_dao);
+		
 		List<FunctionLog> functionLogList = em.createQuery(jpql).setParameter("userName", userName)
 																									.setParameter("dateTimeStart", dateTimeStart)
 																									.setParameter("dateTimeEnd", dateTimeEnd)
 																									.setParameter("functionType", functionType )
 																									.getResultList();
+		
+		now = new Timestamp(System.currentTimeMillis()); 
+		String dateTimeEnd_dao = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
+		
+		System.out.println("dao" + dateTimeEnd_dao);
+		
 		return functionLogList;
 	}
 

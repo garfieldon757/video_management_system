@@ -70,23 +70,7 @@ public class UserController {
 	@RequestMapping(value="plainTest2")
 	public void plainTest2(){
 		
-		Timestamp now = new Timestamp(System.currentTimeMillis()); 
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
-		
-		for(int i=0; i<32; i++){
-			for(int j=0; j<5; j++){
-				for(int k=0; k<3; k++){
-					um.getFunctionLogByDatetime("maninit", "2016-12-13 15:30:43" , "2016-12-13 15:32:43");
-				}
-			}
-		}
-		System.out.println("***********************plain test2*********************");
-		now = new Timestamp(System.currentTimeMillis()); 
-		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
-		
-		System.out.println("************************" + dateTimeStart + "************************");
-		System.out.println("************************" + dateTimeEnd + "************************");
+		um.getUser(1);
 		
 		return ;
 	}
@@ -393,8 +377,18 @@ public class UserController {
 		String userName = request.getParameter("userName");
 		String logDateTimeStart = request.getParameter("logDateTimeStart");
 		String logDateTimeEnd = request.getParameter("logDateTimeEnd");
+	
+		Timestamp now = new Timestamp(System.currentTimeMillis()); 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+		String dateTimeStart = df.format(now);//记录controller方法执行的起始时间，精确到毫秒
+		System.out.println(dateTimeStart);
 		
 		List<FunctionLog> controllerFunctionLogList = um.getFunctionLogByDatetime(userName, logDateTimeStart, logDateTimeEnd);
+		
+		now = new Timestamp(System.currentTimeMillis()); 
+		String dateTimeEnd = df.format(now);//记录controller方法执行的终止时间，精确到毫秒
+		System.out.println(dateTimeEnd);
+		
 		List<FunctionLogUtil> controllerFunctionLogUtilList = new ArrayList<FunctionLogUtil>();
 		for( int i = 0 ; i < controllerFunctionLogList.size() ; i++ ){
 			if( controllerFunctionLogList.get(i).getFunction().getFunctionUrl().equals("logSearch") ){
@@ -403,8 +397,12 @@ public class UserController {
 			FunctionLogUtil controllerFunctionLogUtil = new FunctionLogUtil();
 			controllerFunctionLogUtil.setFunctionLog( controllerFunctionLogList.get(i) );
 			
+			
 			List<FunctionLog> serviceFunctionLogList = um.getSubFunctionLogByFatherFunctionIDAndDateTime( controllerFunctionLogList.get(i).getFunction().getFunctionID() , controllerFunctionLogList.get(i).getDateTimeStart(), controllerFunctionLogList.get(i).getDateTimeEnd() );
-			List<FunctionLogUtil> serviceFunctionLogUtilList = new ArrayList<FunctionLogUtil>();
+
+			
+		
+						List<FunctionLogUtil> serviceFunctionLogUtilList = new ArrayList<FunctionLogUtil>();
 			for(int j=0; j < serviceFunctionLogList.size(); j++){
 				FunctionLogUtil serviceFunctionLogUtil = new FunctionLogUtil();
 				serviceFunctionLogUtil.setFunctionLog( serviceFunctionLogList.get(j) );
@@ -434,10 +432,11 @@ public class UserController {
 	public String ajax_searchDaoFunctionUpdateDetailByFunctionLogID(String functionLogID){
 		
 		List<DaoFunctionUpdateDetail> daoFunctionUpdateDetail = um.getDaoFunctionUpdateDetailByFunctionLogID(functionLogID);
-
+//		String ss = "";
+//		System.out.println(ss);
 		String s = JSONArray.fromObject(daoFunctionUpdateDetail).toString();
 		
-		return s;	
+		return s ;	
 	}
 	
 }

@@ -24,24 +24,16 @@
 	<context:annotation-config/>
 	<aop:aspectj-autoproxy />
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
 	
-	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
+	<!-- 数据库映射 -->
+    <!--  class="org.apache.tomcat.dbcp.dbcp.BasicDataSource" -->
+    <!--  class="org.springframework.jdbc.datasource.DriverManagerDataSource" -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/hibernate_first"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="123456"></property>
-	</bean>
-	
-		<!--
-		指定实现JPA的适配器，主要作用如下：
-		1、取代persistence.xml中的<provider>
-		2、指定方言
-		3、通知“entityManagerFactory”产生什么样的entityManager
-		4、还可以使用EclipseLinkJpaVendorAdapter(Toplink)，openJpaVendorAdapter
-	 -->
-	<bean id="hibernateJpaVendorAdapter"
-		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
 	</bean>
 	
 	<!-- JPA实体管理工厂的配置 使用@PersistenceContext会自动注入EntityManager,可以使用 @PersistenceUnit注入entityManagerFactory
@@ -49,25 +41,33 @@
 	 -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="ds" />
-		<property name="persistenceUnitName" value="un"></property>
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		<property name="dataSource" ref="dataSource" ></property>
+		<property name="persistenceUnitName" value="shit"></property>
+         <property name="jpaVendorAdapter">
+             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                 <property name="generateDdl" value="false" />
+             </bean>
+         </property>
 		<property name="packagesToScan" value="com.adp.model" /><!--待扫描的实体类包，不再需要persistence.xml了 -->
 		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
-				<!-- <prop key="hibernate.show_sql">true</prop>  -->
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+                 <prop key="hibernate.show_sql">true</prop>
+                 <prop key="javax.persistence.validation.mode">none</prop>
 			</props>
 		</property>
 	</bean>
-	
- 
 
-<!-- 指定了Hibernate的映射文件和配置信息 -->    
+	<!-- Jpa 事务配置 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<!-- 指定了Hibernate的映射文件和配置信息 -->    
     <bean id="sessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">    
-        <property name="dataSource" ref="ds" />     
+        <property name="dataSource" ref="dataSource" />     
         <property name="hibernateProperties">    
             <props>    
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>    
@@ -78,22 +78,11 @@
         </property>    
         <property name="packagesToScan" value="*" />            
     </bean>
+	
 
-	<!-- Jpa 事务配置 -->
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-	<!-- Spring Data Jpa配置 -->
-	<!-- <jpa:repositories base-package="dao.impl" transaction-manager-ref="transactionManager" 
-		entity-manager-factory-ref="entityManagerFactory"/> -->
-	
-	<!-- 
-		对使用@Transactional的方法启用AOP
-		proxy-target-class:表示是否对“目标类”启用代理。true:表示使用cglib方式(类)，false:表示使用Proxy方式（接口）
-	
-	-->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />
 		
+	
 	
 </beans>

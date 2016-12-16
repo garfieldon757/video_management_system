@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "TableField")//声明在数据库中自动生成的表名
 public class TableField {
@@ -23,6 +25,7 @@ public class TableField {
 	private String fieldName;
 	
 	@OneToMany(mappedBy = "tableField", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<DaoFunctionUpdateDetail> daoFunctionUpdateDetailList = new ArrayList<DaoFunctionUpdateDetail>();
 
 	public Integer getTableFieldID() {

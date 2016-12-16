@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "FunctionLog",
 	indexes = {
@@ -23,6 +26,7 @@ import javax.persistence.Table;
 						)
 					}
 			)
+@JsonIgnoreProperties(value={"daoFunctionUpdateDetailList"})  
 public class FunctionLog {
 
 	@Id//声明此列为主�?
@@ -86,6 +90,7 @@ public class FunctionLog {
 		this.dateTimeEnd = dateTimeEnd;
 	}
 
+	@JsonIgnore
 	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailList() {
 		return daoFunctionUpdateDetailList;
 	}

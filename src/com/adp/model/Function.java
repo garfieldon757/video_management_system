@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "Function",
 indexes = {
@@ -33,7 +35,7 @@ public class Function {
 	private String functionType;
 	private String daoFunctionOpetationType;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="resourceID")
 	private Resource resource;
 	

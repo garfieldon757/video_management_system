@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "Resource")
 public class Resource {
@@ -30,9 +32,11 @@ public class Resource {
 	private ResourceType resourceType;
 	
 	@OneToMany(mappedBy = "resource", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Authorization> authList= new ArrayList<Authorization>();
 	
 	@OneToMany(mappedBy = "resource", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Function> functionList= new ArrayList<Function>();
 
 
