@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "User")//声明在数据库中自动生成的表名为User
 public class User {
@@ -31,21 +33,27 @@ public class User {
     private Integer apply_status;// 0-未申请 1-申请待审核 2-申请通过 3-申请被拒绝
     
     @OneToMany(mappedBy = "giveAuthUser", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+    @JsonIgnore
     private List<AuthorizationList> giveAuthUserList = new ArrayList<AuthorizationList>();
     
     @OneToMany(mappedBy = "applyAuthUser", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+    @JsonIgnore
     private List<AuthorizationList> applyAuthUserList = new ArrayList<AuthorizationList>();
     
     @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+    @JsonIgnore
 	private List<Video> videoList = new ArrayList<Video>();
 
     @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+    @JsonIgnore
 	private List<Algorithm> algorithmList = new ArrayList<Algorithm>();
     
     @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+    @JsonIgnore
 	private List<ProcessLog> processLogList = new ArrayList<ProcessLog>();
     
     @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+    @JsonIgnore
 	private List<FunctionLog> functionLogList = new ArrayList<FunctionLog>();
     
 

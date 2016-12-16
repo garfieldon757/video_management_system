@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "Operation")
 public class Operation {
@@ -24,6 +26,7 @@ public class Operation {
 	private String operationValue;
 	
 	@OneToMany(mappedBy = "operation", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Authorization> authList= new ArrayList<Authorization>();
 	
 	public Integer getOperationID() {

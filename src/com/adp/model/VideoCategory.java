@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "VideoCategory")//声明在数据库中自动生成的表名为User
 public class VideoCategory {
@@ -25,6 +27,7 @@ public class VideoCategory {
 	private String videoCategoryUrl;
 	
 	@OneToMany(mappedBy = "videoCategory", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Video> videoList = new ArrayList<Video>();
 	
 	public List<Video> getVideoList() {

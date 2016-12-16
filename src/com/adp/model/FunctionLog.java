@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 						)
 					}
 			)
-@JsonIgnoreProperties(value={"daoFunctionUpdateDetailList"})  
 public class FunctionLog {
 
 	@Id//声明此列为主�?
@@ -46,6 +45,7 @@ public class FunctionLog {
 	
 	//建立daoFunctionIpdateDetail
 	@OneToMany(mappedBy = "functionLog", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<DaoFunctionUpdateDetail> daoFunctionUpdateDetailList = new ArrayList<DaoFunctionUpdateDetail>();
 
 	
@@ -90,7 +90,6 @@ public class FunctionLog {
 		this.dateTimeEnd = dateTimeEnd;
 	}
 
-	@JsonIgnore
 	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailList() {
 		return daoFunctionUpdateDetailList;
 	}

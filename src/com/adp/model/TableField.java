@@ -32,14 +32,6 @@ public class TableField {
 		return tableFieldID;
 	}
 
-	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailList() {
-		return daoFunctionUpdateDetailList;
-	}
-
-	public void setDaoFunctionUpdateDetailList(List<DaoFunctionUpdateDetail> daoFunctionUpdateDetailList) {
-		this.daoFunctionUpdateDetailList = daoFunctionUpdateDetailList;
-	}
-
 	public void setTableFieldID(Integer tableFieldID) {
 		this.tableFieldID = tableFieldID;
 	}
@@ -60,16 +52,13 @@ public class TableField {
 		this.fieldName = fieldName;
 	}
 
-	public List<DaoFunctionUpdateDetail> getDaoFunctionTableFieldRelationList() {
+	public List<DaoFunctionUpdateDetail> getDaoFunctionUpdateDetailList() {
 		return daoFunctionUpdateDetailList;
 	}
 
-	public void setDaoFunctionTableFieldRelationList(
-			List<DaoFunctionUpdateDetail> daoFunctionUpdateDetailList) {
+	public void setDaoFunctionUpdateDetailList(List<DaoFunctionUpdateDetail> daoFunctionUpdateDetailList) {
 		this.daoFunctionUpdateDetailList = daoFunctionUpdateDetailList;
 	}
 
-	
-	
 	
 }

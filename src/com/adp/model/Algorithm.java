@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "Algorithm")//声明在数据库中自动生成的表名为User
 public class Algorithm {
@@ -36,6 +38,7 @@ public class Algorithm {
 	private AlgorithmCategory algorithmCategory;
 	
 	@OneToMany(mappedBy = "algorithm", cascade=CascadeType.MERGE , fetch=FetchType.EAGER)
+	@JsonIgnore
 	private List<ProcessLog> processLogList = new ArrayList<ProcessLog>();
 
 	

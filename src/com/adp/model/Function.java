@@ -40,10 +40,12 @@ public class Function {
 	private Resource resource;
 	
 	@OneToMany(mappedBy = "function", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<FunctionLog> functionLogList = new ArrayList<FunctionLog>();
 	
 	//建立自己对自己的外键引用
 	@OneToMany(mappedBy = "function", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Function> functionList = new ArrayList<Function>();
 	
 	@ManyToOne(fetch = FetchType.EAGER)

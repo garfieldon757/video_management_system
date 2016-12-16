@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "Role")//声明在数据库中自动生成的表名为User
@@ -22,14 +24,17 @@ public class Role {
 	private String roleName;
 	
 	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<User> userList = new ArrayList<User>();
 	
 	
 	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<AuthorizationList> authorizatioinList = new ArrayList<AuthorizationList>();
 	
 	
 	@OneToMany(mappedBy = "role", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<AuthorizationRoleRelation> authRoleRelationList = new ArrayList<AuthorizationRoleRelation>();
 	
 	public Role() {

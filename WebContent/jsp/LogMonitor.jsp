@@ -261,8 +261,8 @@
 			},
 			type:"GET",
 			success:function(response){
-				alert("sdafsdfds");
-				//alert(response);
+				
+				alert(response);
 				
 		}
 		})

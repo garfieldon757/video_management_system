@@ -24,6 +24,8 @@ import com.adp.service.AlgorithmManager;
 import com.adp.service.UserManager;
 import com.adp.service.VideoManager;
 import com.adp.util.FunctionLogUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -429,13 +431,15 @@ public class UserController {
 	
 	@RequestMapping("ajax_searchDaoFunctionUpdateDetailByFunctionLogID")
 	@ResponseBody
-	public String ajax_searchDaoFunctionUpdateDetailByFunctionLogID(String functionLogID){
+	public String ajax_searchDaoFunctionUpdateDetailByFunctionLogID(String functionLogID) throws JsonProcessingException{
 		
 		List<DaoFunctionUpdateDetail> daoFunctionUpdateDetail = um.getDaoFunctionUpdateDetailByFunctionLogID(functionLogID);
 //		String ss = "";
 //		System.out.println(ss);
-		String s = JSONArray.fromObject(daoFunctionUpdateDetail).toString();
-		
+		//String s = JSONArray.fromObject(daoFunctionUpdateDetail).toString();
+		ObjectMapper mapper = new ObjectMapper(); 
+	    String s = mapper.writeValueAsString(daoFunctionUpdateDetail); 
+	    
 		return s ;	
 	}
 	

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity//声明当前类为hibernate映射到数据库中的实体�?
 @Table(name = "Authorization")
 public class Authorization {
@@ -24,6 +26,7 @@ public class Authorization {
 	private String authName;
 	
 	@OneToMany(mappedBy = "authorization", cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<AuthorizationRoleRelation> authRoleRelationList= new ArrayList<AuthorizationRoleRelation>();
 	
 	public List<AuthorizationRoleRelation> getAuthRoleRelationList() {
